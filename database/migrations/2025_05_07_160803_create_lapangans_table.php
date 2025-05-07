@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_lapangan');
             $table->integer('harga_per_jam');
+            $table->string('status');
             $table->string('jenis_lapangan')->nullable();
             $table->string('status');
             $table->string('deskripsi');

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_pemesan');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('jenis_lapangan')->references('jenis_lapangan')->on('lapangans');
             $table->string('no_hp');
             $table->date('tanggal_pesan');
             $table->time('jam_pesan');
-            $table->string('jenis_lapangan');
             $table->string('status')->default('pending');
             $table->string('catatan');
             $table->timestamps();
