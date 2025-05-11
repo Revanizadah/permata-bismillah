@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\HasFactory;
 class Lapangan extends Model
+
 {
     use HasFactory, Notifiable;
 
@@ -15,8 +16,8 @@ class Lapangan extends Model
         "harga_per_jam",
         "status",
         "jenis_lapangan",
-        "status"
-
+        "status",
+        "deskripsi"
 
     ];
 }
