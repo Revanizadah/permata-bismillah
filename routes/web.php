@@ -20,8 +20,9 @@ Route::get('/pesanan', function () {
     return view('pesanan.index');
 });
 
-Route::get('/lapangan', function () {
-    return view('lapangan.index');
+Route::middleware(['auth'])->group(function () {
+Route::get('/lapangan/futsal', [LapanganController::class, 'futsal'])->name('lapangan.futsal');
+Route::get('/lapangan/badminton', [LapanganController::class, 'badminton'])->name('lapangan.badminton');
 });
 
 Route::get('/reservasi', function () {

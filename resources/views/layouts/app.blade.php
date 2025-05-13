@@ -24,40 +24,42 @@
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ url('/manajemen-pesanan') }}">
+                            <a class="nav-link active" href="{{ route('lapangan.index') }}">
                                 <i class="fas fa-box-open"></i> Manajemen Pesanan
                             </a>
                         </li>
 
-                        @if(auth()->user()->role == 'penyewa') <!-- Sidebar for Penyewa Lapangan -->
-                            <!-- Lapangan Dropdown -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#lapanganDropdown" aria-expanded="false" aria-controls="lapanganDropdown">
-                                    <i class="fas fa-calendar-check"></i> Lapangan
-                                </a>
-                                <div class="collapse" id="lapanganDropdown">
-                                    <ul class="nav flex-column ms-3">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ url('/futsal') }}">
-                                                <i class="fas fa-futbol"></i> Futsal
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ url('/badminton') }}">
-                                                <i class="fas fa-shuttlecock"></i> Badminton
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+                        @auth
+                            @if(auth()->user()->role == 'penyewa') <!-- Sidebar for Penyewa Lapangan -->
+                                <!-- Lapangan Dropdown -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#lapanganDropdown" aria-expanded="false" aria-controls="lapanganDropdown">
+                                        <i class="fas fa-calendar-check"></i> Lapangan
+                                    </a>
+                                    <div class="collapse" id="lapanganDropdown">
+                                        <ul class="nav flex-column ms-3">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('lapangan.futsal') }}">
+                                                    <i class="fas fa-futbol"></i> Futsal
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('lapangan.badminton') }}">
+                                                    <i class="fas fa-shuttlecock"></i> Badminton
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
 
-                            <!-- Laporan -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/laporan') }}">
-                                    <i class="fas fa-history"></i> Laporan
-                                </a>
-                            </li>
-                        @endif
+                                <!-- Laporan -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/laporan') }}">
+                                        <i class="fas fa-history"></i> Laporan
+                                    </a>
+                                </li>
+                            @endif
+                        @endauth
 
                         <!-- Logout -->
                         <li class="nav-item">
