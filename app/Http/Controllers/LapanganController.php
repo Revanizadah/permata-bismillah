@@ -15,6 +15,19 @@ class LapanganController extends Controller
         return view('lapangan.index', compact('lapangan'));
     }
 
+    public function futsal()
+    {
+        // Return the futsal view from the 'futsal' folder
+        return view('futsal.index');  // views/futsal/index.blade.php
+    }
+
+    // Method to handle the Badminton page
+    public function badminton()
+    {
+        // Return the badminton view from the 'badminton' folder
+        return view('badminton.index');  // views/badminton/index.blade.php
+    }
+
     // Show the form for creating a new lapangan
     public function create()
     {
