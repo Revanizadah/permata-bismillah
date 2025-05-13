@@ -1,22 +1,46 @@
- @extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservasi Online</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <!-- Link your CSS file here -->
+</head>
+<body>
 
-@section('content')
-    <div class="container mx-auto p-5">
-        <h1 class="text-3xl font-bold mb-5">Pilih Reservasi</h1>
+    <main>
+        <div class="container">
+            <section class="welcome-message">
+                <h1>Selamat Datang di Permata Futsal dan Badminton</h1>
+                <p>{{ Auth::user()->name }}</p>
+            </section>
 
- <div class="content">
-        <!-- Futsal Button -->
-        <a href="{{ route('reservasi.futsal') }}" class="card">
-            <img src="{{ asset('images/futsal_image.jpg') }}" alt="Futsal">
-            <div class="card-title">Futsal</div>
-        </a>
+            <section class="choose-reservation">
+                <h2>Pilih Reservasi</h2>
+                <div class="reservation-options">
+                    <!-- Futsal Section -->
+                    <div class="reservation-option">
+                        <a href="{{ route('reservasiFutsal') }}">
+                            <img src="{{ asset('images/futsal.jpg') }}" alt="Futsal">
+                            <p>Futsal</p>
+                        </a>
+                    </div>
 
-        <!-- Badminton Button -->
-        <a href="{{ route('reservasi.badminton') }}" class="card">
-            <img src="{{ asset('images/badminton_image.jpg') }}" alt="Badminton">
-            <div class="card-title">Badminton</div>
-        </a>
-    </div>
-    </div>
+                    <!-- Badminton Section -->
+                    <div class="reservation-option">
+                        <a href="{{ route('reservasiBadminton') }}">
+                            <img src="{{ asset('images/badminton.jpg') }}" alt="Badminton">
+                            <p>Badminton</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
 
-@endsection
+    <footer>
+        <p>&copy; 2025 Reservasi Online. All rights reserved.</p>
+    </footer>
+</body>
+</html>
