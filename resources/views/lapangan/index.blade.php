@@ -1,66 +1,74 @@
-@extends('layouts.app')
-
-@section('content')
-
-    <div class="container mx-auto p-5">
-        <h1 class="text-3xl font-bold mb-5">Pemesanan Lapangan Futsal Admin</h1>
-
-        <!-- Pilihan Tanggal -->
-        <div class="mb-5">
-            <label for="tanggal" class="font-semibold">Tanggal</label>
-            <input type="date" id="tanggal" class="form-control mt-2 w-48" required />
-        </div>
-
-        <!-- Pilihan Lapangan -->
-        <div class="mb-5">
-            <label for="lapangan" class="font-semibold">Lapangan</label>
-            <div class="d-flex mt-2">
-                <button class="btn btn-success mr-2" id="lapangan-sintetis" onclick="toggleLapangan('sintetis')">Lapangan Sintetis</button>
-                <button class="btn btn-warning mr-2" id="lapangan-multicort" onclick="toggleLapangan('multicort')">Lapangan Multicort</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservasi Admin - Futsal</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <!-- Add your CSS file link here -->
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="{{ asset('images/logo.png') }}" alt="Permata Futsal & Badminton">
             </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ route('admin.dashboard') }}">Manajemen</a></li>
+                    <li><a href="{{ route('lapangan.futsal') }}" class="active">Lapangan</a></li>
+                    <li><a href="{{ route('lapangan.badminton') }}">Badminton</a></li>
+                    <li><a href="{{ route('admin.report') }}">Laporan</a></li>
+                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <!-- Tampilan Lapangan Sintetis -->
-        <div id="lapanganSintetisDiv" class="lapangan-info hidden">
-            <h4>Lapangan Sintetis</h4>
-            <p>Lapangan Sintetis menggunakan rumput sintetis yang memberikan permukaan lebih empuk dan mengurangi risiko cedera.</p>
+    <main>
+        <div class="container">
+            <section class="reservation-management">
+                <h1>Pemesanan Lapangan Futsal</h1>
+
+                <!-- Date and Court Selection -->
+                <div class="court-selection">
+                    <h2>Lapangan Futsal</h2>
+                    <select name="tanggal" id="tanggal" class="form-control">
+                        <option value="">Pilih Tanggal</option>
+                        <!-- Dynamic date options (you can populate from your backend) -->
+                        <option value="2025-01-01">01-01-2025</option>
+                        <option value="2025-01-02">02-01-2025</option>
+                        <option value="2025-01-03">03-01-2025</option>
+                    </select>
+                </div>
+
+                <!-- Court Selection with Availability Status -->
+                <div class="court-options">
+                    <button class="court-btn available">Lapangan 1 Sintetis</button>
+                    <button class="court-btn unavailable">Lapangan 2 Multicourt</button>
+                </div>
+
+                <!-- Time Slot Availability -->
+                <div class="time-slots">
+                    <h3>Jam</h3>
+                    <div class="time-slot-grid">
+                        <!-- Available slots: Create a grid of buttons for time slots -->
+                        @foreach (range(7, 22) as $hour)
+                            <div class="time-slot">
+                                <button class="slot-btn {{ $hour == 8 ? 'unavailable' : 'available' }}" data-time="{{ sprintf('%02d', $hour) }}:00">
+                                    {{ sprintf('%02d', $hour) }}:00
+                                </button>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Simpan Pesanan button -->
+                <div class="off-btn">
+                    <button class="btn-off">Simpan Pesanan</button>
+                </div>
+            </section>
         </div>
-
-        <!-- Tampilan Lapangan Multicort -->
-        <div id="lapanganMulticortDiv" class="lapangan-info hidden">
-            <h4>Lapangan Multicort</h4>
-            <p>Lapangan Multicort biasanya terbuat dari campuran karet dan vinyl yang memberikan permukaan yang lebih keras dan licin.</p>
-        </div>
-
-        <!-- Pilihan Jam -->
-        <div class="mb-5" id="jam-section" class="hidden">
-            <label class="font-semibold">Jam</label>
-            <div class="d-flex flex-wrap mt-2">
-                @foreach(['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'] as $jam)
-                    <button class="btn btn-light m-1" onclick="selectJam('{{ $jam }}')">{{ $jam }}</button>
-                @endforeach
-            </div>
-        </div>
-
-        <!-- Form Pemesanan -->
-        <form action="{{ route('admin.storeBooking') }}" method="POST" id="form-pemesan" class="hidden">
-            @csrf
-            <label for="nama_pemesan" class="font-semibold">Nama Pemesan</label>
-            <input type="text" id="nama_pemesan" name="nama_pemesan" class="form-control mt-2 w-48" required/>
-
-            <label for="no_hp" class="font-semibold mt-3">Nomor HP Pemesan</label>
-            <input type="text" id="no_hp" name="no_hp" class="form-control mt-2 w-48" required/>
-
-            <label for="lapangan" class="font-semibold mt-3">Lapangan</label>
-            <input type="text" name="lapangan" id="lapangan" class="form-control mt-2 w-48" required readonly/>
-
-            <label for="jam" class="font-semibold mt-3">Jam</label>
-            <input type="text" id="jam" name="jam" class="form-control mt-2 w-48" required readonly/>
-
-        </form>
-
-        <!-- Tombol Pemesanan -->
-        <button class="btn btn-primary">Pesan Lapangan</button>
-
-    </div>
-    @endsection
+    </main>
+</body>
+</html>

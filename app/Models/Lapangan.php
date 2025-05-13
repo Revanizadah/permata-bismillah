@@ -3,21 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Lapangan extends Model
-
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
-    protected $table = "lapangans";
-    protected $primaryKey = "id";
+    protected $table = 'lapangans';
+
     protected $fillable = [
-        "nama_lapangan",
-        "harga_per_jam",
-        "status",
-        "jenis_lapangan",
-        "status",
-        "deskripsi"
-
+        'nama_lapangan',
+        'harga_per_jam',
+        'status',
+        'jenis_lapangan',
+        'deskripsi',
     ];
+
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class);
+    }
 }
