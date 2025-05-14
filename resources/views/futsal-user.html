@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservasi Online - Permata Futsal & Badminton</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Mendefinisikan warna khusus */
+        .bg-custom-blue {
+            background-color: #213555;
+        }
+
+        .text-custom-white {
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+
+    <!-- Main Content -->
+    <section class="bg-custom-blue text-custom-white py-16">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-semibold mb-4">Selamat Datang di Permata Futsal dan Badminton</h1>
+            <h2 class="text-3xl font-semibold mb-4">Pemesanan Lapangan Futsal</h2>
+
+            <!-- Tanggal -->
+            <div class="mb-8">
+                <label for="tanggal" class="block text-xl mb-2">Tanggal</label>
+                <input type="date" id="tanggal" name="tanggal" class="w-full p-2 border border-gray-300 rounded-md" required>
+            </div>
+
+            <!-- Pilihan Lapangan -->
+            <div class="mb-8">
+                <div class="flex justify-center space-x-8">
+                    <div class="bg-gray-700 text-white rounded-lg p-4 w-32 text-center">
+                        <p class="text-xl">Lapangan 1</p>
+                    </div>
+                    <div class="bg-gray-700 text-white rounded-lg p-4 w-32 text-center">
+                        <p class="text-xl">Lapangan 2</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jam Reservasi -->
+            <h3 class="text-2xl font-semibold mb-4">Jam</h3>
+            <div class="grid grid-cols-5 gap-4">
+                <div class="flex flex-col items-center">
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">07:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">08:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">09:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">10:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">11:00</button>
+                </div>
+                <div class="flex flex-col items-center">
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">12:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">13:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">14:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">15:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">16:00</button>
+                </div>
+                <div class="flex flex-col items-center">
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">17:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">18:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">19:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">20:00</button>
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">21:00</button>
+                </div>
+                <div class="flex flex-col items-center">
+                    <button class="w-16 h-16 bg-gray-700 rounded-md mb-2">22:00</button>
+                </div>
+            </div>
+
+            <!-- Pesan Button -->
+            <div class="mt-8">
+                <button class="bg-blue-500 text-white px-8 py-3 rounded-md hover:bg-blue-600">Pesan Lapangan</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white text-gray-800">
+        <div class="container mx-auto text-center">
+            <p>©2025 | Permata Futsal & Badminton</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
