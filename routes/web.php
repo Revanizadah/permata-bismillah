@@ -7,30 +7,8 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\LapanganController;
 use App\Http\Controllers\DashboardController;
 
-// Basic routes
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/payment', function () {
-    return view('payment.index');
-});
-
-Route::get('/pesanan', function () {
-    return view('pesanan.index');
-});
-
-Route::middleware(['auth'])->group(function () {
-Route::get('/lapangan/futsal', [LapanganController::class, 'futsal'])->name('lapangan.futsal');
-Route::get('/lapangan/badminton', [LapanganController::class, 'badminton'])->name('lapangan.badminton');
-});
-
-Route::get('/reservasi', function () {
-    return view('reservasi.index');
-});
-
 // Resource routes
 Route::resource('users', UserController::class);
 Route::resource('payment', PembayaranController::class);
 Route::resource('pesanan', PesananController::class);
-Route::resource('lapangan', LapanganController::class);
+Route::resource('lapangans', LapanganController::class);

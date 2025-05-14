@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservasi Admin - Futsal</title>
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <!-- Add your CSS file link here -->
+    <title>Users List</title>
 </head>
 <body>
-    <header>
-        <div class="navbar">
-            <div class="logo">
-                <img src="{{ asset('images/logo.png') }}" alt="Permata Futsal & Badminton">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="{{ route('lapangan.futsal') }}" class="active">Futsal</a></li>
-                    <li><a href="{{ route('lapangan.badminton') }}">Badminton</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        
-    </main>
+    <h1>Users List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nama Lapangan</th>
+                <th>harga perjam</th>
+                <th>jenis lapangan</th>
+                <th>status</th>
+                <th>deskripsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($lapangans as $lapangan)
+                <tr>
+                    <td>{{ $lapangan->id }}</td>
+                    <td>{{ $lapangan->nama_lapangan }}</td>
+                    <td>{{ $lapangan->harga_per_jam }}</td>
+                    <td>{{ $lapangan->jenis_lapangan }}</td>
+                    <td>{{ $lapangan->status }}</td>
+                    <td>{{ $lapangan->deskripsi }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 </html>
