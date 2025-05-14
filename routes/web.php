@@ -1,14 +1,29 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\PesananController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LapanganController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-// Resource routes
-Route::resource('users', UserController::class);
-Route::resource('payment', PembayaranController::class);
-Route::resource('pesanan', PesananController::class);
-Route::resource('lapangans', LapanganController::class);
+Route::get('/', function () {
+    // Jika pengguna sudah login, arahkan ke dashboard
+    return Auth::check() ? view('dashboard') : view('welcome');
+});
+
+// Menggunakan Auth routes untuk login, register, dll.
+Auth::routes();
+
+// Halaman utama/dashboard hanya untuk pengguna yang sudah login
+Route::middleware(['auth'])->get('/dashboard', function () {
+    return view('dashboard');
+});
+
+// Rute untuk lapangan
+Route::resource('lapangan', LapanganController::class);
+
+// Menggunakan middleware auth untuk memastikan hanya pengguna yang login yang bisa mengakses order dan payment
+Route::middleware(['auth'])->group(function () {
+    Route::resource('order', OrderController::class);
+    Route::resource('payment', PaymentController::class);
+});
