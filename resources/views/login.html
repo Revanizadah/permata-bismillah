@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Permata Futsal dan Badminton</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <!-- Card Login -->
+    <div class="bg-blue-200 p-8 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">Login</h2>
+
+        <!-- Form Login -->
+        <form method="POST" action="/login" class="space-y-4">
+            <div>
+                <label for="email" class="block text-gray-700">Email :</label>
+                <input type="email" id="email" name="email" class="w-full p-2 mt-1 border border-gray-300 rounded-md" required>
+            </div>
+
+            <div>
+                <label for="password" class="block text-gray-700">Password :</label>
+                <input type="password" id="password" name="password" class="w-full p-2 mt-1 border border-gray-300 rounded-md" required>
+            </div>
+
+            <div class="flex justify-center">
+                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-md w-full hover:bg-blue-600">Login</button>
+            </div>
+        </form>
+
+        <!-- Link Daftar -->
+        <p class="mt-4 text-center text-gray-700">Belum punya akun? <a href="/register" class="text-blue-500 hover:underline">Daftar sekarang</a></p>
+    </div>
+
+</body>
+
+</html>
