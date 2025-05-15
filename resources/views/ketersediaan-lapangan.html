@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Ketersediaan Lapangan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #1f3251;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #1f3251;
+            color: white;
+        }
+        .booked {
+            background-color: #f76c6c;
+            color: white;
+            font-weight: bold;
+        }
+        .available {
+            background-color: #6cf7a8;
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Jadwal Ketersediaan Lapangan</h2>
+
+<table>
+    <tr>
+        <th>Jam</th>
+        <th>Status Lapangan Futsal</th>
+        <th>Status Lapangan Badminton</th>
+    </tr>
+    <tr>
+        <td>08:00 - 09:00</td>
+        <td class="available">Kosong</td>
+        <td class="booked">Sudah Dipesan</td>
+    </tr>
+    <tr>
+        <td>09:00 - 10:00</td>
+        <td class="booked">Sudah Dipesan</td>
+        <td class="available">Kosong</td>
+    </tr>
+    <tr>
+        <td>10:00 - 11:00</td>
+        <td class="available">Kosong</td>
+        <td class="available">Kosong</td>
+    </tr>
+    <tr>
+        <td>11:00 - 12:00</td>
+        <td class="booked">Sudah Dipesan</td>
+        <td class="booked">Sudah Dipesan</td>
+    </tr>
+    <!-- Tambahkan baris lain sesuai jadwal -->
+</table>
+
+</body>
+</html>

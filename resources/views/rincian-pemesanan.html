@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservasi Admin</title>
+    <title>Pesanan Saya</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -89,45 +89,51 @@
         table td {
             background-color: #f2f2f2;
         }
-        .accept-btn, .reject-btn {
+        table tbody tr:hover {
+            background-color: #e6f7ff;
+        }
+        .detail-btn {
             padding: 8px 15px;
-            border: none;
+            background-color: #2980b9;
             color: white;
+            border: none;
             cursor: pointer;
             font-size: 16px;
             border-radius: 5px;
         }
-        .accept-btn {
-            background-color: #2ecc71;
+        .detail-btn:hover {
+            background-color: #1f6fa3;
         }
-        .accept-btn:hover {
-            background-color: #27ae60;
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #001e2e;
         }
-        .reject-btn {
-            background-color: #e74c3c;
+        .footer p {
+            margin: 0;
         }
-        .reject-btn:hover {
-            background-color: #c0392b;
+
+        /* Responsive Table */
+        @media (max-width: 768px) {
+            table th, table td {
+                padding: 10px;
+            }
+            table {
+                font-size: 14px;
+            }
         }
+
     </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <h2>Dashboard Admin</h2>
-    <a href="#">Manajemen Penerimaan</a>
-    <a href="#">Jenis Lapangan</a>
-    <a href="#">Laporan</a>
-</div>
 
 <div class="main-content">
     <div class="header">
-        <h1>Reservasi Admin</h1>
-        <button class="logout">Logout</button>
+        <h1>Pesanan Saya</h1>
     </div>
 
     <div class="table-container">
-        <h2>Manajemen Penerimaan</h2>
         <table>
             <thead>
                 <tr>
@@ -139,6 +145,7 @@
                     <th>Jam</th>
                     <th>Deskripsi</th>
                     <th>Bukti Pembayaran</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -152,9 +159,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td>
-                        <button class="accept-btn">Terima</button>
-                        <button class="reject-btn">Tolak</button>
+                         <button class="detail-btn">Detail</button>
                     </td>
                 </tr>
             </tbody>

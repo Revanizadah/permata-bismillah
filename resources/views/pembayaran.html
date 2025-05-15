@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pembayaran Pesanan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .payment-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+
+        .payment-container h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .payment-container p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pay-btn {
+            padding: 10px 20px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .pay-btn:hover {
+            background-color: #2ecc71;
+        }
+
+        .upload-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .upload-btn {
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .upload-btn:hover {
+            background-color: #1f6fa3;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Pembayaran Pemesanan</h1>
+    </div>
+
+    <div class="container">
+        <div class="payment-container">
+
+            <!-- Detail Pemesanan -->
+            <p><strong>Nama:</strong> Revani Zadah Pratiwi</p>
+            <p><strong>Lapangan:</strong> Lapangan Sintetis</p>
+            <p><strong>Harga:</strong> Rp. 200.000</p>
+            <p><strong>Tanggal:</strong> 2023-10-15</p>
+            <p><strong>Jam:</strong> 15:00 - 16:00</p>
+            <p><strong>Deskripsi:</strong> Belum Dibayar</p>
+
+
+            <!-- Form Upload Bukti Pembayaran -->
+            <div class="upload-container">
+                <p><strong>Upload Bukti Pembayaran:</strong></p>
+                <form action="/upload-bukti" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="bukti_pembayaran" accept="image/*" required>
+                    <button type="submit" class="upload-btn">Unggah Bukti Pembayaran</button>
+                </form>
+            </div>
+
+            <!-- Konfirmasi Pembayaran -->
+            <div class="button-container">
+                <button class="pay-btn" onclick="alert('Pembayaran Berhasil!')">Konfirmasi Pembayaran</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
