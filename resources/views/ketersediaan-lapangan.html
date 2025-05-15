@@ -14,7 +14,7 @@
             color: #1f3251;
         }
         table {
-            width: 80%;
+            width: 90%;
             margin: 20px auto;
             border-collapse: collapse;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -29,14 +29,36 @@
             color: white;
         }
         .booked {
-            background-color: #f76c6c;
+            background-color: #f44336;
             color: white;
             font-weight: bold;
         }
         .available {
-            background-color: #6cf7a8;
-            color: black;
+            background-color: #4caf50;
+            color: white;
             font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            tr {
+                margin-bottom: 15px;
+            }
+            td {
+                text-align: left;
+                padding-left: 50%;
+                position: relative;
+            }
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                font-weight: bold;
+            }
+            th {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -45,32 +67,111 @@
 <h2>Jadwal Ketersediaan Lapangan</h2>
 
 <table>
-    <tr>
-        <th>Jam</th>
-        <th>Status Lapangan Futsal</th>
-        <th>Status Lapangan Badminton</th>
-    </tr>
-    <tr>
-        <td>08:00 - 09:00</td>
-        <td class="available">Kosong</td>
-        <td class="booked">Sudah Dipesan</td>
-    </tr>
-    <tr>
-        <td>09:00 - 10:00</td>
-        <td class="booked">Sudah Dipesan</td>
-        <td class="available">Kosong</td>
-    </tr>
-    <tr>
-        <td>10:00 - 11:00</td>
-        <td class="available">Kosong</td>
-        <td class="available">Kosong</td>
-    </tr>
-    <tr>
-        <td>11:00 - 12:00</td>
-        <td class="booked">Sudah Dipesan</td>
-        <td class="booked">Sudah Dipesan</td>
-    </tr>
-    <!-- Tambahkan baris lain sesuai jadwal -->
+    <thead>
+        <tr>
+            <th>Jam</th>
+            <th>Futsal Multicort</th>
+            <th>Futsal Sintetis</th>
+            <th>Badminton</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>07:00 - 08:00</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+        </tr>
+        <tr>
+            <td>08:00 - 09:00</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+        </tr>
+        <tr>
+            <td>09:00 - 10:00</td>
+            <td class="available">Kosong</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+        </tr>
+        <tr>
+            <td>10:00 - 11:00</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+            <td class="available">Kosong</td>
+        </tr>
+        <tr>
+            <td>11:00 - 12:00</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+        </tr>
+        <tr>
+            <td>12:00 - 13:00</td>
+            <td class="available">Kosong</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+        </tr>
+        <tr>
+            <td>13:00 - 14:00</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+            <td class="available">Kosong</td>
+        </tr>
+        <tr>
+            <td>14:00 - 15:00</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+        </tr>
+        <tr>
+            <td>15:00 - 16:00</td>
+            <td class="available">Kosong</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+        </tr>
+        <tr>
+            <td>16:00 - 17:00</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+            <td class="available">Kosong</td>
+        </tr>
+        <tr>
+            <td>17:00 - 18:00</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+        </tr>
+        <tr>
+            <td>18:00 - 19:00</td>
+            <td class="available">Kosong</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+        </tr>
+        <tr>
+            <td>19:00 - 20:00</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+            <td class="available">Kosong</td>
+        </tr>
+        <tr>
+            <td>20:00 - 21:00</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+        </tr>
+        <tr>
+            <td>21:00 - 22:00</td>
+            <td class="available">Kosong</td>
+            <td class="available">Kosong</td>
+            <td class="booked">Sudah Dipesan</td>
+        </tr>
+        <tr>
+            <td>22:00 - 23:00</td>
+            <td class="booked">Sudah Dipesan</td>
+            <td class="available">Kosong</td>
+            <td class="available">Kosong</td>
+    </tbody>
 </table>
 
 </body>
