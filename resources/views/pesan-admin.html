@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservasi Lapangan - Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fffff4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #213555;
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .sidebar a:hover {
+      background-color: #34495e;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 30px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #213555;
+      color: white;
+      padding: 20px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .logout {
+      font-size: 18px;
+      background-color: #e74c3c;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .logout:hover {
+      background-color: #c0392b;
+    }
+
+    .table-container {
+      background-color: #3E5879;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
+    .table-container h2 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table th,
+    table td {
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #3498db;
+      color: white;
+    }
+
+    table td {
+      background-color: #f2f2f2;
+    }
+
+    .accept-btn,
+    .reject-btn {
+      padding: 8px 15px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    .accept-btn {
+      background-color: #2ecc71;
+    }
+
+    .accept-btn:hover {
+      background-color: #27ae60;
+    }
+
+    .reject-btn {
+      background-color: #e74c3c;
+    }
+
+    .reject-btn:hover {
+      background-color: #c0392b;
+    }
+
+    .reservation-box {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .reservation-box h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .date-picker,
+    select,
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .court-button {
+      padding: 15px 30px;
+      background-color: white;
+      color: #003366;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+      margin: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .court-button:hover {
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    .court-button.selected {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .order-button {
+      background-color: #2980b9;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <h2>Dashboard Admin</h2>
+    <a href="#">Manajemen Penerimaan</a>
+    <a href="#">Pesanan Offline</a>
+    <a href="#">Laporan</a>
+  </div>
+
+  <div class="main-content">
+    <div class="header">
+      <h1>Reservasi Lapangan Admin</h1>
+      <button class="logout">Logout</button>
+    </div>
+
+    <!-- Pemesanan Lapangan -->
+    <div class="table-container">
+      <div class="reservation-box">
+        <h3>Pilih Tanggal</h3>
+        <input type="date" id="date" class="date-picker" />
+      </div>
+
+      <!-- Nama Penyewa -->
+      <div class="reservation-box">
+        <h3>Nama Penyewa</h3>
+        <input type="text" id="nama" placeholder="Nama Penyewa" class="date-picker" />
+      </div>
+
+      <!-- Harga -->
+      <div class="reservation-box">
+        <h3>Harga</h3>
+        <input type="text" id="harga" placeholder="Harga Lapangan" class="date-picker" />
+      </div>
+
+      <!-- Pilih Lapangan -->
+      <div class="reservation-box">
+        <h3>Pilih Lapangan</h3>
+          <tr>
+            <td><button class="court-button" onclick="selectCourt(1)">Lapangan 1 Futsal Sintetis</button></td>
+            <td><button class="court-button" onclick="selectCourt(2)">Lapangan 2 Futsal Multicort</button></td>
+            <td><button class="court-button" onclick="selectCourt(3)">Lapangan 3 Badminton</button></td>
+          </tr>
+      </div>
+
+      <!-- Pilih Waktu -->
+      <div class="reservation-box">
+        <h3>Pilih Waktu</h3>
+        <label for="start-time">Jam Mulai:</label><br />
+        <select id="start-time" class="date-picker">
+          <option value="">-- Pilih Jam Mulai --</option>
+          <option>07.00</option>
+          <option>08.00</option>
+          <option>09.00</option>
+          <option>10.00</option>
+          <option>11.00</option>
+          <option>12.00</option>
+          <option>13.00</option>
+          <option>14.00</option>
+          <option>15.00</option>
+          <option>16.00</option>
+          <option>17.00</option>
+          <option>18.00</option>
+          <option>19.00</option>
+          <option>20.00</option>
+          <option>21.00</option>
+          <option>22.00</option>
+        </select>
+
+        <br /><br />
+
+        <label for="end-time">Jam Selesai:</label><br />
+        <select id="end-time" class="date-picker">
+          <option value="">-- Pilih Jam Selesai --</option>
+          <option>08.00</option>
+          <option>09.00</option>
+          <option>10.00</option>
+          <option>11.00</option>
+          <option>12.00</option>
+          <option>13.00</option>
+          <option>14.00</option>
+          <option>15.00</option>
+          <option>16.00</option>
+          <option>17.00</option>
+          <option>18.00</option>
+          <option>19.00</option>
+          <option>20.00</option>
+          <option>21.00</option>
+          <option>22.00</option>
+          <option>23.00</option>
+        </select>
+      </div>
+
+      <!-- Tombol Pesan -->
+      <div class="reservation-box">
+        <button class="order-button">Pesan Lapangan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script pembatas tanggal -->
+  <script>
+    const dateInput = document.getElementById("date");
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    const formatDate = (d) => {
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    dateInput.min = formatDate(today);
+    dateInput.max = formatDate(tomorrow);
+  </script>
+
+</body>
+
+</html>
