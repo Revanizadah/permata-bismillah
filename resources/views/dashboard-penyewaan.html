@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservasi Online - Permata Futsal & Badminton</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar */
+        .nav {
+            background-color: #001e2e;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .nav a:hover {
+            background-color: #34495e;
+            padding: 5px 10px;
+        }
+
+        /* Main Content */
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+
+        .lapangan-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 40%;
+        }
+
+        .lapangan-container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .lapangan-container h2 {
+            margin-top: 20px;
+            font-size: 22px;
+        }
+
+        .pilih-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .pilih-btn:hover {
+            background-color: #1f6fa3;
+        }
+
+        .footer {
+            background-color: #001e2e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="nav">
+        <a href="#">Home</a>
+        <a href="#">Pesanan</a>
+        <a href="#">Profile</a>
+        <a href="#">Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="header">
+        <h1>Selamat Datang di Permata Futsal dan Badminton</h1>
+        <p>Revani Zadah Pratiwi</p>
+    </div>
+
+    <!-- Main Container for Lapangan -->
+    <div class="main-container">
+        <!-- Futsal -->
+        <div class="lapangan-container">
+            <img src="futsal.jpg" alt="Lapangan Futsal">
+            <h2>Futsal</h2>
+            <button class="pilih-btn" onclick="window.location.href='pemesanan.html'">Pilih Futsal</button>
+        </div>
+
+        <!-- Badminton -->
+        <div class="lapangan-container">
+            <img src="badminton.jpg" alt="Lapangan Badminton">
+            <h2>Badminton</h2>
+            <button class="pilih-btn" onclick="window.location.href='pemesanan.html'">Pilih Badminton</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 | Permata Futsal & Badminton</p>
+    </div>
+
+</body>
+
+</html>

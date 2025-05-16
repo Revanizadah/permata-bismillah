@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pemesanan Lapangan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #3E5879;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #213555;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .container {
+      padding: 30px;
+    }
+    .reservation-box {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .reservation-box h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .date-picker,
+    select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+    .court-table {
+      margin: 0 auto;
+    }
+    .court-button {
+      padding: 15px 30px;
+      background-color: white;
+      color: #003366;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+      margin: 10px;
+      transition: background-color 0.3s;
+    }
+    .court-button:hover {
+      background-color: #2c3e50;
+      color: white;
+    }
+    .court-button.selected {
+      background-color: #e74c3c;
+      color: white;
+    }
+    .order-button {
+      background-color: #2980b9;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Pemesanan Lapangan Permata Futsal dan Badminton</h1>
+</header>
+
+<div class="container">
+  <!-- Pilih Tanggal -->
+  <div class="reservation-box">
+    <label for="date">Tanggal:</label><br />
+    <input type="date" id="date" class="date-picker" />
+  </div>
+
+  <!-- Pilih Lapangan -->
+    <div class="reservation-box">
+      <h3>Pilih Lapangan</h3>
+      <table class="court-table">
+        <tr>
+          <td><button class="court-button" onclick="selectCourt(1)">Lapangan 1 Futsal Sintetis</button></td>
+          <td><button class="court-button" onclick="selectCourt(2)">Lapangan 2 Futsal Multicort</button></td>
+          <td><button class="court-button" onclick="selectCourt(3)">Lapangan 3 Badminton</button></td>
+        </tr>
+      </table>
+    </div>
+
+  <!-- Pilih Waktu -->
+  <div class="reservation-box">
+    <h3>Pilih Waktu</h3>
+    <label for="start-time">Jam Mulai:</label><br />
+    <select id="start-time" class="date-picker">
+      <option value="">-- Pilih Jam Mulai --</option>
+      <option>07.00</option>
+      <option>08.00</option>
+      <option>09.00</option>
+      <option>10.00</option>
+      <option>11.00</option>
+      <option>12.00</option>
+      <option>13.00</option>
+      <option>14.00</option>
+      <option>15.00</option>
+      <option>16.00</option>
+      <option>17.00</option>
+      <option>18.00</option>
+      <option>19.00</option>
+      <option>20.00</option>
+      <option>21.00</option>
+      <option>22.00</option>
+    </select>
+
+    <br /><br />
+
+    <label for="end-time">Jam Selesai:</label><br />
+    <select id="end-time" class="date-picker">
+      <option value="">-- Pilih Jam Selesai --</option>
+      <option>08.00</option>
+      <option>09.00</option>
+      <option>10.00</option>
+      <option>11.00</option>
+      <option>12.00</option>
+      <option>13.00</option>
+      <option>14.00</option>
+      <option>15.00</option>
+      <option>16.00</option>
+      <option>17.00</option>
+      <option>18.00</option>
+      <option>19.00</option>
+      <option>20.00</option>
+      <option>21.00</option>
+      <option>22.00</option>
+      <option>23.00</option>
+    </select>
+  </div>
+
+  <!-- Tombol Pesan -->
+  <div class="reservation-box">
+    <button class="order-button">Pesan</button>
+  </div>
+</div>
+
+<!-- Script pembatas tanggal -->
+<script>
+  const dateInput = document.getElementById("date");
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+
+  const formatDate = (d) => {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  dateInput.min = formatDate(today);
+  dateInput.max = formatDate(tomorrow);
+</script>
+
+</body>
+</html>
