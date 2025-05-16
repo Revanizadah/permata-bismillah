@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Laporan Pemesanan Offline - Admin</title>
+  <title>Laporan Pemesanan Online - Admin</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@
     }
 
     .sidebar h2 {
-      font-weight: bold; /* Make only "Dashboard Admin" bold */
+      font-weight: bold;
     }
 
     .sidebar a {
@@ -34,7 +34,7 @@
       text-decoration: none;
       font-size: 18px;
       margin: 10px 0;
-      font-weight: normal; /* Make links not bold */
+      font-weight: normal;
     }
 
     .sidebar a:hover {
@@ -80,12 +80,16 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center the content */
     }
 
     .table-container h2 {
       text-align: center;
       font-size: 24px;
       margin-bottom: 20px;
+
     }
 
     table {
@@ -110,44 +114,12 @@
       background-color: #f2f2f2;
     }
 
-    .accept-btn,
-    .reject-btn {
-      padding: 8px 15px;
-      border: none;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      border-radius: 5px;
-    }
-
-    .accept-btn {
-      background-color: #2ecc71;
-    }
-
-    .accept-btn:hover {
-      background-color: #27ae60;
-    }
-
-    .reject-btn {
-      background-color: #e74c3c;
-    }
-
-    .reject-btn:hover {
-      background-color: #c0392b;
-    }
-
-    .filter-box {
-      margin-bottom: 20px;
+    .export-buttons {
+      margin-top: 20px;
       display: flex;
-      justify-content: flex-end;
-    }
-
-    .filter-box input {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-      margin-right: 10px;
+      justify-content: center; /* Align buttons in the center */
+      width: 100%;
+      gap: 10px;
     }
 
     .export-btn {
@@ -165,9 +137,18 @@
       background-color: #1f6fa3;
     }
 
-    .bukti-img {
-      max-width: 100px;
-      height: auto;
+    .filter-box {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .filter-box input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      margin-right: 10px;
     }
 
     .reservation-box {
@@ -234,17 +215,23 @@
 
   <div class="main-content">
     <div class="header">
-      <h1>Laporan Pemesanan Offline</h1>
+      <h1>Laporan Pemesanan</h1>
       <button class="logout">Logout</button>
     </div>
 
-    <!-- Filter Tanggal -->
-    <div class="filter-box">
-      <input type="date" id="filter-tanggal" class="filter-input" onchange="filterTable()" />
-    </div>
-
     <div class="table-container">
-      <h2>Data Pemesanan</h2>
+      <!-- Filter Tanggal -->
+      <div class="filter-box">
+        <input type="date" id="filter-tanggal" class="filter-input" onchange="filterTable()" />
+      </div>
+
+      <!-- Tombol Export -->
+      <div class="export-buttons">
+        <button class="export-btn" onclick="exportToExcel()">Export to Excel</button>
+        <button class="export-btn" onclick="exportToPDF()">Export to PDF</button>
+      </div>
+
+      <h1 style="color: white;">Data Pemesanan</h1>
       <table id="report-table">
         <thead>
           <tr>
@@ -254,7 +241,8 @@
             <th>Harga</th>
             <th>Tanggal</th>
             <th>Jam</th>
-            <th>Status</th>
+            <th>Deskripsi</th>
+            <th>Payment</th>
           </tr>
         </thead>
         <tbody>
@@ -265,7 +253,8 @@
             <td>Rp 150.000</td>
             <td>13 - 01 - 2025</td>
             <td>13:00</td>
-            <td>Diterima</td>
+            <td></td>
+            <td></td>
           </tr>
           <tr data-date="2025-01-14">
             <td>2</td>
@@ -274,7 +263,8 @@
             <td>Rp 75.000</td>
             <td>14 - 01 - 2025</td>
             <td>10:00</td>
-            <td>Ditolak</td>
+            <td></td>
+            <td>Transfer</td>
           </tr>
           <tr data-date="2025-01-13">
             <td>3</td>
@@ -283,7 +273,8 @@
             <td>Rp 200.000</td>
             <td>13 - 01 - 2025</td>
             <td>15:00</td>
-            <td>Ditolak</td>
+            <td></td>
+            <td>Cash</td>
           </tr>
           <tr data-date="2025-01-13">
             <td>4</td>
@@ -292,16 +283,11 @@
             <td>Rp 75.000</td>
             <td>13 - 01 - 2025</td>
             <td>09:00</td>
-            <td>Diterima</td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
-
-    <!-- Tombol Export -->
-      <div class="mt-4">
-        <button class="export-btn" onclick="exportToExcel()">Export to Excel</button>
-        <button class="export-btn" onclick="exportToPDF()">Export to PDF</button>
-      </div>
     </div>
   </div>
 
