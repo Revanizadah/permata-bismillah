@@ -13,28 +13,15 @@ return new class extends Migration
     {
 
         Schema::create('pembayarans', function (Blueprint $table) {
-            $table->id(); // Menambahkan ID sebagai primary key
-
-            // Ubah tipe user_id menjadi unsignedBigInteger untuk kecocokan dengan id di tabel users
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users'); // Foreign key ke users
-
-            // Ubah tipe jenis_lapangan menjadi string, sesuai dengan lapangans
-            $table->string('jenis_lapangan');
-            $table->foreign('jenis_lapangan')->references('jenis_lapangan')->on('lapangans'); // Foreign key ke lapangans
-
-            // Kolom no_hp bertipe string, pastikan ada indeks unik di users
-            $table->string('no_hp');
-            $table->foreign('no_hp')->references('no_hp')->on('users'); // Foreign key ke users
-
-            // Ubah tipe pesanan_id menjadi unsignedBigInteger untuk kecocokan dengan id di tabel pesanans
-            $table->unsignedBigInteger('pesanan_id');
-            $table->foreign('pesanan_id')->references('id')->on('pesanans'); // Foreign key ke pesanans
-
-            // Kolom bukti_pembayaran
-            $table->string('bukti_pembayaran');
-
-            $table->timestamps(); // Timestamps untuk created_at dan updated_at
+            $table->id(); 
+            $table->string('no_pesanan');
+            $table->string('nama_pemesan');
+            $table->string('metode_pembayaran');
+            $table->string('status_pembayaran')->default('pending');
+            $table->string('jumlah_pembayaran');
+            $table->string('bukti_pembayaran')->nullable(); 
+            $table->string('catatan')->nullable(); 
+            $table->timestamps(); 
         });
 
 

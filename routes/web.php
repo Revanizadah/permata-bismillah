@@ -11,8 +11,6 @@ Route::get('/', function () {
     return Auth::check() ? view('dashboard') : view('welcome');
 });
 
-// Menggunakan Auth routes untuk login, register, dll.
-Auth::routes();
 
 // Halaman utama/dashboard hanya untuk pengguna yang sudah login
 Route::middleware(['auth'])->get('/dashboard', function () {
@@ -23,7 +21,3 @@ Route::middleware(['auth'])->get('/dashboard', function () {
 Route::resource('lapangan', LapanganController::class);
 
 // Menggunakan middleware auth untuk memastikan hanya pengguna yang login yang bisa mengakses order dan payment
-Route::middleware(['auth'])->group(function () {
-    Route::resource('order', OrderController::class);
-    Route::resource('payment', PaymentController::class);
-});
