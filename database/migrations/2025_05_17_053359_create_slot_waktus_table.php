@@ -6,19 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('lapangans', function (Blueprint $table) {
+        Schema::create('slot_waktu', function (Blueprint $table) {
             $table->id();
             $table->string('nama_lapangan');
-            $table->integer('harga_per_jam');
+            $table->date('tanggal');
+            $table->time('jam_mulai');
+            $table->time('jam_selesai');
+            $table->string('status')->default('available'); 
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('lapangans');
+        Schema::dropIfExists('slot_waktu');
     }
 };
