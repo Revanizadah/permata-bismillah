@@ -41,7 +41,7 @@
         </form>
 
         <!-- Link Daftar -->
-        <p class="mt-4 text-center text-gray-700">Belum punya akun? <a href="/register" class="text-blue-500 hover:underline">Daftar sekarang</a></p>
+        <p class="mt-4 text-center text-gray-700">Belum punya akun? <a href="penyewa/register.html" class="text-blue-500 hover:underline">Daftar sekarang</a></p>
     </div>
 
     <script>
@@ -52,27 +52,28 @@
         ];
 
         // Simulate a login function
-        function handleLogin(event) {
-            event.preventDefault();  // Prevent form submission
+    function handleLogin(event) {
+    event.preventDefault();  // Prevent form submission
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const role = document.getElementById('role').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const role = document.getElementById('role').value;
 
-            // Find the user in the database (mock)
-            const user = users.find(u => u.email === email && u.password === password && u.role === role);
+    // Find the user in the database (mock)
+    const user = users.find(u => u.email === email && u.password === password && u.role === role);
 
-            if (user) {
-                // Redirect based on the role
-                if (role === 'admin') {
-                    window.location.href = 'C:/Users/fujim/Projects/TugasAkhir/PermataBismillah/resources/views/admin/manajemen-penerimaan.html';  // Admin Dashboard
-                } else if (role === 'user') {
-                    window.location.href = '/C:/Users/fujim/Projects/TugasAkhir/PermataBismillah/resources/views/penyewa/dashboard-penyewa.html';  // Penyewa Page
-                }
-            } else {
-                alert("Invalid credentials or role.");
-            }
+    if (user) {
+        // Redirect based on the role
+        if (role === 'admin') {
+            window.location.href = 'admin/manajemen-penerimaan.html';  // Admin Dashboard
+        } else if (role === 'user') {
+            window.location.href = 'penyewa/dashboard-penyewa.html';  // Penyewa Page
         }
+    } else {
+        alert("Invalid credentials or role.");
+    }
+}
+
     </script>
 
 </body>
