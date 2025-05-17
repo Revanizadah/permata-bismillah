@@ -7,45 +7,56 @@
     <title>Pembayaran Pesanan</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: #ecf0f1;
             margin: 0;
             padding: 0;
         }
 
         .header {
-            background-color: #003366;
+            background-color: #213555;
             color: white;
             padding: 20px;
             text-align: center;
+            margin-bottom: 20px;
+            border-radius: 10px;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 28px;
         }
 
         .container {
-            padding: 30px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .payment-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            color: black;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: #34495e;
         }
 
         .payment-container h2 {
             text-align: center;
-            font-size: 24px;
+            font-size: 28px;
             margin-bottom: 20px;
+            color: #2980b9;
         }
 
         .payment-container p {
             font-size: 18px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .payment-container p strong {
+            font-weight: bold;
+            color: #2c3e50;
         }
 
         .button-container {
@@ -54,36 +65,95 @@
         }
 
         .pay-btn {
-            padding: 10px 20px;
+            padding: 12px 30px;
             background-color: #27ae60;
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .pay-btn:hover {
             background-color: #2ecc71;
+            transform: translateY(-2px);
         }
 
         .upload-container {
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
         }
 
         .upload-btn {
-            padding: 10px 20px;
-            background-color: #2980b9;
+            padding: 12px 30px;
+            background-color: #3498db;
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .upload-btn:hover {
-            background-color: #1f6fa3;
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .upload-container input {
+            font-size: 16px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 400px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .upload-container input[type="file"] {
+            padding: 8px;
+        }
+
+        .account-number-container {
+            margin-top: 20px;
+        }
+
+        .account-number-container input {
+            font-size: 16px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 400px;
+            display: inline-block;
+            background-color: #ecf0f1;
+            color: #7f8c8d;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .payment-container {
+                padding: 20px;
+            }
+
+            .payment-container h2 {
+                font-size: 24px;
+            }
+
+            .pay-btn, .upload-btn {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
         }
 
     </style>
@@ -104,24 +174,64 @@
             <p><strong>Harga:</strong> Rp. 200.000</p>
             <p><strong>Tanggal:</strong> 2023-10-15</p>
             <p><strong>Jam:</strong> 15:00 - 16:00</p>
-            <p><strong>Deskripsi:</strong> Belum Dibayar</p>
 
+            <!-- Payment Method Radio Buttons -->
+            <p><strong>Pilih Metode Pembayaran:</strong></p>
+            <label><input type="radio" name="payment-method" value="cash" checked> Cash</label>
+            <label><input type="radio" name="payment-method" value="transfer"> Transfer</label>
 
-            <!-- Form Upload Bukti Pembayaran -->
-            <div class="upload-container">
+            <!-- Bank Account Number input (only viewable for 'Transfer' payment) -->
+            <div id="account-number-container" class="account-number-container" style="display: none;">
+                <label for="account-number"><strong>Nomor Rekening Bank</strong></label>
+                <input type="text" id="account-number" name="account-number" value="123-456-7890" readonly />
+            </div>
+
+            <!-- Show file upload option only for 'Transfer' payment -->
+            <div id="upload-container" class="upload-container" style="display: none;">
                 <p><strong>Upload Bukti Pembayaran:</strong></p>
                 <form action="/upload-bukti" method="POST" enctype="multipart/form-data">
                     <input type="file" name="bukti_pembayaran" accept="image/*" required>
-                    <button type="submit" class="upload-btn">Unggah Bukti Pembayaran</button>
                 </form>
             </div>
 
             <!-- Konfirmasi Pembayaran -->
             <div class="button-container">
-                <button class="pay-btn" onclick="alert('Pembayaran Berhasil!')">Konfirmasi Pembayaran</button>
+                <button class="pay-btn" onclick="confirmPayment()">Konfirmasi Pembayaran</button>
             </div>
         </div>
     </div>
+
+    <script>
+        // Show or hide the bank account number input and file upload based on selected payment method
+        const radioButtons = document.querySelectorAll('input[name="payment-method"]');
+        const uploadContainer = document.getElementById('upload-container');
+        const accountNumberContainer = document.getElementById('account-number-container');
+        const accountNumberInput = document.getElementById('account-number');
+
+        radioButtons.forEach(button => {
+            button.addEventListener('change', () => {
+                if (document.querySelector('input[name="payment-method"]:checked').value === 'transfer') {
+                    uploadContainer.style.display = 'block'; // Show file upload container for transfer
+                    accountNumberContainer.style.display = 'block'; // Show bank account number input
+                } else {
+                    uploadContainer.style.display = 'none'; // Hide file upload container for cash
+                    accountNumberContainer.style.display = 'none'; // Hide bank account number input
+                }
+            });
+        });
+
+        // Handle the confirmation of payment
+        function confirmPayment() {
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+            if (paymentMethod === 'transfer' && !document.querySelector('input[name="bukti_pembayaran"]')) {
+                alert('Mohon unggah bukti pembayaran untuk metode transfer!');
+            } else if (paymentMethod === 'transfer' && !document.querySelector('input[name="account-number"]').value) {
+                alert('Mohon masukkan nomor rekening bank!');
+            } else {
+                alert('Pembayaran Berhasil!');
+            }
+        }
+    </script>
 
 </body>
 
