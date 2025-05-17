@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Permata Futsal dan Badminton</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Smooth Scroll Effect */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Additional Style for the hover effect */
+        .nav-link:hover {
+            color: #ffcc00; /* Change color on hover */
+            transform: scale(1.1); /* Slightly increase the size */
+            transition: all 0.3s ease;
+        }
+
+        /* Optional: Adding a slight background effect on hover for the buttons */
+        .court-card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Header Section -->
+    <header class="bg-blue-900 text-white py-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <img src="logo.png" alt="Logo" class="w-32 h-auto">
+            <nav class="flex space-x-8">
+                <a href="#" class="hover:text-gray-300 transition-all duration-200 nav-link" onclick="scrollToTop()">Beranda</a>
+                <a href="#tipe-lapangan" class="hover:text-gray-300 transition-all duration-200 nav-link">Tipe</a>
+                <a href="https://wa.me/6281234567890" class="hover:text-gray-300 transition-all duration-200 nav-link" target="_blank">Contact</a>
+                <a href="login.html" class="hover:text-gray-300 transition-all duration-200 nav-link">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <section class="relative bg-cover bg-center h-screen" style="background-image: url('background-image.jpg');">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="container mx-auto text-center text-white relative z-10 pt-32">
+            <h1 class="text-5xl font-bold mb-4">Selamat Datang di Permata Futsal dan Badminton</h1>
+            <p class="text-lg mb-8">Malang Anggun Sejahtera</p>
+            <!-- Booking Now Button with Redirection to Login -->
+            <a href="login.html" class="bg-yellow-500 text-black px-6 py-2 rounded-md text-lg font-semibold hover:bg-yellow-400">Booking Now</a>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="container mx-auto py-12 text-center">
+        <p class="text-xl text-gray-800 mb-6">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        </p>
+    </section>
+
+    <!-- Court Section -->
+    <section class="container mx-auto py-12 text-center" id="tipe-lapangan">
+        <h2 class="text-3xl font-semibold mb-6 text-gray-900">Tipe Lapangan</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Lapangan Futsal Sintetis -->
+            <div class="bg-gray-900 text-white rounded-lg overflow-hidden shadow-lg court-card">
+                <img src="futsal-sintetis.jpg" alt="Futsal Sintetis" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h3 class="text-2xl font-semibold mb-2">Lapangan Futsal Sintetis</h3>
+                    <p class="text-lg">Nikmati pertandingan futsal di lapangan sintetis yang nyaman dan modern.</p>
+                </div>
+            </div>
+            <!-- Lapangan Futsal Multicort -->
+            <div class="bg-gray-900 text-white rounded-lg overflow-hidden shadow-lg court-card">
+                <img src="futsal-multicort.jpg" alt="Futsal Multicort" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h3 class="text-2xl font-semibold mb-2">Lapangan Futsal Multicort</h3>
+                    <p class="text-lg">Rasakan serunya bermain futsal di lapangan multicort yang luas.</p>
+                </div>
+            </div>
+            <!-- Lapangan Badminton -->
+            <div class="bg-gray-900 text-white rounded-lg overflow-hidden shadow-lg court-card">
+                <img src="badminton.jpg" alt="Badminton" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h3 class="text-2xl font-semibold mb-2">Lapangan Badminton</h3>
+                    <p class="text-lg">Rasakan sensasi bermain badminton di lapangan yang luas dan terang.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-blue-900 text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>©2025 | Permata Futsal & Badminton</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Function to scroll to the top of the page when "Beranda" is clicked
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>

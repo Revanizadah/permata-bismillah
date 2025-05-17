@@ -1,174 +1,251 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pemesanan Lapangan</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #3E5879;
-      color: white;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #213555;
-      padding: 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-    .container {
-      padding: 30px;
-    }
-    .reservation-box {
-      text-align: center;
-      margin: 20px 0;
-    }
-    .reservation-box h3 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-    .date-picker,
-    select {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: none;
-    }
-    .court-table {
-      margin: 0 auto;
-    }
-    .court-button {
-      padding: 15px 30px;
-      background-color: white;
-      color: #003366;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      border: none;
-      margin: 10px;
-      transition: background-color 0.3s;
-    }
-    .court-button:hover {
-      background-color: #2c3e50;
-      color: white;
-    }
-    .court-button.selected {
-      background-color: #e74c3c;
-      color: white;
-    }
-    .order-button {
-      background-color: #2980b9;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-      border-radius: 5px;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Penyewa</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fffff4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #213555;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #213555;
+            color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .logout {
+            font-size: 18px;
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .logout:hover {
+            background-color: #c0392b;
+        }
+
+        .table-container {
+            background-color: #3E5879;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .table-container h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        /* Form Styling */
+        .reservation-form {
+            background-color: #3E5879;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 100px; /* Increased margin for more space between header and form */
+        }
+
+        .reservation-form label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .reservation-form select,
+        .reservation-form input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .reservation-form button {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .reservation-form button:hover {
+            background-color: #1f6fa3;
+        }
+
+        /* Table Styling */
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #213555;
+            color: white;
+        }
+
+        table td {
+            background-color: #f2f2f2;
+        }
+
+        .booked {
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+        }
+
+        .available {
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
 
-<header>
-  <h1>Pemesanan Lapangan Permata Futsal dan Badminton</h1>
-</header>
-
-<div class="container">
-  <!-- Pilih Tanggal -->
-  <div class="reservation-box">
-    <label for="date">Tanggal:</label><br />
-    <input type="date" id="date" class="date-picker" />
-  </div>
-
-  <!-- Pilih Lapangan -->
-    <div class="reservation-box">
-      <h3>Pilih Lapangan</h3>
-      <table class="court-table">
-        <tr>
-          <td><button class="court-button" onclick="selectCourt(1)">Lapangan 1 Futsal Sintetis</button></td>
-          <td><button class="court-button" onclick="selectCourt(2)">Lapangan 2 Futsal Multicort</button></td>
-          <td><button class="court-button" onclick="selectCourt(3)">Lapangan 3 Badminton</button></td>
-        </tr>
-      </table>
+    <div class="sidebar">
+        <h2>Dashboard Penyewa</h2>
+        <a href="#">Ketersediaan Lapangan</a>
+        <a href="#">Pesan Lapangan</a>
+        <a href="#">Rincian Pemesanan</a>
     </div>
 
-  <!-- Pilih Waktu -->
-  <div class="reservation-box">
-    <h3>Pilih Waktu</h3>
-    <label for="start-time">Jam Mulai:</label><br />
-    <select id="start-time" class="date-picker">
-      <option value="">-- Pilih Jam Mulai --</option>
-      <option>07.00</option>
-      <option>08.00</option>
-      <option>09.00</option>
-      <option>10.00</option>
-      <option>11.00</option>
-      <option>12.00</option>
-      <option>13.00</option>
-      <option>14.00</option>
-      <option>15.00</option>
-      <option>16.00</option>
-      <option>17.00</option>
-      <option>18.00</option>
-      <option>19.00</option>
-      <option>20.00</option>
-      <option>21.00</option>
-      <option>22.00</option>
-    </select>
+    <div class="main-content">
+        <div class="header">
+            <h1 style="color: white;">Pesan Lapangan</h1>
+            <a href="view/login.html">
+                <button class="logout">Logout</button>
+            </a>
+        </div>
 
-    <br /><br />
+        <!-- Form for selecting date, court type, and time -->
+        <div class="reservation-form">
+            <h2 style="color: white;">Pemesanan Lapangan Futsal dan Badminton</h2>
 
-    <label for="end-time">Jam Selesai:</label><br />
-    <select id="end-time" class="date-picker">
-      <option value="">-- Pilih Jam Selesai --</option>
-      <option>08.00</option>
-      <option>09.00</option>
-      <option>10.00</option>
-      <option>11.00</option>
-      <option>12.00</option>
-      <option>13.00</option>
-      <option>14.00</option>
-      <option>15.00</option>
-      <option>16.00</option>
-      <option>17.00</option>
-      <option>18.00</option>
-      <option>19.00</option>
-      <option>20.00</option>
-      <option>21.00</option>
-      <option>22.00</option>
-      <option>23.00</option>
-    </select>
-  </div>
+            <!-- Tanggal -->
+            <label style="color: white;" for="date">Tanggal:</label>
+            <input type="date" id="date" name="date" />
 
-  <!-- Tombol Pesan -->
-  <div class="reservation-box">
-    <button class="order-button">Pesan</button>
-  </div>
-</div>
+            <!-- Jenis Lapangan -->
+            <label style="color: white;" for="court">Pilih Lapangan:</label>
+            <select id="court" name="court">
+                <option value="futsal-sintetis">Lapangan Futsal Sintetis</option>
+                <option value="futsal-multicort">Lapangan Futsal Multicort</option>
+                <option value="badminton">Lapangan Badminton</option>
+            </select>
 
-<!-- Script pembatas tanggal -->
-<script>
-  const dateInput = document.getElementById("date");
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
+            <!-- Jam Mulai -->
+            <label style="color: white;" for="start-time">Jam Mulai:</label>
+            <select id="start-time" name="start-time">
+                <option value="07:00">07:00</option>
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+            </select>
 
-  const formatDate = (d) => {
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
+            <!-- Jam Selesai -->
+            <label style="color: white;" for="end-time">Jam Selesai:</label>
+            <select id="end-time" name="end-time">
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+            </select>
 
-  dateInput.min = formatDate(today);
-  dateInput.max = formatDate(tomorrow);
-</script>
+            <!-- Button Pesan -->
+            <button type="submit">Pesan Lapangan</button>
+        </div>
+    </div>
+
+    <script>
+        const dateInput = document.getElementById("date");
+        const today = new Date();
+        const formatDate = (d) => {
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+
+        // Set minimum and maximum date to today
+        dateInput.min = formatDate(today);
+        dateInput.max = formatDate(today);
+    </script>
 
 </body>
+
 </html>

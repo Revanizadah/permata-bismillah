@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesanan Saya</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,6 +19,9 @@
             color: white;
             padding: 30px 0;
             text-align: center;
+            position: fixed;
+            left: 0;
+            top: 0;
         }
         .sidebar a {
             display: block;
@@ -34,6 +36,7 @@
         }
         .main-content {
             flex-grow: 1;
+            margin-left: 250px;
             padding: 30px;
         }
         .header {
@@ -112,62 +115,62 @@
         .footer p {
             margin: 0;
         }
-
-        /* Responsive Table */
-        @media (max-width: 768px) {
-            table th, table td {
-                padding: 10px;
-            }
-            table {
-                font-size: 14px;
-            }
-        }
-
     </style>
 </head>
 <body>
 
-
-<div class="main-content">
-    <div class="header">
-        <h1>Pesanan Saya</h1>
+    <div class="sidebar">
+        <h2>Dashboard Penyewa</h2>
+        <a href="#">Ketersediaan Lapangan</a>
+        <a href="#">Pesan Lapangan</a>
+        <a href="#">Rincian Pemesanan</a>
     </div>
 
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Penyewa</th>
-                    <th>Jenis Lapangan</th>
-                    <th>Harga</th>
-                    <th>Tanggal</th>
-                    <th>Jam</th>
-                    <th>Deskripsi</th>
-                    <th>Bukti Pembayaran</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                         <button class="detail-btn">Detail</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="main-content">
+        <div class="header">
+            <h1>Pesanan Saya</h1>
+            <a href="tampilan-awal.html">
+                <button class="logout">Logout</button>
+            </a>
+        </div>
+
+        <div class="table-container">
+            <h2>Detail Pemesanan</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Penyewa</th>
+                        <th>Jenis Lapangan</th>
+                        <th>Harga</th>
+                        <th>Tanggal</th>
+                        <th>Jam</th>
+                        <th>Deskripsi</th>
+                        <th>Bukti Pembayaran</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Revani</td>
+                        <td>Futsal Sintetis</td>
+                        <td>Rp 150.000</td>
+                        <td>13 - 01 - 2025</td>
+                        <td>13:00</td>
+                        <td>Lapangan nyaman dan luas.</td>
+                        <td><img src="path_to_image.jpg" alt="Bukti Pembayaran" width="100"></td>
+                        <td>Menunggu</td>
+                        <td>
+                             <button class="detail-btn">Detail</button>
+                        </td>
+                    </tr>
+                    <!-- Additional rows as needed -->
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
 </body>
 </html>

@@ -4,132 +4,272 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reservasi Online - Permata Futsal & Badminton</title>
+    <title>Dashboard Penyewa</title>
+    <link rel="stylesheet" href="styles.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #fffff4;
             margin: 0;
             padding: 0;
+            display: flex;
         }
 
-        /* Navbar */
-        .nav {
-            background-color: #001e2e;
-            padding: 10px;
+        .sidebar {
+            width: 250px;
+            background-color: #213555;
+            color: white;
+            padding: 30px 0;
             text-align: center;
         }
 
-        .nav a {
+        .sidebar a {
+            display: block;
             color: white;
-            margin: 0 15px;
+            padding: 15px;
             text-decoration: none;
             font-size: 18px;
+            margin: 10px 0;
         }
 
-        .nav a:hover {
+        .sidebar a:hover {
             background-color: #34495e;
-            padding: 5px 10px;
         }
 
-        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+        }
+
         .header {
-            background-color: #003366;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #213555;
             color: white;
-            padding: 40px;
-            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px; /* Added margin for spacing */
+            border-radius: 10px;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 28px;
+            font-size: 24px;
         }
 
-        .main-container {
+        .logout {
+            font-size: 18px;
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .logout:hover {
+            background-color: #c0392b;
+        }
+
+        .button-container {
             display: flex;
             justify-content: space-around;
-            margin-top: 50px;
-        }
-
-        .lapangan-container {
-            text-align: center;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 40%;
-        }
-
-        .lapangan-container img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .lapangan-container h2 {
             margin-top: 20px;
-            font-size: 22px;
         }
 
-        .pilih-btn {
-            margin-top: 15px;
-            padding: 10px 20px;
+        .button-container a {
+            display: inline-block;
             background-color: #2980b9;
             color: white;
-            border: none;
+            padding: 10px 20px;
             border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
+            text-decoration: none;
+            font-size: 18px;
         }
 
-        .pilih-btn:hover {
+        .button-container a:hover {
             background-color: #1f6fa3;
         }
 
-        .footer {
-            background-color: #001e2e;
-            color: white;
+        .table-container {
+            background-color: #3E5879;
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .table-container h2 {
             text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%; /* Adjust the width of the table */
+            margin: 0 auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            padding: 8px; /* Reduced padding for compact table */
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #213555;
+            color: white;
+        }
+
+        table td {
+            background-color: #f2f2f2;
+        }
+
+        .booked {
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+        }
+
+        .available {
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <div class="nav">
-        <a href="#">Home</a>
-        <a href="#">Pesanan</a>
-        <a href="#">Profile</a>
-        <a href="#">Logout</a>
+    <div class="sidebar">
+        <h2>Dashboard Penyewa</h2>
+        <a href="#">Ketersediaan Lapangan</a>
+        <a href="#">Pesan Lapangan</a>
+        <a href="#">Rincian Pemesanan</a>
     </div>
 
-    <!-- Main Content -->
-    <div class="header">
-        <h1>Selamat Datang di Permata Futsal dan Badminton</h1>
-        <p>Revani Zadah Pratiwi</p>
-    </div>
-
-    <!-- Main Container for Lapangan -->
-    <div class="main-container">
-        <!-- Futsal -->
-        <div class="lapangan-container">
-            <img src="futsal.jpg" alt="Lapangan Futsal">
-            <h2>Futsal</h2>
-            <button class="pilih-btn" onclick="window.location.href='pemesanan.html'">Pilih Futsal</button>
+    <div class="main-content">
+        <div class="header">
+            <h1 style="color: white;">Ketersediaan Lapangan</h1>
+            <a href="tampilan-awal">
+                <button class="logout">Logout</button>
+            </a>
         </div>
 
-        <!-- Badminton -->
-        <div class="lapangan-container">
-            <img src="badminton.jpg" alt="Lapangan Badminton">
-            <h2>Badminton</h2>
-            <button class="pilih-btn" onclick="window.location.href='pemesanan.html'">Pilih Badminton</button>
+        <div class="table-container">
+            <h2 style="color: white;">Jadwal Ketersediaan Lapangan</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jam</th>
+                        <th>Futsal Sintetis</th>
+                        <th>Futsal Multicort</th>
+                        <th>Lapangan Badminton</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>07:00 - 08:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                    </tr>
+                    <tr>
+                        <td>08:00 - 09:00</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                    </tr>
+                    <tr>
+                        <td>09:00 - 10:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                    </tr>
+                    <tr>
+                        <td>10:00 - 11:00</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                        <td class="available">Kosong</td>
+                    </tr>
+                    <tr>
+                        <td>11:00 - 12:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                    </tr>
+                    <tr>
+                        <td>12:00 - 13:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                    </tr>
+                    <tr>
+                        <td>13:00 - 14:00</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                        <td class="available">Kosong</td>
+                    </tr>
+                    <tr>
+                        <td>14:00 - 15:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                    </tr>
+                    <tr>
+                        <td>15:00 - 16:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                    </tr>
+                    <tr>
+                        <td>16:00 - 17:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                    </tr>
+                    <tr>
+                        <td>17:00 - 18:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                    </tr>
+                    <tr>
+                        <td>18:00 - 19:00</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                        <td class="available">Kosong</td>
+                    </tr>
+                    <tr>
+                        <td>19:00 - 20:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                    </tr>
+                    <tr>
+                        <td>20:00 - 21:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                    </tr>
+                    <tr>
+                        <td>21:00 - 22:00</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                        <td class="available">Kosong</td>
+                    </tr>
+                    <tr>
+                        <td>22:00 - 23:00</td>
+                        <td class="available">Kosong</td>
+                        <td class="booked">Sudah Dipesan</td>
+                        <td class="available">Kosong</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2025 | Permata Futsal & Badminton</p>
     </div>
 
 </body>
