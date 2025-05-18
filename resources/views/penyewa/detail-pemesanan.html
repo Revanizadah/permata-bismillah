@@ -78,20 +78,18 @@
 
     <div class="container">
         <div class="details-container">
-
             <!-- Detail Pembayaran -->
-            <p><strong>Nama:</strong> </p>
-            <p><strong>Lapangan:</strong> </p>
-            <p><strong>Harga:</strong> </p>
-            <p><strong>Tanggal:</strong> </p>
-            <p><strong>Jam:</strong> </p>
-            <p><strong>Deskripsi:</strong> </p>
+            <p><strong>Nama :</strong> <span id="nama"></span></p>
+            <p><strong>Lapangan :</strong> <span id="lapangan"></span></p>
+            <p><strong>Harga :</strong> <span id="harga"></span></p>
+            <p><strong>Tanggal :</strong> <span id="tanggal"></span></p>
+            <p><strong>Jam :</strong> <span id="jam"></span></p>
+            <p><strong>Deskripsi :</strong> <span id="deskripsi"></span></p>
 
             <!-- Bukti Pembayaran -->
             <div class="bukti-container">
                 <p><strong>Bukti Pembayaran:</strong></p>
-                <!-- Gantilah ini dengan gambar bukti pembayaran -->
-                <img src="payment-proof.jpg" alt="Bukti Pembayaran">
+                <img id="buktiPembayaran" src="" alt="Bukti Pembayaran">
             </div>
 
             <!-- Back Button -->
@@ -101,6 +99,25 @@
         </div>
     </div>
 
+    <script>
+        // Load reservation data from localStorage and populate the details
+        window.onload = function() {
+            const reservationData = JSON.parse(localStorage.getItem("reservationData"));
+
+            if (reservationData) {
+                // Populate the reservation details into the page
+                document.getElementById("nama").textContent = localStorage.getItem("userName") || "Nama Pengguna";
+                document.getElementById("lapangan").textContent = reservationData.court;
+                document.getElementById("harga").textContent = reservationData.price;
+                document.getElementById("tanggal").textContent = reservationData.date;
+                document.getElementById("jam").textContent = `${reservationData.startTime} - ${reservationData.endTime}`;
+                document.getElementById("deskripsi").textContent = reservationData.description;
+                document.getElementById("buktiPembayaran").src = reservationData.paymentProof;
+            } else {
+                alert("Data pemesanan tidak ditemukan!");
+            }
+        };
+    </script>
 
 </body>
 

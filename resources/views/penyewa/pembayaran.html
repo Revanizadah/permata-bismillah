@@ -148,11 +148,11 @@
         <div class="payment-container">
 
             <!-- Detail Pemesanan -->
-            <p><strong>Nama:</strong> Revani Zadah Pratiwi</p>
-            <p><strong>Lapangan:</strong> Lapangan Sintetis</p>
-            <p><strong>Tanggal:</strong> 2023-10-15</p>
-            <p><strong>Jam Mulai:</strong> 15:00</p>
-            <p><strong>Jam Selesai:</strong> 17:00</p>
+            <p><strong>Nama:</strong> <span id="nama"></span></p>
+            <p><strong>Lapangan:</strong> <span id="lapangan"></span></p>
+            <p><strong>Tanggal:</strong> <span id="tanggal"></span></p>
+            <p><strong>Jam Mulai:</strong> <span id="jamMulai"></span></p>
+            <p><strong>Jam Selesai:</strong> <span id="jamSelesai"></span></p>
             <p><strong>Harga:</strong> Rp. 200.000</p>
             <p><strong>Nomor Rekening:</strong> 000866764659</p>
 
@@ -172,20 +172,53 @@
     </div>
 
     <script>
-        // Function to simulate the confirmation of payment
-        function confirmPayment() {
-            const paymentForm = document.getElementById('paymentForm');
-            const fileInput = paymentForm.querySelector('input[type="file"]');
+        // Function to load reservation data from localStorage
+        window.onload = function() {
+            const reservationData = JSON.parse(localStorage.getItem("reservationData"));
+            const userName = localStorage.getItem("userName");
 
-            if (fileInput.files.length === 0) {
-                alert('Mohon unggah bukti pembayaran!');
+            if (reservationData) {
+                // Populate the reservation details on the page
+                document.getElementById("nama").textContent = userName || "Nama Pengguna"; // Tampilkan nama pengguna
+                document.getElementById("lapangan").textContent = reservationData.court;
+                document.getElementById("tanggal").textContent = reservationData.date;
+                document.getElementById("jamMulai").textContent = reservationData.startTime;
+                document.getElementById("jamSelesai").textContent = reservationData.endTime;
             } else {
-                // Simulate the file submission process
-                alert('Pembayaran Berhasil! Bukti pembayaran telah diterima.');
-                // Redirect to pemesanan.html
-                window.location.href = "pemesanan.html";  // Redirect to the next page
+                alert("Data pemesanan tidak ditemukan!");
             }
-        }
+        };
+
+        // Saving reservation data in localStorage before redirecting to pemesanan.html
+        function confirmPayment() {
+    const paymentForm = document.getElementById('paymentForm');
+    const fileInput = paymentForm.querySelector('input[type="file"]');
+
+    if (fileInput.files.length === 0) {
+        alert('Mohon unggah bukti pembayaran!');
+    } else {
+        const reservationData = {
+            court: document.getElementById("lapangan").textContent,
+            date: document.getElementById("tanggal").textContent,
+            startTime: document.getElementById("jamMulai").textContent,
+            endTime: document.getElementById("jamSelesai").textContent,
+            description: "Lapangan nyaman dan luas.",
+            price: "Rp. 200.000",
+            paymentProof: "path_to_image.jpg", // Tambahkan preview jika mau
+            status: "Menunggu"
+        };
+
+        // Ambil array lama, tambahkan data baru
+        const existingData = JSON.parse(localStorage.getItem("reservationDataArray")) || [];
+        existingData.push(reservationData);
+        localStorage.setItem("reservationDataArray", JSON.stringify(existingData));
+        localStorage.setItem("userName", document.getElementById("nama").textContent);
+
+        alert('Pembayaran Berhasil! Bukti pembayaran telah diterima.');
+        window.location.href = "pemesanan.html";
+    }
+}
+
 
     </script>
 

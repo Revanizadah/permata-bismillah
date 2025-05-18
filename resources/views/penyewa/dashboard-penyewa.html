@@ -47,7 +47,7 @@
                 background-color: #213555;
                 color: white;
                 padding: 20px;
-                margin-bottom: 20px; /* Added margin for spacing */
+                margin-bottom: 20px;
                 border-radius: 10px;
             }
 
@@ -138,6 +138,14 @@
                 color: white;
                 font-weight: bold;
             }
+
+            /* Custom Style for 'Selamat datang' text */
+            #username {
+                font-size: 24px; /* Increase font size */
+                font-weight: bold; /* Make it bold */
+                color: white; /* Change color to gold/yellow for visibility */
+            }
+
         </style>
     </head>
 
@@ -151,8 +159,8 @@
 
         <div class="main-content">
             <div class="header">
-                <h1 style="color: white">Ketersediaan Lapangan</h1>
-                <a href="tampilan-awal.html">
+                <span id="username"></span> <!-- Display username with custom style -->
+                <a href="../tampilan-awal.html">
                     <button class="logout">Logout</button>
                 </a>
             </div>
@@ -269,5 +277,17 @@
                 </table>
             </div>
         </div>
+
+        <script>
+            // Ambil nama pengguna dari localStorage dan tampilkan di halaman
+            window.onload = function () {
+                const userName = localStorage.getItem("userName");
+                if (userName) {
+                    document.getElementById("username").textContent = `Selamat datang, ${userName}`;
+                } else {
+                    alert("Nama pengguna tidak ditemukan.");
+                }
+            };
+        </script>
     </body>
 </html>

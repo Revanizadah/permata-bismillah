@@ -56,20 +56,6 @@
             font-size: 24px;
         }
 
-        .logout {
-            font-size: 18px;
-            background-color: #e74c3c;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .logout:hover {
-            background-color: #c0392b;
-        }
-
         .reservation-form {
             background-color: #3e5879;
             padding: 20px;
@@ -121,9 +107,6 @@
     <div class="main-content">
         <div class="header">
             <h1 style="color: white">Pesan Lapangan</h1>
-            <a href="view/login.html">
-                <button class="logout">Logout</button>
-            </a>
         </div>
 
         <!-- Form for selecting date, court type, and time -->
@@ -156,6 +139,11 @@
                 <option value="15:00">15:00</option>
                 <option value="16:00">16:00</option>
                 <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
             </select>
 
             <!-- Jam Selesai -->
@@ -171,6 +159,12 @@
                 <option value="15:00">15:00</option>
                 <option value="16:00">16:00</option>
                 <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
             </select>
 
             <!-- Button Pesan -->
@@ -179,34 +173,42 @@
     </div>
 
     <script>
-        const dateInput = document.getElementById("date");
-        const today = new Date();
-        const formatDate = (d) => {
-            const year = d.getFullYear();
-            const month = String(d.getMonth() + 1).padStart(2, "0");
-            const day = String(d.getDate()).padStart(2, "0");
-            return `${year}-${month}-${day}`;
-        };
+    const dateInput = document.getElementById("date");
+    const today = new Date();
+    const formatDate = (d) => {
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    };
 
-        // Set minimum and maximum date to today
-        dateInput.min = formatDate(today);
-        dateInput.max = formatDate(today);
+    // Set minimum and maximum date to today
+    dateInput.min = formatDate(today);
+    dateInput.max = formatDate(today);
 
-        // Handle form submission and redirect
-        document.getElementById("reservation-form").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent form from reloading the page
+    // Handle form submission and redirect
+    document.getElementById("reservation-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form from reloading the page
 
-            // Logic to ensure the form is filled out
-            const form = event.target;
+        // Collect form data
+        const date = document.getElementById("date").value;
+        const court = document.getElementById("court").value;
+        const startTime = document.getElementById("start-time").value;
+        const endTime = document.getElementById("end-time").value;
 
-            if (form.checkValidity()) {
-                // Redirect to the pembayaran.html after form is successfully filled
-                window.location.href = "pembayaran.html";
-            } else {
-                alert("Please fill out all the fields.");
-            }
-        });
-    </script>
+        // Store the form data in localStorage
+        localStorage.setItem("reservationData", JSON.stringify({
+            date,
+            court,
+            startTime,
+            endTime
+        }));
+
+        // Redirect to the pembayaran page
+        window.location.href = "pembayaran.html";
+    });
+</script>
+
 
 </body>
 

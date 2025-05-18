@@ -1,103 +1,104 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Daftar - Permata Futsal dan Badminton</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar - Permata Futsal dan Badminton</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-    <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-        <!-- Card Register -->
-        <div class="bg-blue-200 p-8 rounded-lg shadow-lg w-96">
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
-                Daftar
-            </h2>
+    <!-- Card Register -->
+    <div class="bg-blue-200 p-8 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
+            Daftar
+        </h2>
 
-            <!-- Form Daftar -->
-            <form id="registerForm" class="space-y-4">
-                <div>
-                    <label for="name" class="block text-gray-700">Nama :</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        class="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        required
-                    />
-                </div>
+        <!-- Form Daftar -->
+        <form id="registerForm" class="space-y-4">
+            <div>
+                <label for="name" class="block text-gray-700">Nama :</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="w-full p-2 mt-1 border border-gray-300 rounded-md"
+                    required
+                />
+            </div>
 
-                <div>
-                    <label for="phone" class="block text-gray-700"
-                        >No HP :</label
-                    >
-                    <input
-                        type="text"
-                        id="phone"
-                        name="phone"
-                        class="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        required
-                    />
-                </div>
+            <div>
+                <label for="phone" class="block text-gray-700">No HP :</label>
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    class="w-full p-2 mt-1 border border-gray-300 rounded-md"
+                    required
+                />
+            </div>
 
-                <div>
-                    <label for="email" class="block text-gray-700"
-                        >Email :</label
-                    >
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        class="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        required
-                    />
-                </div>
+            <div>
+                <label for="email" class="block text-gray-700">Email :</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="w-full p-2 mt-1 border border-gray-300 rounded-md"
+                    required
+                />
+            </div>
 
-                <div>
-                    <label for="password" class="block text-gray-700"
-                        >Password :</label
-                    >
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        required
-                    />
-                </div>
+            <div>
+                <label for="password" class="block text-gray-700">Password :</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="w-full p-2 mt-1 border border-gray-300 rounded-md"
+                    required
+                />
+            </div>
 
-                <div class="flex justify-center">
-                    <button
-                        type="submit"
-                        class="bg-blue-500 text-white px-6 py-2 rounded-md w-full hover:bg-blue-600"
-                    >
-                        Daftar
-                    </button>
-                </div>
-            </form>
+            <div class="flex justify-center">
+                <button
+                    type="submit"
+                    class="bg-blue-500 text-white px-6 py-2 rounded-md w-full hover:bg-blue-600">Daftar
+                </button>
+            </div>
+        </form>
 
-            <!-- Link Login -->
-            <p class="mt-4 text-center text-gray-700">
-                Sudah punya akun?
-                <a href="../login.html" class="text-blue-500 hover:underline">Login sekarang</a>
-            </p>
-        </div>
+        <!-- Link Login -->
+        <p class="mt-4 text-center text-gray-700">
+            Sudah punya akun?
+            <a href="../login.html" class="text-blue-500 hover:underline">Login sekarang</a>
+        </p>
+    </div>
 
-        <script>
-            // Handle form submission
-            document
-                .getElementById("registerForm")
-                .addEventListener("submit", function (event) {
-                    event.preventDefault(); // Prevent the form from submitting normally
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function (event) {
+            event.preventDefault();
 
-                    // Simulating a successful registration
-                    // In a real case, this would be a validation against a database
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
 
-                    alert("Pendaftaran berhasil! Anda sekarang dapat login.");
+            const users = JSON.parse(localStorage.getItem("userAccounts")) || [];
 
-                    // Redirect to the login page after successful registration
-                    window.location.href = "../login.html";
-                });
-        </script>
-    </body>
+            const isEmailUsed = users.some(user => user.email === email);
+            if (isEmailUsed) {
+                alert("Email sudah terdaftar. Silakan login atau gunakan email lain.");
+                return;
+            }
+
+            users.push({ name, phone, email, password });
+            localStorage.setItem("userAccounts", JSON.stringify(users));
+
+            alert("Pendaftaran berhasil! Silakan login.");
+            window.location.href = "../login.html";
+        });
+    </script>
+
+</body>
 </html>
