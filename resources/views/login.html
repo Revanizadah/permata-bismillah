@@ -44,7 +44,7 @@
         <p class="mt-4 text-center text-gray-700">Belum punya akun? <a href="penyewa/register.html" class="text-blue-500 hover:underline">Daftar sekarang</a></p>
     </div>
 
-    <script>
+     <script>
         function handleLogin(event) {
             event.preventDefault();
 
@@ -62,17 +62,24 @@
                 return;
             }
 
-            // Cari user terdaftar
-            const user = savedUsers.find(u => u.email === email && u.password === password);
+            // Find the user in savedUsers
+            const user = savedUsers.find(u => u.email === email && u.password === password && role === "user");
 
-            if (user && role === "user") {
-                const userSession = { name: user.name, email: user.email, phone: user.phone, role: "user" };
+            if (user) {
+                const userSession = { name: user.name, email: user.email, role: "user" };
                 localStorage.setItem("loggedInUser", JSON.stringify(userSession));
                 alert("Login Berhasil!");
                 window.location.href = "penyewa/dashboard-penyewa.html";
             } else {
                 alert("Email, password, atau role salah!");
             }
+
+            // Store the username in localStorage for future use
+            localStorage.setItem("userName", user.name);
+
+            alert("Login Berhasil!");
+            window.location.href = "penyewa/dashboard-penyewa.html"; // Redirect to dashboard
+
         }
     </script>
 
