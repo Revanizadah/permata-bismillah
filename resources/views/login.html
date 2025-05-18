@@ -45,35 +45,35 @@
     </div>
 
     <script>
-        // Sample user data for simulation (you would typically fetch this from a database)
-        const users = [
-            { email: 'admin@gmail.com', password: 'admin123', role: 'admin' },
-            { email: 'penyewa@gmail.com', password: 'penyewa123', role: 'user' }
-        ];
+        function handleLogin(event) {
+            event.preventDefault();
 
-        // Simulate a login function
-    function handleLogin(event) {
-    event.preventDefault();  // Prevent form submission
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const role = document.getElementById('role').value;
+            const savedUsers = JSON.parse(localStorage.getItem("userAccounts")) || [];
 
-    // Find the user in the database (mock)
-    const user = users.find(u => u.email === email && u.password === password && u.role === role);
+            // Admin hardcode
+            if (email === "admin@gmail.com" && password === "admin123" && role === "admin") {
+                localStorage.setItem("loggedInUser", JSON.stringify({ name: "Admin", email, role }));
+                alert("Login Admin Berhasil!");
+                window.location.href = "admin/manajemen-penerimaan.html";
+                return;
+            }
 
-    if (user) {
-        // Redirect based on the role
-        if (role === 'admin') {
-            window.location.href = 'admin/manajemen-penerimaan.html';  // Admin Dashboard
-        } else if (role === 'user') {
-            window.location.href = 'penyewa/dashboard-penyewa.html';  // Penyewa Page
+            // Cari user terdaftar
+            const user = savedUsers.find(u => u.email === email && u.password === password);
+
+            if (user && role === "user") {
+                const userSession = { name: user.name, email: user.email, phone: user.phone, role: "user" };
+                localStorage.setItem("loggedInUser", JSON.stringify(userSession));
+                alert("Login Berhasil!");
+                window.location.href = "penyewa/dashboard-penyewa.html";
+            } else {
+                alert("Email, password, atau role salah!");
+            }
         }
-    } else {
-        alert("Invalid credentials or role.");
-    }
-}
-
     </script>
 
 </body>
