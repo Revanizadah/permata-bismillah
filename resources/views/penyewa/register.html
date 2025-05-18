@@ -7,12 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-
     <!-- Card Register -->
     <div class="bg-blue-200 p-8 rounded-lg shadow-lg w-96">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
-            Daftar
-        </h2>
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">Daftar</h2>
 
         <!-- Form Daftar -->
         <form id="registerForm" class="space-y-4">
@@ -63,7 +60,9 @@
             <div class="flex justify-center">
                 <button
                     type="submit"
-                    class="bg-blue-500 text-white px-6 py-2 rounded-md w-full hover:bg-blue-600">Daftar
+                    class="bg-blue-500 text-white px-6 py-2 rounded-md w-full hover:bg-blue-600"
+                >
+                    Daftar
                 </button>
             </div>
         </form>
@@ -75,30 +74,44 @@
         </p>
     </div>
 
-    <script>
-        document.getElementById("registerForm").addEventListener("submit", function (event) {
-            event.preventDefault();
+     <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
 
             const name = document.getElementById("name").value;
-            const phone = document.getElementById("phone").value;
             const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
             const password = document.getElementById("password").value;
 
-            const users = JSON.parse(localStorage.getItem("userAccounts")) || [];
+            // Get existing users from localStorage or initialize an empty array
+            const savedUsers = JSON.parse(localStorage.getItem("userAccounts")) || [];
 
-            const isEmailUsed = users.some(user => user.email === email);
-            if (isEmailUsed) {
-                alert("Email sudah terdaftar. Silakan login atau gunakan email lain.");
+            // Check if the email already exists
+            const userExists = savedUsers.some(user => user.email === email);
+            if (userExists) {
+                alert("Email sudah terdaftar!");
                 return;
             }
 
-            users.push({ name, phone, email, password });
-            localStorage.setItem("userAccounts", JSON.stringify(users));
+            // When the user successfully registers
+            const newUser = {
+                name,
+                email,
+                phone,
+                password,
+            };
+
+            // Save the new user in localStorage
+            savedUsers.push(newUser);
+            localStorage.setItem("userAccounts", JSON.stringify(savedUsers));
+
+            // Store the username in localStorage for future use
+            localStorage.setItem("userName", name);
 
             alert("Pendaftaran berhasil! Silakan login.");
-            window.location.href = "../login.html";
+            window.location.href = "dashboard-penyewa.html"; // Redirect to login page
+
         });
     </script>
-
 </body>
 </html>

@@ -173,40 +173,41 @@
     </div>
 
     <script>
-    const dateInput = document.getElementById("date");
-    const today = new Date();
-    const formatDate = (d) => {
-        const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, "0");
-        const day = String(d.getDate()).padStart(2, "0");
-        return `${year}-${month}-${day}`;
-    };
+    // Handle setting today's date as minimum
+        const dateInput = document.getElementById("date");
+        const today = new Date();
+        const formatDate = (d) => {
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, "0");
+            const day = String(d.getDate()).padStart(2, "0");
+            return `${year}-${month}-${day}`;
+        };
 
-    // Set minimum and maximum date to today
-    dateInput.min = formatDate(today);
-    dateInput.max = formatDate(today);
+        // Set minimum and maximum date to today
+        dateInput.min = formatDate(today);
+        dateInput.max = formatDate(today); // Optionally adjust this to a future date range if needed
 
-    // Handle form submission and redirect
-    document.getElementById("reservation-form").addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent form from reloading the page
+        // Handle form submission and redirect
+        document.getElementById("reservation-form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form from reloading the page
 
-        // Collect form data
-        const date = document.getElementById("date").value;
-        const court = document.getElementById("court").value;
-        const startTime = document.getElementById("start-time").value;
-        const endTime = document.getElementById("end-time").value;
+            // Collect form data
+            const date = document.getElementById("date").value;
+            const court = document.getElementById("court").value;
+            const startTime = document.getElementById("start-time").value;
+            const endTime = document.getElementById("end-time").value;
 
-        // Store the form data in localStorage
-        localStorage.setItem("reservationData", JSON.stringify({
-            date,
-            court,
-            startTime,
-            endTime
-        }));
+            // Store the form data in localStorage
+            localStorage.setItem("reservationData", JSON.stringify({
+                date,
+                court,
+                startTime,
+                endTime
+            }));
 
-        // Redirect to the pembayaran page
-        window.location.href = "pembayaran.html";
-    });
+            // Redirect to the pembayaran page
+            window.location.href = "pembayaran.html";
+        });
 </script>
 
 

@@ -147,35 +147,37 @@
 
     <script>
         window.onload = function() {
-        const reservationList = JSON.parse(localStorage.getItem("reservationDataArray"));
-        const userName = localStorage.getItem("userName");
-        const orderDetails = document.getElementById("pesanan-body");
+            // Retrieve user data from localStorage
+            const reservationList = JSON.parse(localStorage.getItem("reservationDataArray"));
+            const userName = localStorage.getItem("userName"); // Get the logged-in user's name
+            const orderDetails = document.getElementById("pesanan-body");
 
-        if (Array.isArray(reservationList) && reservationList.length > 0) {
-            reservationList.forEach((data, index) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${userName || "Nama Pengguna"}</td>
-                    <td>${data.court}</td>
-                    <td>${data.price}</td>
-                    <td>${data.date}</td>
-                    <td>${data.startTime} - ${data.endTime}</td>
-                    <td>${data.description}</td>
-                    <td><img src="${data.paymentProof}" alt="Bukti Pembayaran" width="100"></td>
-                    <td>${data.status}</td>
-                    <td>
-                        <a href="detail-pemesanan.html">
-                            <button class="detail-btn">Detail</button>
-                        </a>
-                    </td>
-                `;
-                orderDetails.appendChild(row);
-            });
-        } else {
-            alert("Belum ada data pemesanan.");
-        }
-    };
+            if (Array.isArray(reservationList) && reservationList.length > 0) {
+                reservationList.forEach((data, index) => {
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${userName || "Nama Pengguna"}</td>
+                        <td>${data.court}</td>
+                        <td>${data.price}</td>
+                        <td>${data.date}</td>
+                        <td>${data.startTime} - ${data.endTime}</td>
+                        <td>${data.description}</td>
+                        <td><img src="${data.paymentProof}" alt="Bukti Pembayaran" width="100"></td>
+                        <td>${data.status}</td>
+                        <td>
+                            <a href="detail-pemesanan.html">
+                                <button class="detail-btn">Detail</button>
+                            </a>
+                        </td>
+                    `;
+                    orderDetails.appendChild(row);
+                });
+            } else {
+                alert("Belum ada data pemesanan.");
+            }
+        };
     </script>
 
 </body>
