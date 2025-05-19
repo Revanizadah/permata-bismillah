@@ -14,6 +14,7 @@
                 <th>Phone</th>
                 <th>Password hash</th>
                 <th>role</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,11 @@
                     <td>{{ $user->no_hp }}</td>
                     <td>{{ $user->password }}</td>
                     <td>{{ $user->role }}</td>
+                    <td>
+                        <a href="{{ route('users.show', $user->id) }}">
+                            <button type="button">Detail</button>
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

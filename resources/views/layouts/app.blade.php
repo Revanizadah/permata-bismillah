@@ -11,7 +11,7 @@
         <a class="navbar-brand" href="#">Reservasi Lapangan</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
-                @auth
+                {{-- @auth --}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('lapangan.index') }}">Lapangan</a>
                 </li>
@@ -28,7 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
-                @endauth
+                {{-- @endauth --}}
             </ul>
         </div>
     </nav>

@@ -17,8 +17,11 @@ return new class extends Migration
             $table->string('jenis_lapangan');
             $table->string('no_hp');
             $table->date('tanggal_pesan');
-            $table->time('jam_pesan');
+            $table->time('jam_mulai');
+            $table->time('jam_selesai');
+            $table->time('jumlah_jam');
             $table->string('status')->default('pending');
+            $table->integer('total_harga');
             $table->string('catatan');
             $table->timestamps();
         });
