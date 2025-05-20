@@ -70,7 +70,7 @@ class PembayaranController extends Controller
             $validated['bukti_pembayaran'] = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
         }
         $pembayaran->update($validated);
-        return redirect()->route('payment.index')->with('success', 'Pembayaran berhasil diupdate');
+        return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil diupdate');
     }
 
     // Hapus pembayaran
