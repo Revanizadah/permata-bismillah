@@ -68,6 +68,7 @@
             display: block;
             font-size: 16px;
             margin-bottom: 8px;
+            color: white;
         }
 
         .reservation-form select,
@@ -78,6 +79,23 @@
             margin-bottom: 20px;
             border-radius: 5px;
             border: 1px solid #ddd;
+        }
+
+        .reservation-form .court-option {
+            display: inline-block;
+            width: 30%;
+            margin-right: 10px;
+            text-align: center;
+            background-color: #ffffff;
+            color: #213555;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .reservation-form .court-option:hover {
+            background-color: #2980b9;
+            color: white;
         }
 
         .reservation-form button {
@@ -93,6 +111,50 @@
         .reservation-form button:hover {
             background-color: #1f6fa3;
         }
+
+        .reservation-form .time-slot {
+            display: inline-block;
+            width: 12%;
+            text-align: center;
+            margin-right: 10px;
+            padding: 10px;
+            background-color: #ffffff;
+            color: #213555;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .reservation-form .time-slot:hover {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        .reservation-form .next-button {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            margin-top: 20px;
+        }
+
+        .court-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .court-container .court-option {
+            text-align: center;
+        }
+
+        .court-price {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -106,111 +168,103 @@
 
     <div class="main-content">
         <div class="header">
-            <h1 style="color: white">Pesan Lapangan</h1>
+            <h1>Pesan Lapangan</h1>
         </div>
 
         <!-- Form for selecting date, court type, and time -->
         <form id="reservation-form" class="reservation-form">
-            <h2 style="color: white">Pemesanan Lapangan Futsal dan Badminton</h2>
+            <h2>Pilih Lapangan Futsal dan Badminton</h2>
+
+            <!-- Pilih Lapangan -->
+            <label for="court">Pilih Lapangan:</label>
+            <div class="court-container">
+                <!-- Lapangan F1 -->
+                <div class="court-option">
+                    <div class="court-price">50.000/jam</div>
+                    <input type="radio" id="court1" name="court" value="Lapangan F1" />
+                    <label for="court1">Lapangan F1</label>
+                </div>
+
+                <!-- Lapangan F2 -->
+                <div class="court-option">
+                    <div class="court-price">50.000/jam</div>
+                    <input type="radio" id="court2" name="court" value="Lapangan F2" />
+                    <label for="court2">Lapangan F2</label>
+                </div>
+
+                <!-- Badminton -->
+                <div class="court-option">
+                    <div class="court-price">50.000/jam</div>
+                    <input type="radio" id="court3" name="court" value="Badminton" />
+                    <label for="court3">Badminton</label>
+                </div>
+            </div>
 
             <!-- Tanggal -->
-            <label style="color: white" for="date">Tanggal:</label>
+            <label for="date">Tanggal:</label>
             <input type="date" id="date" name="date" required />
 
-            <!-- Jenis Lapangan -->
-            <label style="color: white" for="court">Pilih Lapangan:</label>
-            <select id="court" name="court" required>
-                <option value="futsal-sintetis">Lapangan Futsal Sintetis</option>
-                <option value="futsal-multicort">Lapangan Futsal Multicort</option>
-                <option value="badminton">Lapangan Badminton</option>
-            </select>
-
-            <!-- Jam Mulai -->
-            <label style="color: white" for="start-time">Jam Mulai:</label>
-            <select id="start-time" name="start-time" required>
-                <option value="07:00">07:00</option>
-                <option value="08:00">08:00</option>
-                <option value="09:00">09:00</option>
-                <option value="10:00">10:00</option>
-                <option value="11:00">11:00</option>
-                <option value="12:00">12:00</option>
-                <option value="13:00">13:00</option>
-                <option value="14:00">14:00</option>
-                <option value="15:00">15:00</option>
-                <option value="16:00">16:00</option>
-                <option value="17:00">17:00</option>
-                <option value="18:00">18:00</option>
-                <option value="19:00">19:00</option>
-                <option value="20:00">20:00</option>
-                <option value="21:00">21:00</option>
-                <option value="22:00">22:00</option>
-            </select>
-
-            <!-- Jam Selesai -->
-            <label style="color: white" for="end-time">Jam Selesai:</label>
-            <select id="end-time" name="end-time" required>
-                <option value="08:00">08:00</option>
-                <option value="09:00">09:00</option>
-                <option value="10:00">10:00</option>
-                <option value="11:00">11:00</option>
-                <option value="12:00">12:00</option>
-                <option value="13:00">13:00</option>
-                <option value="14:00">14:00</option>
-                <option value="15:00">15:00</option>
-                <option value="16:00">16:00</option>
-                <option value="17:00">17:00</option>
-                <option value="18:00">18:00</option>
-                <option value="19:00">19:00</option>
-                <option value="20:00">20:00</option>
-                <option value="21:00">21:00</option>
-                <option value="22:00">22:00</option>
-                <option value="23:00">23:00</option>
-            </select>
+            <!-- Jam Mulai (radio buttons for times) -->
+            <label for="start-time">Jam Mulai:</label>
+            <div class="court-container">
+                <div class="time-slot">
+                    <input type="radio" id="time1" name="start-time" value="07:00" />
+                    <label for="time1">07:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time2" name="start-time" value="08:00" />
+                    <label for="time2">08:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time3" name="start-time" value="09:00" />
+                    <label for="time3">09:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time4" name="start-time" value="10:00" />
+                    <label for="time4">10:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time5" name="start-time" value="11:00" />
+                    <label for="time5">11:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time6" name="start-time" value="12:00" />
+                    <label for="time6">12:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time7" name="start-time" value="13:00" />
+                    <label for="time7">13:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time8" name="start-time" value="14:00" />
+                    <label for="time8">14:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time9" name="start-time" value="15:00" />
+                    <label for="time9">15:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time10" name="start-time" value="16:00" />
+                    <label for="time10">16:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time11" name="start-time" value="17:00" />
+                    <label for="time11">17:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time12" name="start-time" value="18:00" />
+                    <label for="time12">18:00</label>
+                </div>
+                <div class="time-slot">
+                    <input type="radio" id="time13" name="start-time" value="19:00" />
+                    <label for="time13">19:00</label>
+                    
+            </div>
 
             <!-- Button Pesan -->
-            <button type="submit">Pesan Lapangan</button>
+            <button class="next-button" type="submit">Next</button>
         </form>
     </div>
-
-    <script>
-    // Handle setting today's date as minimum
-        const dateInput = document.getElementById("date");
-        const today = new Date();
-        const formatDate = (d) => {
-            const year = d.getFullYear();
-            const month = String(d.getMonth() + 1).padStart(2, "0");
-            const day = String(d.getDate()).padStart(2, "0");
-            return `${year}-${month}-${day}`;
-        };
-
-        // Set minimum and maximum date to today
-        dateInput.min = formatDate(today);
-        dateInput.max = formatDate(today); // Optionally adjust this to a future date range if needed
-
-        // Handle form submission and redirect
-        document.getElementById("reservation-form").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent form from reloading the page
-
-            // Collect form data
-            const date = document.getElementById("date").value;
-            const court = document.getElementById("court").value;
-            const startTime = document.getElementById("start-time").value;
-            const endTime = document.getElementById("end-time").value;
-
-            // Store the form data in localStorage
-            localStorage.setItem("reservationData", JSON.stringify({
-                date,
-                court,
-                startTime,
-                endTime
-            }));
-
-            // Redirect to the pembayaran page
-            window.location.href = "pembayaran.html";
-        });
-</script>
-
-
 </body>
 
 </html>
