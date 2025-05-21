@@ -11,8 +11,11 @@ class Pesanan extends Model
         'jenis_lapangan',
         'no_hp',
         'tanggal_pesan',
-        'jam_pesan',
+        'jam_mulai',
+        'jam_selesai',
+        'jumlah_jam',
         'status',
+        'total_harga',
         'catatan',
     ];
 }
