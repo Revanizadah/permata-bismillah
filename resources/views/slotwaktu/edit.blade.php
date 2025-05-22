@@ -5,6 +5,15 @@
 </head>
 <body>
 <h1>Edit Slot Waktu</h1>
+@if ($errors->any())
+    <div style="color:red;">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form action="{{ route('slotwaktu.update', $slotwaktu->id) }}" method="POST">
     @csrf @method('PUT')
     <label>Nama lapangan:</label>
