@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-indigo-300">
+
+<div class="container mx-auto my-10 p-8 bg-white shadow-lg rounded-lg">
+    <h2 class="text-center text-3xl font-bold text-gray-800 mb-6">Laporan Admin</h2>
+
+    <!-- Filters -->
+    <div class="flex justify-between mb-6">
+        <div class="flex items-center">
+            <label for="tanggalFilter" class="mr-2 text-gray-700">Filter Tanggal:</label>
+            <input type="date" id="tanggalFilter" class="p-2 border border-gray-300 rounded" />
+        </div>
+        <div class="flex items-center">
+            <label for="lapanganFilter" class="mr-2 text-gray-700">Filter Lapangan:</label>
+            <select id="lapanganFilter" class="p-2 border border-gray-300 rounded">
+                <option value="">Pilih Lapangan</option>
+                <option value="Lapangan 1">Lapangan 1</option>
+                <option value="Lapangan 2">Lapangan 2</option>
+                <option value="Lapangan 3">Lapangan 3</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Buttons to export data -->
+    <div class="mb-6 text-center">
+        <button class="bg-green-800 text-white px-6 py-3 rounded-lg hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-400 mr-4">Export to Excel</button>
+        <button class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-blue-400">Export to PDF</button>
+    </div>
+
+    <!-- Table for displaying slot times -->
+    <table class="min-w-full table-auto border-collapse border border-gray-300">
+        <thead>
+            <tr class="bg-blue-200 text-gray-800">
+                <th class="px-6 py-4 border-b">No</th>
+                <th class="px-6 py-4 border-b">Nama Pemesan</th>
+                <th class="px-6 py-4 border-b">Jenis Lapangan</th>
+                <th class="px-6 py-4 border-b">Tanggal</th>
+                <th class="px-6 py-4 border-b">Jam</th>
+                <th class="px-6 py-4 border-b">Harga</th>
+                <th class="px-6 py-4 border-b">Bukti Pembayaran</th>
+                <th class="px-6 py-4 border-b">Metode Pembayaran</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="px-6 py-4 border-b">1</td>
+                <td class="px-6 py-4 border-b">dikaas</td>
+                <td class="px-6 py-4 border-b">Lapangan 1</td>
+                <td class="px-6 py-4 border-b">2023-10-01</td>
+                <td class="px-6 py-4 border-b">09:00 - 10:00</td>
+                <td class="px-6 py-4 border-b">Rp 90.000</td>
+                <td class="px-6 py-4 border-b"><a href="#" class="text-blue-600">Lihat</a></td>
+                <td class="px-6 py-4 border-b">Transfer Bank</td>
+            </tr>
+            <tr>
+                <td class="px-6 py-4 border-b">2</td>
+                <td class="px-6 py-4 border-b">Andi</td>
+                <td class="px-6 py-4 border-b">Lapangan 2</td>
+                <td class="px-6 py-4 border-b">2023-10-02</td>
+                <td class="px-6 py-4 border-b">10:00 - 11:00</td>
+                <td class="px-6 py-4 border-b">Rp 100.000</td>
+                <td class="px-6 py-4 border-b"><a href="#" class="text-blue-600">Lihat</a></td>
+                <td class="px-6 py-4 border-b">Cash</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

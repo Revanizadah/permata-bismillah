@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesanan Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-indigo-300">
+
+<div class="container mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
+    <h2 class="text-center text-3xl font-bold text-gray-800 mb-6">Pesanan</h2>
+
+    <table class="min-w-full table-auto border-collapse border border-gray-300">
+        <thead>
+            <tr class="bg-blue-200 text-gray-800">
+                <th class="px-6 py-4 border-b">No</th>
+                <th class="px-6 py-4 border-b">Nama Pemesan</th>
+                <th class="px-6 py-4 border-b">Jenis Lapangan</th>
+                <th class="px-6 py-4 border-b">Tanggal</th>
+                <th class="px-6 py-4 border-b">Jam</th>
+                <th class="px-6 py-4 border-b">Bukti Pembayaran</th>
+                <th class="px-6 py-4 border-b">Catatan</th>
+                <th class="px-6 py-4 border-b">Status</th>
+                <th class="px-6 py-4 border-b">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="px-6 py-4 border-b">1</td>
+                <td class="px-6 py-4 border-b">dikaas</td>
+                <td class="px-6 py-4 border-b">Lapangan 1</td>
+                <td class="px-6 py-4 border-b">2023-10-01</td>
+                <td class="px-6 py-4 border-b">09:00 - 10:00</td>
+                <td class="px-6 py-4 border-b"><a href="#" class="text-blue-600">Lihat</a></td>
+                <td class="px-6 py-4 border-b">belum lunas yee</td>
+                <td class="px-6 py-4 border-b">menunggu</td>
+                <td class="px-6 py-4 border-b">
+                    <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Terima</button>
+                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Tolak</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

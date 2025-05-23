@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Waktu Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-indigo-300">
+
+<div class="container mx-auto my-10 p-8 bg-white shadow-lg rounded-lg">
+    <h2 class="text-center text-3xl font-bold text-gray-800 mb-6">Slot Waktu</h2>
+
+    <!-- Button to add a new slot -->
+    <div class="text-center mb-6">
+        <button class="bg-blue-200 text-black px-6 py-3 rounded-lg hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200">Tambah Slot</button>
+    </div>
+
+    <!-- Table for displaying slot times -->
+    <table class="min-w-full table-auto border-collapse border border-gray-300" id="slotTable">
+        <thead>
+            <tr class="bg-blue-200 text-black">
+                <th class="px-6 py-4 border-b">Nama Lapangan</th>
+                <th class="px-6 py-4 border-b">Tanggal</th>
+                <th class="px-6 py-4 border-b">Jam Mulai</th>
+                <th class="px-6 py-4 border-b">Jam Selesai</th>
+                <th class="px-6 py-4 border-b">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="px-6 py-4 border-b">Lapangan 1</td>
+                <td class="px-6 py-4 border-b">2023-10-01</td>
+                <td class="px-6 py-4 border-b">09:00</td>
+                <td class="px-6 py-4 border-b">10:00</td>
+                <td class="px-6 py-4 border-b">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Detail</button>
+                    <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">Edit</button>
+                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Hapus</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="px-6 py-4 border-b">Lapangan 2</td>
+                <td class="px-6 py-4 border-b">2023-10-02</td>
+                <td class="px-6 py-4 border-b">10:00</td>
+                <td class="px-6 py-4 border-b">11:00</td>
+                <td class="px-6 py-4 border-b">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Detail</button>
+                    <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">Edit</button>
+                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Hapus</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="px-6 py-4 border-b">Lapangan 3</td>
+                <td class="px-6 py-4 border-b">2023-10-03</td>
+                <td class="px-6 py-4 border-b">11:00</td>
+                <td class="px-6 py-4 border-b">12:00</td>
+                <td class="px-6 py-4 border-b">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Detail</button>
+                    <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">Edit</button>
+                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Hapus</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
