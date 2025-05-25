@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pesanan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gradient-to-r bg-indigo-300 flex items-center justify-center min-h-screen">
+
+<div class="container mx-auto p-8 bg-white shadow-lg rounded-xl w-full max-w-2xl">
+
+    <h2 class="text-center text-3xl font-bold text-gray-800 mb-8">Detail Pesanan</h2>
+
+    <div class="space-y-6">
+        <!-- Nama Pemesan -->
+        <div class="flex justify-between items-center">
+            <label for="namaPemesan" class="block text-lg font-medium text-gray-700">Nama Pemesan</label>
+            <input type="text" id="namaPemesan" value="Dikaas" class="mt-1 block w-3/4 p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 focus:ring-2 focus:ring-blue-400" readonly />
+        </div>
+
+        <!-- Jenis Lapangan -->
+        <div class="flex justify-between items-center">
+            <label for="jenisLapangan" class="block text-lg font-medium text-gray-700">Jenis Lapangan</label>
+            <input type="text" id="jenisLapangan" value="Lapangan Futsal Sintetis" class="mt-1 block w-3/4 p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 focus:ring-2 focus:ring-blue-400" readonly />
+        </div>
+
+        <!-- Harga -->
+        <div class="flex justify-between items-center">
+            <label for="harga" class="block text-lg font-medium text-gray-700">Harga</label>
+            <input type="text" id="harga" value="Rp 90.000" class="mt-1 block w-3/4 p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 focus:ring-2 focus:ring-blue-400" readonly />
+        </div>
+
+        <!-- Tanggal -->
+        <div class="flex justify-between items-center">
+            <label for="tanggal" class="block text-lg font-medium text-gray-700">Tanggal</label>
+            <input type="date" id="tanggal" value="2023-10-01" class="mt-1 block w-3/4 p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 focus:ring-2 focus:ring-blue-400" readonly />
+        </div>
+
+        <!-- Jam -->
+        <div class="flex justify-between items-center">
+            <label for="jam" class="block text-lg font-medium text-gray-700">Jam</label>
+            <input type="text" id="jam" value="09:00 - 10:00" class="mt-1 block w-3/4 p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 focus:ring-2 focus:ring-blue-400" readonly />
+        </div>
+
+        <!-- Bukti Pembayaran -->
+        <div class="flex justify-between items-center">
+            <label for="buktiPembayaran" class="block text-lg font-medium text-gray-700">Bukti Pembayaran</label>
+            <a href="#" class="text-blue-600 hover:text-blue-800 text-lg">Lihat Bukti Pembayaran</a>
+        </div>
+
+        <!-- Catatan -->
+        <div class="flex justify-between items-center">
+            <label for="catatan" class="block text-lg font-medium text-gray-700">Catatan</label>
+            <textarea id="catatan" class="mt-1 block w-3/4 p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 focus:ring-2 focus:ring-blue-400" rows="3" readonly>Belum lunas</textarea>
+        </div>
+
+        <!-- Status -->
+        <div class="flex justify-between items-center">
+            <label for="status" class="block text-lg font-medium text-gray-700">Status</label>
+            <input type="text" id="status" value="Menunggu" class="mt-1 block w-3/4 p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 focus:ring-2 focus:ring-blue-400" readonly />
+        </div>
+
+        <!-- Back Button -->
+        <div class="text-center mt-8">
+            <a href="pesanan-saya.html" class="bg-blue-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full">
+                Kembali ke Pesanan Saya
+            </a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

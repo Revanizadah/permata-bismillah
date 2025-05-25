@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Penyewa</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-indigo-300 flex items-center justify-center min-h-screen">
+
+<div class="container mx-auto p-8 bg-white shadow-lg rounded-lg w-full max-w-md">
+
+    <!-- Logo -->
+    <div class="text-center mb-6">
+        <img src="/resources/views/image/logo.jpg" alt="Logo Penyewa" class="mx-auto mb-4 w-24 h-24 object-contain" />
+    </div>
+
+    <h2 class="text-center text-3xl font-bold text-gray-800 mb-6">Login Penyewa</h2>
+
+    <!-- Login Form -->
+    <form action="#" method="POST" class="space-y-6">
+        <!-- Username -->
+        <div>
+            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+            <input type="text" id="username" name="username" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg" required />
+        </div>
+
+        <!-- Password -->
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" id="password" name="password" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg" required />
+        </div>
+
+        <!-- Button Login -->
+        <div class="text-center">
+            <button type="submit" class="bg-blue-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full">Login</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

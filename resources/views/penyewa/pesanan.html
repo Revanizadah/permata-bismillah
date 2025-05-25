@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pemesanan Lapangan</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script>
+</head>
+<body class="bg-indigo-300 min-h-screen flex items-center justify-center">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md py-4 px-8 fixed w-full top-0 z-10">
+    <div class="flex items-center justify-between">
+      <!-- Logo and App Name -->
+      <div class="flex items-center space-x-4">
+        <img src="/resources/views/image/logo.jpg" alt="Logo" class="w-12 h-12 rounded-full" />
+        <h1 class="text-2xl font-semibold text-gray-800">Permata Futsal Badminton</h1>
+      </div>
+
+      <!-- Navbar Links and Profile Dropdown aligned to the right -->
+      <div class="flex items-center space-x-6 ml-auto">
+        <!-- Navbar Links -->
+        <div class="hidden md:flex space-x-6">
+          <a href="about.html" class="text-lg text-gray-800 hover:text-blue-600 transition duration-300">Tentang</a>
+          <a href="pesanan.html" class="text-lg text-gray-800 hover:text-blue-600 transition duration-300">Pesan</a>
+          <a href="pesanan-saya.html" class="text-lg text-gray-800 hover:text-blue-600 transition duration-300">Pesanan Saya</a>
+        </div>
+
+        <!-- Profile Dropdown -->
+        <div x-data="{ open: false }" class="relative">
+          <button @click="open = !open" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 transition duration-300">
+            <span class="font-semibold">Dikaas</span>
+            <i class="fas fa-caret-down"></i>
+          </button>
+
+          <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 transition duration-300">
+            <div class="px-4 py-2 text-gray-800 text-sm">Dikaas</div>
+            <div class="px-4 py-2 text-gray-600 text-xs">dikaas@example.com</div>
+            <div class="border-t border-gray-200">
+              <a href="#" class="block px-4 py-2 text-red-600 hover:bg-gray-100 transition duration-200">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-3xl w-full mt-24">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Pemesanan Lapangan</h2>
+
+    <form>
+      <!-- Jenis Lapangan -->
+      <div class="mb-6">
+        <p class="block text-lg font-semibold text-gray-700 mb-2">Jenis Lapangan & Harga:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <label for="lap1">
+            <input type="radio" id="lap1" name="lapangan" value="Futsal Sintetis" class="sr-only peer" required />
+            <div class="border border-gray-300 rounded-lg px-4 py-3 text-center transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+              Lapangan Futsal Sintetis <br><span class="text-sm">(Rp120.000/jam)</span>
+            </div>
+          </label>
+
+          <label for="lap2">
+            <input type="radio" id="lap2" name="lapangan" value="Futsal Multicourt" class="sr-only peer" />
+            <div class="border border-gray-300 rounded-lg px-4 py-3 text-center transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+              Lapangan Futsal Multicourt <br><span class="text-sm">(Rp100.000/jam)</span>
+            </div>
+          </label>
+
+          <label for="lap3">
+            <input type="radio" id="lap3" name="lapangan" value="Badminton" class="sr-only peer" />
+            <div class="border border-gray-300 rounded-lg px-4 py-3 text-center transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+              Lapangan Badminton <br><span class="text-sm">(Rp50.000/jam)</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Tanggal -->
+      <div class="mb-6">
+        <label for="tanggal" class="block text-lg font-semibold text-gray-700 mb-2">Tanggal:</label>
+        <input type="date" id="tanggal" name="tanggal" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-300" required />
+      </div>
+
+      <!-- Jam -->
+      <div class="mb-6">
+        <p class="block text-lg font-semibold text-gray-700 mb-4 text-center">Pilih Jam:</p>
+        <div class="grid grid-cols-4 sm:grid-cols-6 gap-4">
+            <label for="jam07">
+                <input type="radio" id="jam07" name="jam" value="07:00" class="sr-only peer" required />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                07.00
+                </div>
+            </label>
+            <label for="jam08">
+                <input type="radio" id="jam08" name="jam" value="08:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                08.00
+                </div>
+            </label>
+            <label for="jam09">
+                <input type="radio" id="jam09" name="jam" value="09:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                09.00
+                </div>
+            </label>
+            <label for="jam10">
+                <input type="radio" id="jam10" name="jam" value="10:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                10.00
+                </div>
+            </label>
+            <label for="jam11">
+                <input type="radio" id="jam11" name="jam" value="11:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                11.00
+                </div>
+            </label>
+            <label for="jam12">
+                <input type="radio" id="jam12" name="jam" value="12:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                12.00
+                </div>
+            </label>
+            <label for="jam13">
+                <input type="radio" id="jam13" name="jam" value="13:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                13.00
+                </div>
+            </label>
+            <label for="jam14">
+                <input type="radio" id="jam14" name="jam" value="14:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                14.00
+                </div>
+            </label>
+            <label for="jam15">
+                <input type="radio" id="jam15" name="jam" value="15:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                15.00
+                </div>
+            </label>
+            <label for="jam16">
+                <input type="radio" id="jam16" name="jam" value="16:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                16.00
+                </div>
+            </label>
+            <label for="jam17">
+                <input type="radio" id="jam17" name="jam" value="17:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                17.00
+                </div>
+            </label>
+            <label for="jam18">
+                <input type="radio" id="jam18" name="jam" value="18:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                18.00
+                </div>
+            </label>
+            <label for="jam19">
+                <input type="radio" id="jam19" name="jam" value="19:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                19.00
+                </div>
+            </label>
+            <label for="jam20">
+                <input type="radio" id="jam20" name="jam" value="20:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                20.00
+                </div>
+            </label>
+            <label for="jam21">
+                <input type="radio" id="jam21" name="jam" value="21:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                21.00
+                </div>
+            </label>
+            <label for="jam22">
+                <input type="radio" id="jam22" name="jam" value="22:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                22.00
+                </div>
+            </label>
+            <label for="jam23">
+                <input type="radio" id="jam23" name="jam" value="23:00" class="sr-only peer" />
+                <div class="text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:text-white hover:shadow-md cursor-pointer">
+                23.00
+                </div>
+            </label>
+        </div>
+      </div>
+
+      <!-- Tombol Submit -->
+      <div class="text-center mt-6">
+        <a href="pembayaran1.html" class="bg-blue-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                Next - Pembayaran
+            </a>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pembayaran Awal</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-indigo-300 min-h-screen flex items-center justify-center">
+
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-3xl w-full">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Pembayaran Awal</h2>
+
+    <!-- Pembayaran Form -->
+    <form action="#" method="POST">
+      <!-- Nama Pemesan -->
+      <div class="mb-6">
+        <label for="namaPemesan" class="block text-lg font-semibold text-gray-700 mb-2">Nama Pemesan:</label>
+        <input type="text" id="namaPemesan" name="namaPemesan" value="Dikaas" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700" disabled />
+      </div>
+
+      <!-- Jenis Lapangan -->
+      <div class="mb-6">
+        <label for="jenisLapangan" class="block text-lg font-semibold text-gray-700 mb-2">Jenis Lapangan:</label>
+        <input type="text" id="jenisLapangan" name="jenisLapangan" value="Lapangan Futsal Sintetis" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700" disabled />
+      </div>
+
+      <!-- Tanggal -->
+      <div class="mb-6">
+        <label for="tanggal" class="block text-lg font-semibold text-gray-700 mb-2">Tanggal:</label>
+        <input type="date" id="tanggal" name="tanggal" value="2023-10-01" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700" disabled />
+      </div>
+
+      <!-- Jam Mulai -->
+      <div class="mb-6">
+        <label for="jamMulai" class="block text-lg font-semibold text-gray-700 mb-2">Jam Mulai:</label>
+        <input type="time" id="jamMulai" name="jamMulai" value="09:00" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700" disabled />
+      </div>
+
+      <!-- Jam Selesai -->
+      <div class="mb-6">
+        <label for="jamSelesai" class="block text-lg font-semibold text-gray-700 mb-2">Jam Selesai:</label>
+        <input type="time" id="jamSelesai" name="jamSelesai" value="10:00" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700" disabled />
+      </div>
+
+      <!-- Kembali Button -->
+      <div class="text-center mt-6 space-x-4">
+        <a href="pesanan.html" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300">
+          Kembali
+        </a>
+
+        <!-- Button Pesan Sekarang -->
+        <a href="pembayaran2.html" class="bg-blue-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          Pesan Sekarang
+        </a>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
