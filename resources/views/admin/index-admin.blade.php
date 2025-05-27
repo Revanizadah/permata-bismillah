@@ -75,13 +75,12 @@
                 <thead>
                     <tr class="bg-blue-200 text-gray-800">
                         <th class="px-6 py-4 border-b">No</th>
-                        <th class="px-6 py-4 border-b">Nama Pemesan</th>
-                        <th class="px-6 py-4 border-b">Jenis Lapangan</th>
-                        <th class="px-6 py-4 border-b">Tanggal</th>
-                        <th class="px-6 py-4 border-b">Jam</th>
-                        <th class="px-6 py-4 border-b">Harga</th>
-                        <th class="px-6 py-4 border-b">Bukti Pembayaran</th>
+                        <th class="px-6 py-4 border-b">Nomor Pemesan</th>
                         <th class="px-6 py-4 border-b">Metode Pembayaran</th>
+                        <th class="px-6 py-4 border-b">Status</th>
+                        <th class="px-6 py-4 border-b">Jumlah</th>
+                        <th class="px-6 py-4 border-b">Bukti</th>
+                        <th class="px-6 py-4 border-b">Catatan</th>
                         <th class="px-6 py-4 border-b">Aksi</th>
                     </tr>
                 </thead>

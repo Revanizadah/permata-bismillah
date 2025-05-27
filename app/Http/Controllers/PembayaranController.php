@@ -11,7 +11,7 @@ class PembayaranController extends Controller
     public function index()
     {
         $pembayarans = Pembayaran::all();
-        return view('payment.index', compact('pembayarans'));
+        return view('payment.index-admin', compact('pembayarans'));
     }
 
     // Tampilkan form tambah pembayaran
@@ -80,4 +80,17 @@ class PembayaranController extends Controller
         $pembayaran->delete();
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil dihapus');
     }
+    public function updateStatus(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required|in:Sukses,Ditolak',
+    ]);
+
+    $pembayaran = Pembayaran::findOrFail($id);
+
+    $pembayaran->status_pembayaran = $request->status;
+    $pembayaran->save();
+
+    return redirect()->back()->with('success', 'Status pembayaran berhasil diupdate!');
+}
 }
