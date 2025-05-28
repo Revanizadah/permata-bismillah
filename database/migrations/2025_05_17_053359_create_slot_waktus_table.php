@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('slot_waktu', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_lapangan');
+            $table->foreignId('lapangan_id')->constrained('lapangans')->onDelete('cascade');
             $table->date('tanggal');
             $table->time('jam_mulai');
             $table->time('jam_selesai');

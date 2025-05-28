@@ -13,15 +13,16 @@ return new class extends Migration
     {
 
         Schema::create('pembayarans', function (Blueprint $table) {
-            $table->id(); 
-            $table->string('no_pesanan');
-            $table->string('nama_pemesan');
-            $table->string('metode_pembayaran');
-            $table->string('status_pembayaran')->default('pending');
-            $table->string('jumlah_pembayaran');
-            $table->string('bukti_pembayaran')->nullable(); 
-            $table->string('catatan')->nullable(); 
-            $table->timestamps(); 
+            $table->id();
+            $table->string('kode_transaksi', 20)->unique();
+            $table->foreignId('pesanan_id')->constrained('pesanans')->onDelete('cascade');
+            $table->dateTime('tanggal');
+            $table->decimal('jumlah', 10, 2);
+            $table->string('metode', 50);
+            $table->string('bukti_pembayaran')->nullable();
+            $table->string('status', 20)->default('Pending');
+            $table->text('catatan')->nullable();
+            $table->timestamps();
         });
 
 
