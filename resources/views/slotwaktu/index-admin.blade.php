@@ -22,19 +22,19 @@
         <!-- Sidebar Navigation -->
         <ul class="space-y-4">
             <li>
-                <a href="pesanan-admin.html" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+                <a href= "{{ route('pesanan.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                     <i class="fas fa-list w-5 h-5 mr-3"></i>
                     Pesanan
                 </a>
             </li>
             <li>
-                <a href="pembayaran-admin.html" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+                <a href= "{{ route('pembayaran.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                     <i class="fas fa-credit-card w-5 h-5 mr-3"></i>
                     Pembayaran
                 </a>
             </li>
             <li>
-                <a href="slotwaktu.html" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+                <a href= "{{ route('slotwaktu.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                     <i class="fas fa-calendar-alt w-5 h-5 mr-3"></i>
                     Slot Waktu
                 </a>
@@ -78,43 +78,29 @@
                         <th class="px-6 py-4 border-b">Tanggal</th>
                         <th class="px-6 py-4 border-b">Jam Mulai</th>
                         <th class="px-6 py-4 border-b">Jam Selesai</th>
+                        <th class="px-6 py-4 border-b">status</th>
                         <th class="px-6 py-4 border-b">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="px-6 py-4 border-b">Lapangan 1</td>
-                        <td class="px-6 py-4 border-b">2023-10-01</td>
-                        <td class="px-6 py-4 border-b">09:00</td>
-                        <td class="px-6 py-4 border-b">10:00</td>
-                        <td class="px-6 py-4 border-b">
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Detail</button>
-                            <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">Edit</button>
-                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 border-b">Lapangan 2</td>
-                        <td class="px-6 py-4 border-b">2023-10-02</td>
-                        <td class="px-6 py-4 border-b">10:00</td>
-                        <td class="px-6 py-4 border-b">11:00</td>
-                        <td class="px-6 py-4 border-b">
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Detail</button>
-                            <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">Edit</button>
-                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 border-b">Lapangan 3</td>
-                        <td class="px-6 py-4 border-b">2023-10-03</td>
-                        <td class="px-6 py-4 border-b">11:00</td>
-                        <td class="px-6 py-4 border-b">12:00</td>
-                        <td class="px-6 py-4 border-b">
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Detail</button>
-                            <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">Edit</button>
-                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Hapus</button>
-                        </td>
-                    </tr>
+                    @foreach($slotWaktus as $slot)
+                <tr>
+                    <tr class="text-center">
+                    <td>{{ $slot->nama_lapangan }}</td>
+                    <td>{{ $slot->tanggal }}</td>
+                    <td>{{ $slot->jam_mulai }}</td>
+                    <td>{{ $slot->jam_selesai }}</td>
+                    <td>{{ $slot->status }}</td>
+                    <td>
+                        <a href="{{ route('slotwaktu.show', $slot->id) }}">Detail</a> |
+                        <a href="{{ route('slotwaktu.edit', $slot->id) }}">Edit</a>
+                    <form action="{{ route('slotwaktu.destroy', $slot->id) }}" method="POST" style="display:inline;">
+                        @csrf @method('DELETE')
+                        <button type="submit" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                    </form>
+                    </td>
+                </tr>
+            @endforeach
                 </tbody>
             </table>
         </div>

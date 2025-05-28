@@ -20,9 +20,9 @@
         </div>
         <!-- Sidebar Navigation -->
         <ul class="space-y-4">
-            <li><a href="{{ route('pesanan.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg"><i class="fas fa-list w-5 h-5 mr-3"></i>Pesanan</a></li>
-            <li><a href="pembayaran-admin.html" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg"><i class="fas fa-credit-card w-5 h-5 mr-3"></i>Pembayaran</a></li>
-            <li><a href="slotwaktu.html" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg"><i class="fas fa-calendar-alt w-5 h-5 mr-3"></i>Slot Waktu</a></li>
+            <li><a href= "{{ route('pesanan.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg"><i class="fas fa-list w-5 h-5 mr-3"></i>Pesanan</a></li>
+            <li><a href= "{{ route('pembayaran.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg"><i class="fas fa-credit-card w-5 h-5 mr-3"></i>Pembayaran</a></li>
+            <li><a href= "{{ route('slotwaktu.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg"><i class="fas fa-calendar-alt w-5 h-5 mr-3"></i>Slot Waktu</a></li>
             <li><a href="pesan-lapangan.html" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg"><i class="fas fa-paperclip w-5 h-5 mr-3"></i>Pesan Lapangan Offline</a></li>
             <li><a href="laporan-admin.html" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg"><i class="fas fa-chart-bar w-5 h-5 mr-3"></i>Laporan Admin</a></li>
             <li><a href="#" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg"><i class="fas fa-sign-out-alt w-5 h-5 mr-3"></i>Logout</a></li>
