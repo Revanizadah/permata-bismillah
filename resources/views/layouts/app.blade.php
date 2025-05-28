@@ -3,38 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservasi Lapangan</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>@yield('title', 'Admin Permata')</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Reservasi Lapangan</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                {{-- @auth --}}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('lapangan.index') }}">Lapangan</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('order.index') }}">Pemesanan</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('payment.index') }}">Pembayaran</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-                </li>
-                @else
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
-                </li>
-                {{-- @endauth --}}
-            </ul>
+<body class="bg-indigo-300">
+    <div class="flex min-h-screen">
+        <x-sidebar />
+        <div class="flex-1 p-8">
+            @yield('content')
         </div>
-    </nav>
-
-    @yield('content')
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
 </body>
 </html>
