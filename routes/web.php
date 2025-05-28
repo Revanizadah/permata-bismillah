@@ -34,6 +34,7 @@ Route::get('pesanan/{pesanan}', [\App\Http\Controllers\PesananController::class,
 Route::get('pesanan/{pesanan}/edit', [\App\Http\Controllers\PesananController::class, 'edit'])->name('pesanan.edit');
 Route::put('pesanan/{pesanan}', [\App\Http\Controllers\PesananController::class, 'update'])->name('pesanan.update');
 Route::delete('pesanan/{pesanan}', [\App\Http\Controllers\PesananController::class, 'destroy'])->name('pesanan.destroy');
+Route::patch('pesanan/{id}/status', [App\Http\Controllers\PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
 
 // Routes Slot Waktu
 Route::resource('slotwaktu', App\Http\Controllers\SlotWaktuController::class);

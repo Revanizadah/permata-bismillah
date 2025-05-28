@@ -10,7 +10,7 @@ class PesananController extends Controller
     public function index()
     {
         $pesanans = Pesanan::all();
-        return view('pesanan.index', compact('pesanans'));
+        return view('pesanan.index-admin', compact('pesanans'));
     }
 
     public function create()
@@ -70,4 +70,18 @@ class PesananController extends Controller
         $pesanan->delete();
         return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dihapus');
     }
+    public function updateStatus(Request $request, $id)
+{
+    $status = $request->status ?? $request->query('status');
+
+    if (!in_array($status, ['Sukses', 'Ditolak'])) {
+        return redirect()->back()->with('error', 'Status tidak valid.');
+    }
+    
+    $pesanan = Pesanan::findOrFail($id);
+    $pesanan->status = $status;
+    $pesanan->save();
+
+    return redirect()->back()->with('success', 'Status pesanan berhasil diupdate!');
+}
 }
