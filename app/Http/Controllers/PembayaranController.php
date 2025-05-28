@@ -13,11 +13,6 @@ class PembayaranController extends Controller
         return view('payment.index-admin', compact('pembayarans'));
     }
 
-    public function create()
-    {
-        return view('payment.create');
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([

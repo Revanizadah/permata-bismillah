@@ -7,8 +7,91 @@
     <h2 class="text-center text-3xl font-bold text-gray-800 mb-6">Pembayaran</h2>
 
     <div class="text-center mb-6">
-        <a href="{{ route('pembayaran.create') }}" class="bg-blue-200 text-black px-6 py-3 rounded-lg hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200 inline-block">Tambah Pembayaran</a>
+        <button onclick="openModal()" class="bg-blue-200 text-black px-6 py-3 rounded-lg hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200 inline-block">
+            Tambah Pembayaran
+        </button>
     </div>
+
+    <div id="modalPembayaran" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
+        <div id="modalContent" class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative transform transition-all duration-300 opacity-0 scale-95">
+        
+            <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            <h2 class="text-xl font-bold mb-4 text-center">Tambah Pembayaran</h2>
+
+            @if($errors->any())
+                <div class="mb-4 text-red-600">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('pembayaran.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Nomor Pesanan</label>
+                    <input type="text" name="no_pesanan" class="w-full border rounded px-3 py-2" required value="{{ old('no_pesanan') }}">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Nama Pemesan</label>
+                    <input type="text" name="nama_pemesan" class="w-full border rounded px-3 py-2" required value="{{ old('nama_pemesan') }}">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Metode Pembayaran</label>
+                    <input type="text" name="metode_pembayaran" class="w-full border rounded px-3 py-2" required value="{{ old('metode_pembayaran') }}">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Jumlah Pembayaran</label>
+                    <input type="number" name="jumlah_pembayaran" class="w-full border rounded px-3 py-2" required value="{{ old('jumlah_pembayaran') }}">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Bukti Pembayaran</label>
+                    <input type="file" name="bukti_pembayaran" class="w-full border rounded px-3 py-2">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Catatan</label>
+                    <textarea name="catatan" class="w-full border rounded px-3 py-2">{{ old('catatan') }}</textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Status</label>
+                    <input type="text" name="status_pembayaran" class="w-full border rounded px-3 py-2" required value="{{ old('status_pembayaran') }}">
+                </div>
+                <div class="flex justify-end space-x-2">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            const modal = document.getElementById('modalPembayaran');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+            
+            void content.offsetWidth;
+            content.classList.remove('opacity-0', 'scale-95');
+            content.classList.add('opacity-100', 'scale-100');
+        }
+        function closeModal() {
+            const modal = document.getElementById('modalPembayaran');
+            const content = document.getElementById('modalContent');
+            content.classList.remove('opacity-100', 'scale-100');
+            content.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+        
+        @if($errors->any())
+        document.addEventListener('DOMContentLoaded', function() {
+            openModal();
+        });
+        @endif
+    </script>
 
     <div class="overflow-x-auto">
         <table class="min-w-full border border-gray-300 text-center">
