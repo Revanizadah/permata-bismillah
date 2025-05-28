@@ -15,14 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nama_pemesan');
             $table->string('jenis_lapangan');
-            $table->string('no_hp');
             $table->date('tanggal_pesan');
             $table->time('jam_mulai');
             $table->time('jam_selesai');
             $table->time('jumlah_jam');
-            $table->string('status')->default('pending');
-            $table->integer('total_harga');
-            $table->string('catatan');
+            $table->string('status', 20)->default('Pending');
+            $table->decimal('total_harga', 10, 2);
+            $table->string('catatan')->nullable();
             $table->timestamps();
         });
 
