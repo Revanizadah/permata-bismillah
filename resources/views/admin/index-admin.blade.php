@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesanan Admin</title>
+    <title>Pembayaran Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
 </head>
@@ -63,19 +63,24 @@
     <!-- Main Content -->
     <div class="flex-1 p-8">
         <div class="container mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
-            <h2 class="text-center text-3xl font-bold text-gray-800 mb-6">Pesanan</h2>
+            <h2 class="text-center text-3xl font-bold text-gray-800 mb-6">Pembayaran</h2>
 
+            <!-- Button to add a new slot -->
+            <div class="text-center mb-6">
+                <button class="bg-blue-200 text-black px-6 py-3 rounded-lg hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200">Tambah Pembayaran</button>
+            </div>
+
+            <!-- Table for displaying payment details -->
             <table class="min-w-full table-auto border-collapse border border-gray-300">
                 <thead>
                     <tr class="bg-blue-200 text-gray-800">
                         <th class="px-6 py-4 border-b">No</th>
-                        <th class="px-6 py-4 border-b">Nama Pemesan</th>
-                        <th class="px-6 py-4 border-b">Jenis Lapangan</th>
-                        <th class="px-6 py-4 border-b">Tanggal</th>
-                        <th class="px-6 py-4 border-b">Jam</th>
-                        <th class="px-6 py-4 border-b">Bukti Pembayaran</th>
-                        <th class="px-6 py-4 border-b">Catatan</th>
+                        <th class="px-6 py-4 border-b">Nomor Pemesan</th>
+                        <th class="px-6 py-4 border-b">Metode Pembayaran</th>
                         <th class="px-6 py-4 border-b">Status</th>
+                        <th class="px-6 py-4 border-b">Jumlah</th>
+                        <th class="px-6 py-4 border-b">Bukti</th>
+                        <th class="px-6 py-4 border-b">Catatan</th>
                         <th class="px-6 py-4 border-b">Aksi</th>
                     </tr>
                 </thead>
@@ -86,11 +91,25 @@
                         <td class="px-6 py-4 border-b">Lapangan 1</td>
                         <td class="px-6 py-4 border-b">2023-10-01</td>
                         <td class="px-6 py-4 border-b">09:00 - 10:00</td>
+                        <td class="px-6 py-4 border-b">Rp 90.000</td>
                         <td class="px-6 py-4 border-b"><a href="#" class="text-blue-600">Lihat</a></td>
-                        <td class="px-6 py-4 border-b">belum lunas yee</td>
-                        <td class="px-6 py-4 border-b">menunggu</td>
+                        <td class="px-6 py-4 border-b">Transfer Bank</td>
                         <td class="px-6 py-4 border-b">
-                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Terima</button>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Verifikasi</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Tolak</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 border-b">2</td>
+                        <td class="px-6 py-4 border-b">Andi</td>
+                        <td class="px-6 py-4 border-b">Lapangan 2</td>
+                        <td class="px-6 py-4 border-b">2023-10-02</td>
+                        <td class="px-6 py-4 border-b">10:00 - 11:00</td>
+                        <td class="px-6 py-4 border-b">Rp 100.000</td>
+                        <td class="px-6 py-4 border-b"><a href="#" class="text-blue-600">Lihat</a></td>
+                        <td class="px-6 py-4 border-b">Cash</td>
+                        <td class="px-6 py-4 border-b">
+                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Verifikasi</button>
                             <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Tolak</button>
                         </td>
                     </tr>

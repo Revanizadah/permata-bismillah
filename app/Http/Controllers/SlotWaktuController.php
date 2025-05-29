@@ -10,7 +10,7 @@ class SlotWaktuController extends Controller
     public function index()
     {
         $slotWaktus = SlotWaktu::all();
-        return view('slotwaktu.index', compact('slotWaktus'));
+        return view('slotwaktu.index-admin', compact('slotWaktus'));
     }
 
     public function create()
