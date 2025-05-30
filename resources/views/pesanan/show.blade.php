@@ -12,7 +12,6 @@
     <ul class="list-group">
         <li class="list-group-item"><strong>Nama Pemesan:</strong> {{ $pesanan->nama_pemesan }}</li>
         <li class="list-group-item"><strong>Jenis Lapangan:</strong> {{ $pesanan->jenis_lapangan }}</li>
-        <li class="list-group-item"><strong>No HP:</strong> {{ $pesanan->no_hp }}</li>
         <li class="list-group-item"><strong>Tanggal Pesan:</strong> {{ $pesanan->tanggal_pesan }}</li>
         <li class="list-group-item"><strong>Jam Pesan:</strong> {{ $pesanan->jam_pesan }}</li>
         <li class="list-group-item"><strong>Jam Mulai:</strong> {{ $pesanan->jam_mulai }}</li>
@@ -21,6 +20,7 @@
         <li class="list-group-item"><strong>Total Harga:</strong> {{ $pesanan->total_harga }}</li>
         <li class="list-group-item"><strong>Status:</strong> {{ $pesanan->status }}</li>
         <li class="list-group-item"><strong>Catatan:</strong> {{ $pesanan->catatan }}</li>
+        <li class="list-group-item"><strong>Batas Waktu:</strong> {{ $pesanan->batas_waktu ? $pesanan->batas_waktu->format('d-m-Y H:i') : '-' }}</li>
     </ul>
     <a href="{{ route('pesanan.index') }}" class="btn btn-secondary mt-3">Kembali</a>
 </div>

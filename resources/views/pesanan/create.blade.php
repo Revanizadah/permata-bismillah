@@ -12,18 +12,6 @@
     <form action="{{ route('pesanan.store') }}" method="POST">
         @csrf
         <div class="mb-3">
-            <label class="form-label">Nama Pemesan</label>
-            <input type="text" name="nama_pemesan" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Jenis Lapangan</label>
-            <input type="text" name="jenis_lapangan" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">No HP</label>
-            <input type="text" name="no_hp" class="form-control" required>
-        </div>
-        <div class="mb-3">
             <label class="form-label">Tanggal Pesan</label>
             <input type="date" name="tanggal_pesan" class="form-control" required>
         </div>
@@ -50,6 +38,10 @@
         <div class="mb-3">
             <label class="form-label">Catatan</label>
             <input type="text" name="catatan" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Batas Waktu</label>
+            <input type="datetime-local" name="batas_waktu" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
         <a href="{{ route('pesanan.index') }}" class="btn btn-secondary">Batal</a>

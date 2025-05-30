@@ -21,16 +21,16 @@
             <input type="text" name="nama_pemesan" class="form-control" value="{{ $pembayaran->nama_pemesan }}" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Metode Pembayaran</label>
-            <input type="text" name="metode_pembayaran" class="form-control" value="{{ $pembayaran->metode_pembayaran }}" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Status Pembayaran</label>
-            <input type="text" name="status_pembayaran" class="form-control" value="{{ $pembayaran->status_pembayaran }}" required>
+            <label class="form-label">Tanggal Pembayaran</label>
+            <input type="date" name="tanggal_pembayaran" class="form-control" value="{{ $pembayaran->tanggal_pembayaran }}" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Jumlah Pembayaran</label>
             <input type="text" name="jumlah_pembayaran" class="form-control" value="{{ $pembayaran->jumlah_pembayaran }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Metode Pembayaran</label>
+            <input type="text" name="metode_pembayaran" class="form-control" value="{{ $pembayaran->metode_pembayaran }}" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Bukti Pembayaran</label>
@@ -40,8 +40,18 @@
             @endif
         </div>
         <div class="mb-3">
+            <label class="form-label">Status Pembayaran</label>
+            <input type="text" name="status_pembayaran" class="form-control" value="{{ $pembayaran->status_pembayaran }}" required>
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Catatan</label>
             <input type="text" name="catatan" class="form-control" value="{{ $pembayaran->catatan }}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Batas Waktu Pembayaran</label>
+            <input type="datetime-local" name="batas_waktu_pembayaran" class="form-control"
+                   value="{{ $pembayaran->batas_waktu_pembayaran ? $pembayaran->batas_waktu_pembayaran->format('Y-m-d\TH:i') : '' }}" required>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="{{ route('pembayaran.index') }}" class="btn btn-secondary">Batal</a>
