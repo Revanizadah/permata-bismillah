@@ -20,24 +20,32 @@
             <input type="text" name="nama_pemesan" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Metode Pembayaran</label>
-            <input type="text" name="metode_pembayaran" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Status Pembayaran</label>
-            <input type="text" name="status_pembayaran" class="form-control" required>
+            <label class="form-label">Tanggal Pembayaran</label>
+            <input type="date" name="tanggal_pembayaran" class="form-control" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Jumlah Pembayaran</label>
             <input type="text" name="jumlah_pembayaran" class="form-control" required>
         </div>
         <div class="mb-3">
+            <label class="form-label">Metode Pembayaran</label>
+            <input type="text" name="metode_pembayaran" class="form-control" required>
+        </div>
+        <div class="mb-3">
             <label class="form-label">Bukti Pembayaran</label>
             <input type="file" name="bukti_pembayaran" class="form-control">
         </div>
         <div class="mb-3">
+            <label class="form-label">Status Pembayaran</label>
+            <input type="text" name="status_pembayaran" class="form-control" required>
+        </div>
+        <div class="mb-3">
             <label class="form-label">Catatan</label>
             <input type="text" name="catatan" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Batas Waktu Pembayaran</label>
+            <input type="datetime-local" name="batas_waktu_pembayaran" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
         <a href="{{ route('pembayaran.index') }}" class="btn btn-secondary">Batal</a>

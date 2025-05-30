@@ -21,10 +21,6 @@
             <input type="text" name="jenis_lapangan" class="form-control" value="{{ $pesanan->jenis_lapangan }}" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">No HP</label>
-            <input type="text" name="no_hp" class="form-control" value="{{ $pesanan->no_hp }}" required>
-        </div>
-        <div class="mb-3">
             <label class="form-label">Tanggal Pesan</label>
             <input type="date" name="tanggal_pesan" class="form-control" value="{{ $pesanan->tanggal_pesan }}" required>
         </div>
