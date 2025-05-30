@@ -12,15 +12,10 @@ class Lapangan extends Model
     protected $table = 'lapangans';
 
     protected $fillable = [
-        'nama_lapangan',
+        'nama',
         'harga_per_jam',
-        'status',
-        'jenis_lapangan',
-        'deskripsi',
+        'harga_weekend_per_jam'
+        
     ];
 
-    public function pesanan()
-    {
-        return $this->hasMany(Pesanan::class);
-    }
 }

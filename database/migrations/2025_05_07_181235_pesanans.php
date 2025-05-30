@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal('total_harga', 10, 2);
             $table->string('status', 20)->default('Pending');
             $table->text('catatan')->nullable();
+            $table->dateTime('expired_at')->nullable();
             $table->timestamps();
         });
 
