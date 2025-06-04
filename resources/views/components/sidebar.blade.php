@@ -19,13 +19,13 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('slotwaktu.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+            <a href= "{{ route('slotwaktu.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                 <i class="fas fa-calendar-alt w-5 h-5 mr-3"></i>
                 Slot Waktu
             </a>
         </li>
         <li>
-            <a href="pesan-lapangan.html" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+            <a href= "{{ route('lapangan.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                 <i class="fas fa-paperclip w-5 h-5 mr-3"></i>
                 Lapangan
             </a>

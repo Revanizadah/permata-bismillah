@@ -11,7 +11,7 @@ class LapanganController extends Controller
     {
         $lapangans = Lapangan::all();
 
-        return view('lapangan.index', compact('lapangans'));
+        return view('lapangan.index-admin', compact('lapangans'));
     }
     public function create()
     {
