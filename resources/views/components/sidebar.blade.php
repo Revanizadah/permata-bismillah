@@ -48,11 +48,15 @@
                 Laporan Admin
             </a>
         </li>
-        <li>
-            <a href="#" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
-                <i class="fas fa-sign-out-alt w-5 h-5 mr-3"></i>
-                Logout
-            </a>
-        </li>
+       <li>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit"
+            class="w-full text-left flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+            <i class="fas fa-sign-out-alt w-5 h-5 mr-3"></i>
+            {{ __('Log Out') }}
+        </button>
+    </form>
+</li>
     </ul>
 </div>
