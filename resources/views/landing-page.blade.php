@@ -19,7 +19,7 @@
           <li><a href="#about" class="nav-link hover:text-gray-300 transition">Tentang Kami</a></li>
           <li><a href="#type" class="nav-link hover:text-gray-300 transition">Tipe Lapangan</a></li>
           <li><a href="#contact" class="nav-link hover:text-gray-300 transition">Kontak</a></li>
-          <li><a href="#" class="nav-link hover:text-gray-300 transition">Login</a></li>
+          <li><a href="/login" class="nav-link hover:text-gray-300 transition">Login</a></li>
         </ul>
       </nav>
     </div>

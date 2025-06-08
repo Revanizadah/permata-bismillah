@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('tampilan-awal');
+    return view('landing-page');
 });
+
 Route::resource('lapangan', LapanganController::class);
 
 // CRUD User
-Route::resource('users', UserController::class);
+Route::resource('user', UserController::class);
 Route::get('user', [UserController::class, 'index'])->name('user.index');
 Route::get('user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('user', [UserController::class, 'store'])->name('user.store');
@@ -46,7 +47,6 @@ Route::patch('pesanan/{id}/status', [App\Http\Controllers\PesananController::cla
 
 // Routes Slot Waktu
 Route::resource('slotwaktu', App\Http\Controllers\SlotWaktuController::class);
-// Route Slot Waktu manual
 Route::get('slotwaktu', [\App\Http\Controllers\SlotWaktuController::class, 'index'])->name('slotwaktu.index');
 Route::get('slotwaktu/create', [\App\Http\Controllers\SlotWaktuController::class, 'create'])->name('slotwaktu.create');
 Route::post('slotwaktu', [\App\Http\Controllers\SlotWaktuController::class, 'store'])->name('slotwaktu.store');
@@ -57,13 +57,9 @@ Route::delete('slotwaktu/{slotwaktu}', [\App\Http\Controllers\SlotWaktuControlle
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
 require __DIR__.'/auth.php';
