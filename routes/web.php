@@ -4,6 +4,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LapanganController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -53,3 +54,16 @@ Route::get('slotwaktu/{slotwaktu}', [\App\Http\Controllers\SlotWaktuController::
 Route::get('slotwaktu/{slotwaktu}/edit', [\App\Http\Controllers\SlotWaktuController::class, 'edit'])->name('slotwaktu.edit');
 Route::put('slotwaktu/{slotwaktu}', [\App\Http\Controllers\SlotWaktuController::class, 'update'])->name('slotwaktu.update');
 Route::delete('slotwaktu/{slotwaktu}', [\App\Http\Controllers\SlotWaktuController::class, 'destroy'])->name('slotwaktu.destroy');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
