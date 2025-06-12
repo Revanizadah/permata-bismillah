@@ -28,7 +28,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('pembayaran.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.pembayaran.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
                     <label class="block text-gray-700 mb-2">Nomor Pesanan</label>
