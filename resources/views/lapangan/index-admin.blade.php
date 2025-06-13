@@ -28,7 +28,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('lapangan.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.lapangan.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
                     <label class="block text-gray-700 mb-2">Nama Lapangan</label>
@@ -90,9 +90,9 @@
             <tbody class="bg-white">
                 @foreach($lapangans as $lapangan)
                     <tr class="text-center">
-                        <td class="px-4 py-2 border-b">{{ $lapangan->nama_lapangan }}</td>
-                        <td class="px-4 py-2 border-b">Rp {{ number_format($lapangan->harga_perjam, 0, ',', '.') }}</td>
-                        <td class="px-4 py-2 border-b">Rp {{ number_format($lapangan->harga_weekend_perjam, 0, ',', '.') }}</td>
+                        <td class="px-4 py-2 border-b">{{ $lapangan->nama }}</td>
+                        <td class="px-4 py-2 border-b">Rp {{ number_format($lapangan->harga_per_jam, 0, ',', '.') }}</td>
+                        <td class="px-4 py-2 border-b">Rp {{ number_format($lapangan->harga_weekend_per_jam, 0, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>

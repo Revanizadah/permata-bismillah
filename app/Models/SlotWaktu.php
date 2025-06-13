@@ -12,7 +12,7 @@ class SlotWaktu extends Model
         'tanggal',
         'jam_mulai',
         'jam_selesai',
-        'status'
+        'status',
     ];
 
     public function lapangan()

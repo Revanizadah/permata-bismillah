@@ -22,10 +22,8 @@ class LapanganController extends Controller
         // Validate the request data
         $validated = $request->validate([
             'nama_lapangan' => 'required|string|max:255',
-            'harga_per_jam' => 'required|numeric',
-            'status' => 'required|string',
-            'jenis_lapangan' => 'required|string',
-            'deskripsi' => 'nullable|string',
+            'harga_per_jam' => 'required|numeric|min:0',
+            'harga_weekend_per_jam' => 'nullable|numeric|min:0',
         ]);
 
         // Create the lapangan record

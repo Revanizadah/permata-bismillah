@@ -14,7 +14,8 @@ Route::get('/', function () {
 })->middleware('preventAdminLanding');
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    // CRUD Lapangan
+    
+    // lapangan
     Route::resource('lapangan', LapanganController::class);
     Route::get('lapangan', [LapanganController::class, 'index'])->name('admin.lapangan.index');
     Route::get('lapangan/create', [LapanganController::class, 'create'])->name('admin.lapangan.create');
@@ -24,7 +25,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::put('lapangan/{lapangan}', [LapanganController::class, 'update'])->name('admin.lapangan.update');
     Route::delete('lapangan/{lapangan}', [LapanganController::class, 'destroy'])->name('admin.lapangan.destroy');
 
-    // CRUD User
+    // user
     Route::resource('user', UserController::class);
     Route::get('user', [UserController::class, 'index'])->name('admin.user.index');
     Route::get('user/create', [UserController::class, 'create'])->name('admin.user.create');
@@ -34,7 +35,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::put('user/{user}', [UserController::class, 'update'])->name('admin.user.update');
     Route::delete('user/{user}', [UserController::class, 'destroy'])->name('admin.user.destroy');
 
-    // Route pembayaran
+    // pembayaran
     Route::get('pembayaran', [PembayaranController::class, 'index'])->name('admin.pembayaran.index');
     Route::get('pembayaran/create', [PembayaranController::class, 'create'])->name('admin.pembayaran.create');
     Route::post('pembayaran', [PembayaranController::class, 'store'])->name('admin.pembayaran.store');
@@ -44,7 +45,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('pembayaran/{pembayaran}', [PembayaranController::class, 'destroy'])->name('admin.pembayaran.destroy');
     Route::patch('pembayaran/{id}/status', [PembayaranController::class, 'updateStatus'])->name('admin.pembayaran.updateStatus');
 
-    // Routes pesanan
+    // pesanan
     Route::get('pesanan', [\App\Http\Controllers\PesananController::class, 'index'])->name('admin.pesanan.index');
     Route::get('pesanan/create', [\App\Http\Controllers\PesananController::class, 'create'])->name('admin.pesanan.create');
     Route::post('pesanan', [\App\Http\Controllers\PesananController::class, 'store'])->name('admin.pesanan.store');
@@ -54,7 +55,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('pesanan/{pesanan}', [\App\Http\Controllers\PesananController::class, 'destroy'])->name('admin.pesanan.destroy');
     Route::patch('pesanan/{id}/status', [App\Http\Controllers\PesananController::class, 'updateStatus'])->name('admin.pesanan.updateStatus');
 
-    // Routes Slot Waktu
+    // slot Waktu
     Route::resource('slotwaktu', App\Http\Controllers\SlotWaktuController::class);
     Route::get('slotwaktu', [\App\Http\Controllers\SlotWaktuController::class, 'index'])->name('admin.slotwaktu.index');
     Route::get('slotwaktu/create', [\App\Http\Controllers\SlotWaktuController::class, 'create'])->name('admin.slotwaktu.create');

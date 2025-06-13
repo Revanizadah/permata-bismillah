@@ -7,7 +7,7 @@
             <h2 class="text-center text-3xl font-bold text-gray-800 mb-6">Pesanan</h2>
 
             <div class="text-center mb-6">
-                <a href="{{ route('pesanan.create') }}" class="bg-blue-200 text-black px-6 py-3 rounded-lg hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200 inline-block">Tambah Pesanan</a>
+                <a href="{{ route('admin.pesanan.create') }}" class="bg-blue-200 text-black px-6 py-3 rounded-lg hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200 inline-block">Tambah Pesanan</a>
             </div>
 
             <table class="min-w-full table-auto border-collapse border border-gray-300">
