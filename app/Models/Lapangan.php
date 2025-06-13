@@ -18,4 +18,9 @@ class Lapangan extends Model
         
     ];
 
+    public function slotWaktus()
+    {
+        return $this->hasMany(SlotWaktu::class, 'lapangan_id');
+    }
+
 }
