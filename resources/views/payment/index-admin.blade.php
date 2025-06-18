@@ -14,14 +14,14 @@
 
     <div id="modalPembayaran" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
     <div id="modalContent"
-        class="bg-white rounded-lg shadow-lg w-full max-w-lg min-w-[350px] max-h-[80vh] overflow-y-auto p-6 relative transform transition-all duration-300 opacity-0 scale-95">
+        class="bg-white rounded-lg shadow-lg max-w-[50vw] min-w-[250px] max-h-[90vh] overflow-y-auto p-6 relative transform transition-all duration-300 opacity-0 scale-95">
 
         <!-- Tombol close -->
-        <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
-        <h2 class="text-xl font-bold mb-4 text-center">Tambah Pembayaran</h2>
+        <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-3xl">&times;</button>
+        <h2 class="text-xl font-bold mb-4 text-center col-span-5">Tambah Pembayaran</h2>
 
         @if($errors->any())
-            <div class="mb-4 text-red-600">
+            <div class="mb-4 text-red-600 col-span-5">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -30,51 +30,54 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.pembayaran.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.pembayaran.store') }}" method="POST" enctype="multipart/form-data" class="col-span-5">
             @csrf
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2">Nomor Pesanan</label>
-                <input type="text" name="no_pesanan" class="w-full border rounded px-3 py-2" required value="{{ old('no_pesanan') }}">
+            <div class="grid grid-cols-5 gap-4">
+                <div class="col-span-5 sm:col-span-2 mb-4">
+                    <label class="block text-gray-700 text-base mb-2">Nomor Pesanan</label>
+                    <input type="text" name="no_pesanan" class="w-full border rounded px-3 py-2 text-base" required value="{{ old('no_pesanan') }}">
+                </div>
+                <div class="col-span-5 sm:col-span-2 mb-4">
+                    <label class="block text-gray-700 text-base mb-2">Nama Pemesan</label>
+                    <input type="text" name="nama_pemesan" class="w-full border rounded px-3 py-2 text-base" required value="{{ old('nama_pemesan') }}">
+                </div>
+                <div class="col-span-5 sm:col-span-2 mb-4">
+                    <label class="block text-gray-700 text-base mb-2">Tanggal Pembayaran</label>
+                    <input type="date" name="tanggal_pembayaran" class="w-full border rounded px-3 py-2 text-base" required value="{{ old('tanggal_pembayaran') }}">
+                </div>
+                <div class="col-span-5 sm:col-span-2 mb-4">
+                    <label class="block text-gray-700 text-base mb-2">Jumlah Pembayaran</label>
+                    <input type="number" name="jumlah_pembayaran" class="w-full border rounded px-3 py-2 text-base" required value="{{ old('jumlah_pembayaran') }}">
+                </div>
+                <div class="col-span-5 sm:col-span-2 mb-4">
+                    <label class="block text-gray-700 text-base mb-2">Metode Pembayaran</label>
+                    <input type="text" name="metode_pembayaran" class="w-full border rounded px-3 py-2 text-base" required value="{{ old('metode_pembayaran') }}">
+                </div>
+                <div class="col-span-5 sm:col-span-2 mb-4">
+                    <label class="block text-gray-700 text-base mb-2">Bukti Pembayaran</label>
+                    <input type="file" name="bukti_pembayaran" class="w-full border rounded px-3 py-2 text-base">
+                </div>
+                <div class="col-span-5 sm:col-span-2 mb-4">
+                    <label class="block text-gray-700 text-base mb-2">Status</label>
+                    <input type="text" name="status_pembayaran" class="w-full border rounded px-3 py-2 text-base" required value="{{ old('status_pembayaran') }}">
+                </div>
+                <div class="col-span-5 sm:col-span-2 mb-4">
+                    <label class="block text-gray-700 text-base mb-2">Catatan</label>
+                    <textarea name="catatan" class="w-full border rounded px-3 py-2 text-base">{{ old('catatan') }}</textarea>
+                </div>
+                <div class="col-span-5 sm:col-span-2 mb-4">
+                    <label class="block text-gray-700 text-base mb-2">Batas Waktu</label>
+                    <input type="datetime-local" name="batas_waktu" class="w-full border rounded px-3 py-2 text-base" required value="{{ old('batas_waktu') }}">
+                </div>
             </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2">Nama Pemesan</label>
-                <input type="text" name="nama_pemesan" class="w-full border rounded px-3 py-2" required value="{{ old('nama_pemesan') }}">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2">Tanggal Pembayaran</label>
-                <input type="date" name="tanggal_pembayaran" class="w-full border rounded px-3 py-2" required value="{{ old('tanggal_pembayaran') }}">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2">Jumlah Pembayaran</label>
-                <input type="number" name="jumlah_pembayaran" class="w-full border rounded px-3 py-2" required value="{{ old('jumlah_pembayaran') }}">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2">Metode Pembayaran</label>
-                <input type="text" name="metode_pembayaran" class="w-full border rounded px-3 py-2" required value="{{ old('metode_pembayaran') }}">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2">Bukti Pembayaran</label>
-                <input type="file" name="bukti_pembayaran" class="w-full border rounded px-3 py-2">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2">Status</label>
-                <input type="text" name="status_pembayaran" class="w-full border rounded px-3 py-2" required value="{{ old('status_pembayaran') }}">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2">Catatan</label>
-                <textarea name="catatan" class="w-full border rounded px-3 py-2">{{ old('catatan') }}</textarea>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2">Batas Waktu</label>
-                <input type="datetime-local" name="batas_waktu" class="w-full border rounded px-3 py-2" required value="{{ old('batas_waktu') }}">
-            </div>
-            <div class="flex justify-end space-x-2">
-                <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Batal</button>
-                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Simpan</button>
+            <div class="flex justify-end space-x-2 col-span-5">
+                <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 text-base">Batal</button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-base">Simpan</button>
             </div>
         </form>
     </div>
 </div>
+
 
     <script>
         function openModal() {
