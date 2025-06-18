@@ -14,7 +14,6 @@ Route::get('/', function () {
 })->middleware('preventAdminLanding');
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    
     // lapangan
     Route::resource('lapangan', LapanganController::class);
     Route::get('lapangan', [LapanganController::class, 'index'])->name('admin.lapangan.index');
