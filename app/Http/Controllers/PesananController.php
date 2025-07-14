@@ -7,14 +7,16 @@ use App\Models\Pesanan;
 use App\Models\Lapangan;
 use App\Models\SlotWaktu;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class PesananController extends Controller
 {
     public function index()
     {
-        $lapangans = Lapangan::all();
-        $slotWaktus = SlotWaktu::all();
-        return view('pesanan.offline-order', compact( 'lapangans', 'slotWaktus'));
+        $lapangans = Lapangan::orderBy('nama')->get();
+        $slotWaktus = SlotWaktu::orderBy('jam_mulai')->get();
+
+        return view('pesanan.offline-order', compact('lapangans', 'slotWaktus'));
     }
 
     public function indexUser()
@@ -25,45 +27,70 @@ class PesananController extends Controller
 
     public function checkAvailability(Request $request)
     {
-        // 1. Validasi Input dari request AJAX
+        // 1. Validasi Input (Sudah Benar)
         $validated = $request->validate([
-            'lapangan_id' => 'required|exists:lapangans,id', // Pastikan 'lapangans' adalah nama tabel lapangan Anda
-            'tanggal' => 'required|date_format:Y-m-d',
+            'field_id' => 'required|exists:lapangans,id',
+            'date' => 'required|date_format:Y-m-d',
         ]);
 
-        $lapanganId = $validated['lapangan_id'];
-        $tanggal = $validated['tanggal'];
+        // 2. Query untuk mencari slot yang sudah dipesan (Sudah Benar)
+        $bookedSlotIds = Pesanan::join('pesanan_details', 'pesanans.id', '=', 'pesanan_details.pesanan_id')
+            ->where('pesanans.lapangan_id', $validated['field_id']) // Memfilter berdasarkan lapangan_id di tabel pesanans
+            ->whereDate('pesanans.tanggal_pesan', $validated['date']) // Memfilter berdasarkan tanggal_pesan di tabel pesanans
+            ->whereIn('pesanans.status', ['pending', 'confirmed']) // Memfilter berdasarkan status di tabel pesanans
+            ->pluck('pesanan_details.slot_waktu_id'); // Mengambil ID slot dari tabel detail
 
-        $bookedSlotIds = DB::table('bookings')
-            ->join('booking_details', 'bookings.id', '=', 'booking_details.booking_id')
-            ->where('bookings.lapangan_id', $lapanganId)
-            ->whereDate('bookings.tanggal', $tanggal)
-            // Hanya cek pesanan yang statusnya masih aktif (bukan yang sudah batal)
-            ->whereIn('bookings.status', ['confirmed', 'pending'])
-            ->pluck('booking_details.slot_waktu_id'); // Ambil hanya ID slot-nya saja
-
+        // 3. Mengirim respon JSON (Sudah Benar)
         return response()->json([
             'booked_slot_ids' => $bookedSlotIds
         ]);
     }
+    // use Carbon\Carbon; // Jangan lupa import Carbon (sudah di-import di atas)
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $validated = $request->validate([
-            'nama_pemesan' => 'required|string|max:255',
-            'jenis_lapangan' => 'required|string|max:255',
-            'no_hp' => 'required|string|max:20',
-            'tanggal_pesan' => 'required|date',
-            'jam_mulai' => 'required|date_format:H:i',
-            'jam_selesai' => 'required|date_format:H:i',
-            'jumlah_jam' => 'required|integer',
-            'status' => 'required|string',
-            'total_harga' => 'required|integer',
-            'catatan' => 'nullable|string',
+    $validated = $request->validate([
+        'field_id' => 'required|exists:lapangans,id',
+        'booking_date' => 'required|date',
+        'slot_ids' => 'required|array|min:1',
+        'slot_ids.*' => 'exists:slot_waktus,id',
+    ]);
+
+    try {
+        DB::beginTransaction();
+
+        $lapangan = Lapangan::findOrFail($validated['field_id']);
+        $totalHarga = count($validated['slot_ids']) * $lapangan->harga_per_jam;
+
+        // 1. Buat data pesanan utama
+        $pesanan = Pesanan::create([
+            'user_id' => 1,
+            'lapangan_id' => $lapangan->id,
+            'tanggal_pesan' => $validated['booking_date'],
+            'total_harga' => $totalHarga,
+            'status' => 'pending',
         ]);
-        Pesanan::create($validated);
-        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil ditambahkan');
+
+        // 2. Buat data detail slot yang dipesan
+        foreach ($validated['slot_ids'] as $slotId) {
+            $pesanan->detailPemesanan()->create(['slot_waktu_id' => $slotId]);
+        }
+
+        // 3. Buat data pembayaran
+        $pesanan->pembayaran()->create([
+            'kode_pembayaran' => 'INV-' . time() . $pesanan->id, // Contoh kode unik
+            'status_pembayaran' => 'unpaid',
+            'expired_at' => Carbon::now()->addMinutes(30), // Contoh: batas bayar 30 menit
+        ]);
+
+        DB::commit();
+
+        return redirect()->route('halaman.sukses.anda')->with('success', 'Pesanan berhasil dibuat! Segera lakukan pembayaran.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     public function show(Pesanan $pesanan)

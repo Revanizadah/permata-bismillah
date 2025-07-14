@@ -109,8 +109,8 @@
                 @foreach($slotWaktus as $slot)
                 <tr class="hover:bg-gray-50">
                     <td class="px-4 py-2 border-b border-r">{{ $loop->iteration }}</td>
-                    <td class="px-4 py-2 border-b border-r">{{ $slot->lapangan->nama }}</td>
-                    <td class="px-4 py-2 border-b border-r">{{ $slot->tanggal }}</td>
+                    {{-- <td class="px-4 py-2 border-b border-r">{{ $slot->lapangan->nama }}</td> --}}
+                    {{-- <td class="px-4 py-2 border-b border-r">{{ $slot->tanggal }}</td> --}}
                     <td class="px-4 py-2 border-b border-r">{{ $slot->jam_mulai }}</td>
                     <td class="px-4 py-2 border-b border-r">{{ $slot->jam_selesai }}</td>
                     <td class="px-4 py-2 border-b border-r">

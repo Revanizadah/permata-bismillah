@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('landing-page');
 });
+    Route::get('/api/check-availability', [PesananController::class, 'checkAvailability']);
 
     Route::resource('lapangan', LapanganController::class);
     Route::get('lapangan/create', [LapanganController::class, 'create'])->name('lapangan.create');
