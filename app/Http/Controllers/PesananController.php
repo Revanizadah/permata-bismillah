@@ -33,7 +33,7 @@ class PesananController extends Controller
             'field_id' => 'required|exists:lapangans,id',
             'booking_date' => 'required|date',
             'slot_ids' => 'required|array|min:1',
-            'slot_ids.*' => 'exists:slot_waktus,id', // PERBAIKI: Rujuk ke tabel 'slot_waktus'
+            'slot_ids.*' => 'exists:slot_waktus,id', 
         ]);
 
         try {
@@ -42,7 +42,7 @@ class PesananController extends Controller
             $totalHarga = count($validated['slot_ids']) * $lapangan->harga_per_jam;
 
             $pesanan = Pesanan::create([
-                'user_id' => 1, // Ganti dengan Auth::id() jika sudah ada login
+                'user_id' => 1,
                 'lapangan_id' => $lapangan->id,
                 'tanggal_pesan' => $validated['booking_date'],
                 'total_harga' => $totalHarga,
