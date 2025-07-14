@@ -25,28 +25,26 @@ class PesananController extends Controller
         return view('pesanan.index-user', compact('pesanans'));
     }
 
-    public function checkAvailability(Request $request)
-    {
-        // 1. Validasi Input (Sudah Benar)
-            dd('API Berhasil Dipanggil!'); // Tambahkan ini untuk tes
+// di PesananController.php
 
-        $validated = $request->validate([
-            'field_id' => 'required|exists:lapangans,id',
-            'date' => 'required|date_format:Y-m-d',
-        ]);
+public function checkAvailability(Request $request)
+{
+    $validated = $request->validate([
+        'field_id' => 'required|exists:lapangans,id',
+        'date' => 'required|date_format:Y-m-d',
+    ]);
 
-        // 2. Query untuk mencari slot yang sudah dipesan (Sudah Benar)
-        $bookedSlotIds = Pesanan::join('pesanan_details', 'pesanans.id', '=', 'pesanan_details.pesanan_id')
-            ->where('pesanans.lapangan_id', $validated['field_id']) // Memfilter berdasarkan lapangan_id di tabel pesanans
-            ->whereDate('pesanans.tanggal_pesan', $validated['date']) // Memfilter berdasarkan tanggal_pesan di tabel pesanans
-            ->whereIn('pesanans.status', ['pending', 'confirmed']) // Memfilter berdasarkan status di tabel pesanans
-            ->pluck('pesanan_details.slot_waktu_id'); // Mengambil ID slot dari tabel detail
+    // PERUBAHAN NAMA TABEL PADA JOIN
+    $bookedSlotIds = Pesanan::join('detail_pesanans', 'pesanans.id', '=', 'detail_pesanans.pesanan_id')
+        ->where('pesanans.lapangan_id', $validated['field_id'])
+        ->whereDate('pesanans.tanggal_pesan', $validated['date'])
+        ->whereIn('pesanans.status', ['pending', 'confirmed'])
+        ->pluck('detail_pesanans.slot_waktu_id');
 
-        // 3. Mengirim respon JSON (Sudah Benar)
-        return response()->json([
-            'booked_slot_ids' => $bookedSlotIds
-        ]);
-    }
+    return response()->json([
+        'booked_slot_ids' => $bookedSlotIds
+    ]);
+}
     // use Carbon\Carbon; // Jangan lupa import Carbon (sudah di-import di atas)
 
     public function store(Request $request)
@@ -55,7 +53,7 @@ class PesananController extends Controller
         'field_id' => 'required|exists:lapangans,id',
         'booking_date' => 'required|date',
         'slot_ids' => 'required|array|min:1',
-        'slot_ids.*' => 'exists:slot_waktus,id',
+        'slot_ids.*' => 'exists:slot_waktu,id',
     ]);
 
     try {
@@ -87,7 +85,7 @@ class PesananController extends Controller
 
         DB::commit();
 
-        return redirect()->route('halaman.sukses.anda')->with('success', 'Pesanan berhasil dibuat! Segera lakukan pembayaran.');
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dibuat! Segera lakukan pembayaran.');
 
         } catch (\Exception $e) {
             DB::rollBack();
