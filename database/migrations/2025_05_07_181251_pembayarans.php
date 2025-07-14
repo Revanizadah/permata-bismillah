@@ -14,19 +14,13 @@ return new class extends Migration
 
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_transaksi', 20)->unique();
-            $table->foreignId('pesanan_id')->constrained('pesanans')->onDelete('cascade');
-            $table->dateTime('tanggal');
-            $table->decimal('jumlah', 10, 2);
-            $table->string('metode', 50);
-            $table->string('bukti_pembayaran')->nullable();
-            $table->string('status', 20)->default('Pending');
-            $table->text('catatan')->nullable();
-            $table->dateTime('expired_at')->nullable();
+            $table->foreignId('pesanan_id')->constrained('pesanans');
+            $table->string('kode_pembayaran')->unique(); // Kode unik untuk setiap transaksi
+            $table->string('metode_pembayaran')->nullable();
+            $table->string('status_pembayaran')->default('unpaid'); // 'unpaid', 'paid', 'expired'
+            $table->dateTime('expired_at'); // Batas waktu pembayaran
             $table->timestamps();
-        });
-
-
+        }); 
     }
 
     /**

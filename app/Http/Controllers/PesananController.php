@@ -4,18 +4,47 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pesanan;
+use App\Models\Lapangan;
+use App\Models\SlotWaktu;
+use Illuminate\Support\Facades\DB;
 
 class PesananController extends Controller
 {
     public function index()
     {
-        $pesanans = Pesanan::all();
-        return view('pesanan.index-admin', compact('pesanans'));
+        $lapangans = Lapangan::all();
+        $slotWaktus = SlotWaktu::all();
+        return view('pesanan.offline-order', compact( 'lapangans', 'slotWaktus'));
     }
 
-    public function create()
+    public function indexUser()
     {
-        return view('pesanan.create');
+        $pesanans = Pesanan::all();
+        return view('pesanan.index-user', compact('pesanans'));
+    }
+
+    public function checkAvailability(Request $request)
+    {
+        // 1. Validasi Input dari request AJAX
+        $validated = $request->validate([
+            'lapangan_id' => 'required|exists:lapangans,id', // Pastikan 'lapangans' adalah nama tabel lapangan Anda
+            'tanggal' => 'required|date_format:Y-m-d',
+        ]);
+
+        $lapanganId = $validated['lapangan_id'];
+        $tanggal = $validated['tanggal'];
+
+        $bookedSlotIds = DB::table('bookings')
+            ->join('booking_details', 'bookings.id', '=', 'booking_details.booking_id')
+            ->where('bookings.lapangan_id', $lapanganId)
+            ->whereDate('bookings.tanggal', $tanggal)
+            // Hanya cek pesanan yang statusnya masih aktif (bukan yang sudah batal)
+            ->whereIn('bookings.status', ['confirmed', 'pending'])
+            ->pluck('booking_details.slot_waktu_id'); // Ambil hanya ID slot-nya saja
+
+        return response()->json([
+            'booked_slot_ids' => $bookedSlotIds
+        ]);
     }
 
     public function store(Request $request)
