@@ -28,6 +28,8 @@ class PesananController extends Controller
     public function checkAvailability(Request $request)
     {
         // 1. Validasi Input (Sudah Benar)
+            dd('API Berhasil Dipanggil!'); // Tambahkan ini untuk tes
+
         $validated = $request->validate([
             'field_id' => 'required|exists:lapangans,id',
             'date' => 'required|date_format:Y-m-d',

@@ -45,6 +45,8 @@
             </div>
             
             <div id="time-slots-container" class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-3">
+                    {{-- @dd($slotWaktus)
+                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full mx-auto mt-12 mb-12"> --}}
                 @if($slotWaktus->isEmpty())
                     <p class="text-center text-gray-500 col-span-full">Belum ada data slot waktu yang tersedia.</p>
                 @else
@@ -95,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalHoursEl = document.getElementById('total-hours');
     const totalPriceEl = document.getElementById('total-price');
 
+    console.log('Elemen dateSelector yang ditemukan:', dateSelector);
+
     async function checkAvailability() {
         const fieldId = fieldSelector.value;
         const date = dateSelector.value;
@@ -118,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!response.ok) throw new Error('Network response was not ok.');
             
             const data = await response.json();
+            console.log('Data diterima dari API:', data); 
             const bookedSlotIds = data.booked_slot_ids;
 
             slotsContainer.querySelectorAll('.slot-checkbox').forEach(checkbox => {
@@ -166,7 +171,10 @@ document.addEventListener('DOMContentLoaded', function () {
         slotsContainer.querySelectorAll('.slot-checkbox').forEach(c => c.checked = false);
         checkAvailability();
     });
-    dateSelector.addEventListener('change', checkAvailability);
+    dateSelector.addEventListener('change', () =>{
+        console.log('Pemilihan tanggal berubah!');
+        checkAvailability();
+    });
 
     slotsContainer.addEventListener('change', function(e) {
         if (e.target.classList.contains('slot-checkbox')) {

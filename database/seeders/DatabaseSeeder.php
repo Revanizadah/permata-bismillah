@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             // LapanganSeeder::class,
             // PembayaranSeeder::class,
             // PesananSeeder::class,
+            SlotWaktuSeeder::class,
         ]);
         
     }
