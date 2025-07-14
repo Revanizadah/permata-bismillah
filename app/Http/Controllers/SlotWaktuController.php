@@ -28,7 +28,7 @@ class SlotWaktuController extends Controller
 
     SlotWaktu::create($validated);
 
-    return redirect()->route('admin.slotwaktu.index')->with('success', 'Slot waktu berhasil ditambahkan');
+    return redirect()->route('slotwaktu.index')->with('success', 'Slot waktu berhasil ditambahkan');
 }
 
     public function edit(SlotWaktu $slotwaktu)
@@ -51,7 +51,7 @@ class SlotWaktuController extends Controller
     public function destroy(SlotWaktu $slotwaktu)
     {
         $slotwaktu->delete();
-        return redirect()->route('admin.slotwaktu.index')->with('success', 'Slot waktu berhasil dihapus');
+        return redirect()->route('slotwaktu.index')->with('success', 'Slot waktu berhasil dihapus');
     }
 
     public function show(SlotWaktu $slotwaktu)

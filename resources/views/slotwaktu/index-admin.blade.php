@@ -31,7 +31,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.slotwaktu.store') }}" method="POST">
+            <form action="{{ route('slotwaktu.store') }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label class="block text-gray-700 mb-2">Nama Lapangan</label>
@@ -122,7 +122,7 @@
                         </span>
                     </td>
                     <td class="px-4 py-2 border-b space-x-1">
-                        <form action="{{ route('admin.slotwaktu.destroy', $slot->id) }}" method="POST" style="display:inline-block">
+                        <form action="{{ route('slotwaktu.destroy', $slot->id) }}" method="POST" style="display:inline-block">
                             @csrf @method('DELETE')
                             <button type="submit" onclick="return confirm('Yakin hapus?')" class="inline-block bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded transition">Hapus</button>
                         </form>

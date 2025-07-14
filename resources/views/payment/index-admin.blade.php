@@ -30,7 +30,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.pembayaran.store') }}" method="POST" enctype="multipart/form-data" class="col-span-5">
+        <form action="{{ route('pembayaran.store') }}" method="POST" enctype="multipart/form-data" class="col-span-5">
             @csrf
             <div class="grid grid-cols-5 gap-4">
                 <div class="col-span-5 sm:col-span-2 mb-4">

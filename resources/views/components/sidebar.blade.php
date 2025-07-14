@@ -7,37 +7,37 @@
     <!-- Sidebar Navigation -->
     <ul class="space-y-4">
          <li>
-            <a href="{{ route('admin.user.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+            <a href="{{ route('user.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                 <i class="fas fa-list w-5 h-5 mr-3"></i>
                 Dashboard
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.user.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+            <a href="{{ route('user.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                 <i class="fas fa-list w-5 h-5 mr-3"></i>
                 User
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.pesanan.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+            <a href="{{ route('pesanan.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                 <i class="fas fa-list w-5 h-5 mr-3"></i>
                 Pesanan
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.pembayaran.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+            <a href="{{ route('pembayaran.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                 <i class="fas fa-credit-card w-5 h-5 mr-3"></i>
                 Pembayaran
             </a>
         </li>
         <li>
-            <a href= "{{ route('admin.slotwaktu.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+            <a href= "{{ route('slotwaktu.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                 <i class="fas fa-calendar-alt w-5 h-5 mr-3"></i>
                 Slot Waktu
             </a>
         </li>
         <li>
-            <a href= "{{ route('admin.lapangan.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
+            <a href= "{{ route('lapangan.index') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
                 <i class="fas fa-paperclip w-5 h-5 mr-3"></i>
                 Lapangan
             </a>
@@ -55,7 +55,7 @@
             </a>
         </li>
        <li>
-    <form method="POST" action="{{ route('logout') }}">
+    <form method="POST" action="">
         @csrf
         <button type="submit"
             class="w-full text-left flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">

@@ -15,15 +15,24 @@ Route::get('/', function () {
     return view('landing-page');
 });
 
-Route::resource('lapangan', LapanganController::class);
-Route::resource('user', UserController::class);
-Route::resource('slotwaktu', SlotWaktuController::class);
+    Route::resource('lapangan', LapanganController::class);
+    Route::get('lapangan/create', [LapanganController::class, 'create'])->name('lapangan.create');
+    Route::post('lapangan', [LapanganController::class, 'store'])->name('lapangan.store');
 
-// Route untuk Pembayaran (Resource + Custom Route)
-Route::patch('pembayaran/{id}/status', [PembayaranController::class, 'updateStatus'])->name('pembayaran.updateStatus');
-Route::resource('pembayaran', PembayaranController::class);
+    Route::resource('user', UserController::class);
+    Route::get('user', [UserController::class, 'index'])->name('user.index');
+    Route::get('user/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('user', [UserController::class, 'store'])->name('user.store');
 
-// Route untuk Pesanan (Resource + Custom Route)
-Route::patch('pesanan/{id}/status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
-Route::resource('pesanan', PesananController::class);
 
+    Route::resource('user', UserController::class);
+    Route::resource('slotwaktu', SlotWaktuController::class);
+
+    // Route untuk Pembayaran (Resource + Custom Route)
+    Route::patch('pembayaran/{id}/status', [PembayaranController::class, 'updateStatus'])->name('pembayaran.updateStatus');
+    Route::resource('pembayaran', PembayaranController::class);
+
+    // Route untuk Pesanan (Resource + Custom Route)
+    Route::patch('pesanan/{id}/status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
+    Route::resource('pesanan', PesananController::class);
+    
