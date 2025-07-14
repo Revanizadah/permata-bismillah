@@ -12,17 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pesanans', function (Blueprint $table) {
-           $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('lapangan_id')->constrained('lapangans')->onDelete('cascade');
-            $table->date('tanggal');
-            $table->time('waktu_mulai');
-            $table->time('waktu_selesai');
-            $table->integer('jumlah_jam');
-            $table->decimal('total_harga', 10, 2);
-            $table->string('status', 20)->default('Pending');
+            $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('lapangan_id')->constrained('lapangans');
+            $table->date('tanggal_pesan'); // Cukup tanggalnya saja
+            $table->unsignedInteger('total_harga');
+            $table->string('status')->default('pending'); // 'pending', 'confirmed', 'cancelled'
             $table->text('catatan')->nullable();
-            $table->dateTime('expired_at')->nullable();
             $table->timestamps();
         });
 

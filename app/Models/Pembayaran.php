@@ -8,20 +8,16 @@ class Pembayaran extends Model
 {
     protected $table = 'pembayarans';
     protected $fillable = [
-        'kode_transaksi',
         'pesanan_id',
-        'tanggal',
-        'jumlah',
-        'metode',
-        'bukti_pembayaran',
-        'status',
-        'catatan',
-        'expired_at'
+        'metode_pembayaran',
+        'tanggal_pembayaran',
+        'kode_pembayaran',
+        'expired_at',
     ];
 
     public function pesanan()
-    {
-        return $this->belongsTo(Pesanan::class, 'pesanan_id');
-    }
+{
+    return $this->belongsTo(Pesanan::class);
+}
     
 }

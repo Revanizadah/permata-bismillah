@@ -20,18 +20,23 @@ class Pesanan extends Model
         'catatan',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+   public function user()
+{
+    return $this->belongsTo(User::class);
+}
 
-    public function lapangan()
-    {
-        return $this->belongsTo(Lapangan::class, 'lapangan_id');
-    }
+public function lapangan()
+{
+    return $this->belongsTo(Lapangan::class);
+}
 
-    public function pembayarans()
-    {
-        return $this->hasMany(Pembayaran::class, 'pesanan_id');
-    }
+public function pembayaran()
+{
+    return $this->hasOne(Pembayaran::class);
+}
+
+public function detailPemesanan()
+{
+    return $this->hasMany(DetailPesanan::class);
+}
 }
