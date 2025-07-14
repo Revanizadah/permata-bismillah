@@ -56,6 +56,7 @@ class PesananController extends Controller
             $pembayaran = $pesanan->pembayaran()->create([
                 'kode_pembayaran' => 'INV-' . time() . $pesanan->id,
                 'status_pembayaran' => 'unpaid',
+                'metode_pembayaran' => 'cash/ditempat',
                 'expired_at' => Carbon::now()->addMinutes(60),
             ]);
 
@@ -63,6 +64,7 @@ class PesananController extends Controller
             return redirect()->route('pembayaran.index')->with('success', 'Pesanan berhasil dibuat!');
         } catch (\Exception $e) {
             DB::rollBack();
+            dd($e);
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }
