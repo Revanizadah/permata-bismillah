@@ -6,7 +6,6 @@
 <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full mx-auto mt-12 mb-12">
     <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Buat Pemesanan Baru</h2>
 
-    {{-- Pastikan nama route ini sudah benar sesuai file routes/web.php Anda --}}
     <form method="POST" action="{{ route('pesanan.store') }}">
         @csrf
 
@@ -45,15 +44,13 @@
             </div>
             
             <div id="time-slots-container" class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-3">
-                    {{-- @dd($slotWaktus)
-                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full mx-auto mt-12 mb-12"> --}}
                 @if($slotWaktus->isEmpty())
                     <p class="text-center text-gray-500 col-span-full">Belum ada data slot waktu yang tersedia.</p>
                 @else
                     @foreach ($slotWaktus as $slot)
                         <label for="slot-{{ $slot->id }}">
                             <input type="checkbox" id="slot-{{ $slot->id }}" name="slot_ids[]" value="{{ $slot->id }}" class="sr-only peer slot-checkbox" data-slot-id="{{ $slot->id }}" />
-                            <div class="slot-button text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:shadow-lg hover:shadow-md cursor-pointer">
+                            <div class="slot-button text-center py-3 px-2 border border-gray-300 rounded-md transition duration-200 ease-in-out hover:bg-blue-100 hover:shadow-md cursor-pointer">
                                 {{ \Carbon\Carbon::parse($slot->jam_mulai)->format('H:i') }} - {{ \Carbon\Carbon::parse($slot->jam_selesai)->format('H:i') }}
                             </div>
                         </label>
@@ -97,48 +94,40 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalHoursEl = document.getElementById('total-hours');
     const totalPriceEl = document.getElementById('total-price');
 
-    console.log('Elemen dateSelector yang ditemukan:', dateSelector);
-
     async function checkAvailability() {
         const fieldId = fieldSelector.value;
         const date = dateSelector.value;
 
-        // Jika lapangan atau tanggal belum dipilih, sembunyikan kembali section slot waktu
         if (!fieldId || !date) {
             slotWaktuSection.classList.add('hidden');
             return;
         }
 
-        // Tampilkan section dan spinner loading
         slotWaktuSection.classList.remove('hidden');
         loadingSpinner.classList.remove('hidden');
-        
-        // Nonaktifkan semua checkbox sementara saat loading
         slotsContainer.querySelectorAll('.slot-checkbox').forEach(c => c.disabled = true);
 
         try {
-            // Panggil API untuk mendapatkan slot yang sudah di-booking
             const response = await fetch(`{{ url('/api/check-availability') }}?field_id=${fieldId}&date=${date}`);
             if (!response.ok) throw new Error('Network response was not ok.');
             
             const data = await response.json();
-            console.log('Data diterima dari API:', data); 
             const bookedSlotIds = data.booked_slot_ids;
 
             slotsContainer.querySelectorAll('.slot-checkbox').forEach(checkbox => {
                 const slotId = parseInt(checkbox.dataset.slotId);
-                const slotButton = checkbox.parentElement.querySelector('.slot-button');
+                const slotButton = checkbox.nextElementSibling; // Mengambil div tombol
                 const isBooked = bookedSlotIds.includes(slotId);
 
                 if (isBooked) {
                     checkbox.disabled = true;
                     checkbox.checked = false; 
                     slotButton.classList.add('bg-gray-300', 'cursor-not-allowed', 'text-gray-500');
-                    slotButton.classList.remove('hover:bg-blue-100', 'peer-checked:bg-blue-600');
+                    slotButton.classList.remove('hover:bg-blue-100', 'bg-blue-600', 'text-white');
                 } else {
                     checkbox.disabled = false;
                     slotButton.classList.remove('bg-gray-300', 'cursor-not-allowed', 'text-gray-500');
-                    slotButton.classList.add('hover:bg-blue-100', 'peer-checked:bg-blue-600');
+                    slotButton.classList.add('hover:bg-blue-100');
                 }
             });
 
@@ -147,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Terjadi kesalahan saat memeriksa jadwal. Silakan coba lagi.');
         } finally {
             loadingSpinner.classList.add('hidden');
-            updatePrice(); // Selalu update harga setelah selesai
+            updatePrice();
         }
     }
 
@@ -166,18 +155,30 @@ document.addEventListener('DOMContentLoaded', function () {
         totalPriceEl.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
     }
 
-    // Event Listeners
+    // Event Listener untuk lapangan dan tanggal
     fieldSelector.addEventListener('change', () => {
+        // Hapus semua style 'terpilih' saat ganti lapangan
+        slotsContainer.querySelectorAll('.slot-button').forEach(button => {
+            button.classList.remove('bg-blue-600', 'text-white');
+        });
         slotsContainer.querySelectorAll('.slot-checkbox').forEach(c => c.checked = false);
         checkAvailability();
     });
-    dateSelector.addEventListener('change', () =>{
-        console.log('Pemilihan tanggal berubah!');
-        checkAvailability();
-    });
+    dateSelector.addEventListener('change', checkAvailability);
 
+    // ==========================================================
+    // PERUBAHAN UTAMA DI SINI
+    // ==========================================================
     slotsContainer.addEventListener('change', function(e) {
+        // Pastikan yang diklik adalah checkbox slot
         if (e.target.classList.contains('slot-checkbox')) {
+            const slotButton = e.target.nextElementSibling; // Ambil div tombolnya
+            
+            // Toggle class untuk efek warna permanen
+            slotButton.classList.toggle('bg-blue-600');
+            slotButton.classList.toggle('text-white');
+
+            // Panggil updatePrice setelah mengubah tampilan
             updatePrice();
         }
     });
