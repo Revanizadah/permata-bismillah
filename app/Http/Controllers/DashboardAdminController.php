@@ -54,9 +54,6 @@ class DashboardAdminController extends Controller
         
         $dataPendapatan = array_values($semuaTanggal);
 
-        // ==========================================================
-        // BAGIAN 4: KIRIM SEMUA DATA KE VIEW
-        // ==========================================================
         return view('dashboard.dashboardAdmin', compact(
             // Data untuk kartu
             'totalUser',
