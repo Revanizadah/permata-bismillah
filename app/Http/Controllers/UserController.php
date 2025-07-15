@@ -32,7 +32,7 @@ class UserController extends Controller
         ]);
         $validated['password'] = bcrypt($validated['password']);
         User::create($validated);
-        return redirect()->route('users.index')->with('success', 'Pengguna berhasil ditambahkan');
+        return redirect()->route('user.index')->with('success', 'Pengguna berhasil ditambahkan');
     }
 
     // Tampilkan detail user

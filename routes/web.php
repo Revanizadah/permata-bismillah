@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SlotWaktuController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\PesananOfflineController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,7 @@ Route::get('/', function () {
 
     Route::get('/admin/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
 
-    Route::get('/api/check-availability', [PesananController::class, 'checkAvailability']);
+    Route::get('/api/check-availability', [PesananOfflineController::class, 'checkAvailability']);
 
     Route::resource('lapangan', LapanganController::class);
     Route::get('lapangan/create', [LapanganController::class, 'create'])->name('lapangan.create');
@@ -38,9 +39,9 @@ Route::get('/', function () {
     Route::resource('pembayaran', PembayaranController::class);
 
     // Route untuk Pesanan (Resource + Custom Route)
-    Route::patch('pesanan-offline/{id}/status', [PesananController::class, 'updateStatus'])->name('pesanan-offline.updateStatus');
-    Route::resource('pesanan-offline', PesananController::class);
-    Route::get('pesanan-offline/create', [PesananController::class, 'create'])->name('pesanan-offline.create');
+    Route::patch('pesanan-offline/{id}/status', [PesananOfflineController::class, 'updateStatus'])->name('pesanan-offline.updateStatus');
+    Route::resource('pesanan-offline', PesananOfflineController::class);
+    Route::get('pesanan-offline/create', [PesananOfflineController::class, 'create'])->name('pesanan-offline.create');
 
     Route::resource('manage-pesanan', PesananController::class);
 
