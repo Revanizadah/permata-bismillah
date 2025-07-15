@@ -166,9 +166,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     dateSelector.addEventListener('change', checkAvailability);
 
-    // ==========================================================
-    // PERUBAHAN UTAMA DI SINI
-    // ==========================================================
     slotsContainer.addEventListener('change', function(e) {
         // Pastikan yang diklik adalah checkbox slot
         if (e.target.classList.contains('slot-checkbox')) {
