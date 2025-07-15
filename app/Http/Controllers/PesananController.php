@@ -68,8 +68,6 @@ class PesananController extends Controller
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }
-
-    // Method API
     public function checkAvailability(Request $request)
     {
         $validated = $request->validate([
