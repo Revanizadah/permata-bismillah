@@ -8,12 +8,16 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SlotWaktuController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\DashboardAdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('landing-page');
 });
+
+    Route::get('/admin/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+
     Route::get('/api/check-availability', [PesananController::class, 'checkAvailability']);
 
     Route::resource('lapangan', LapanganController::class);

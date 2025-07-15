@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pesanan_id')->constrained('pesanans');
-            $table->string('kode_pembayaran')->unique(); // Kode unik untuk setiap transaksi
+            $table->string('kode_pembayaran')->unique();
             $table->string('metode_pembayaran')->nullable();
-            $table->string('status_pembayaran')->default('unpaid'); // 'unpaid', 'paid', 'expired'
-            $table->dateTime('expired_at'); // Batas waktu pembayaran
+            $table->string('bukti_pembayaran')->nullable(); 
+            $table->string('status_pembayaran')->default('unpaid');
+            $table->dateTime('expired_at');
             $table->timestamps();
         }); 
     }
