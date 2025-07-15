@@ -38,6 +38,11 @@ Route::get('/', function () {
     Route::resource('pembayaran', PembayaranController::class);
 
     // Route untuk Pesanan (Resource + Custom Route)
-    Route::patch('pesanan/{id}/status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
-    Route::resource('pesanan', PesananController::class);
+    Route::patch('pesanan-offline/{id}/status', [PesananController::class, 'updateStatus'])->name('pesanan-offline.updateStatus');
+    Route::resource('pesanan-offline', PesananController::class);
+    Route::get('pesanan-offline/create', [PesananController::class, 'create'])->name('pesanan-offline.create');
+
+    Route::resource('manage-pesanan', PesananController::class);
+
+
     

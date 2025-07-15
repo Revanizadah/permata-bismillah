@@ -19,14 +19,6 @@ class PesananController extends Controller
         return view('pesanan.offline-order', compact('lapangans', 'slotWaktus'));
     }
 
-    public function indexUser()
-    {
-        $pesanans = Pesanan::all();
-        return view('pesanan.index-user', compact('pesanans'));
-    }
-
-// di PesananController.php
-
     public function store(Request $request)
     {
         $validated = $request->validate([

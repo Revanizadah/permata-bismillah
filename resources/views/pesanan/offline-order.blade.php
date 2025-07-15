@@ -6,7 +6,7 @@
 <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full mx-auto mt-12 mb-12">
     <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Buat Pemesanan Baru</h2>
 
-    <form method="POST" action="{{ route('pesanan.store') }}">
+    <form method="POST" action="{{ route('pesanan-offline.store') }}">
         @csrf
 
         <div class="mb-8">
