@@ -13,22 +13,27 @@ class LoginController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+{
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            // Arahkan ke dashboard setelah berhasil
+    // Coba lakukan autentikasi
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
             return redirect()->intended(route('admin.dashboard'));
+        } else {
+            return redirect()->intended(route('user.dashboard')); 
         }
-
-        return back()->withErrors([
-            'email' => 'Email atau password yang Anda masukkan salah.',
-        ])->onlyInput('email');
     }
+    return back()->withErrors([
+        'email' => 'Email atau password yang Anda masukkan salah.',
+    ])->onlyInput('email');
+}
 
     public function destroy(Request $request)
     {
