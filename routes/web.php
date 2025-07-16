@@ -10,15 +10,41 @@ use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\PesananOfflineController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\LaporanAdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\VerificationController;
+use App\Mail\TestMail;
 
 
+Route::get('/tes-email', function () {
+    $emailTujuan = 'testing@example.com';
+
+    try {
+        Mail::to($emailTujuan)->send(new TestMail());
+        return 'Email tes berhasil dikirim dan ditangkap oleh Mailtrap!';
+    } catch (\Exception $e) {
+        return 'Gagal mengirim email: ' . $e->getMessage();
+    }
+});
 
 Route::get('/', function () {
     return view('landing-page');
 });
+
+Route::get('/email/verify', [VerificationController::class, 'show'])
+    ->middleware('auth')
+    ->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
+
+Route::post('/email/resend', [VerificationController::class, 'resend'])
+    ->middleware(['auth', 'throttle:6,1'])
+    ->name('verification.resend');
+
 
 Route::get('/api/check-availability', [PesananOfflineController::class, 'checkAvailability']);
 
