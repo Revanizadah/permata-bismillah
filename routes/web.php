@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\PesananOfflineController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LaporanAdminController;
 
 Route::get('/', function () {
     return view('landing-page');
@@ -45,5 +46,5 @@ Route::get('/', function () {
 
     Route::resource('manage-pesanan', PesananController::class);
 
+    Route::get('/admin/laporan/pendapatan', [LaporanAdminController::class, 'pendapatan'])->name('admin.laporan.pendapatan');
 
-    

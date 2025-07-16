@@ -17,6 +17,7 @@ class DashboardAdminController extends Controller
         $totalLapangan = Lapangan::count();
         $pesananPending = Pesanan::where('status', 'pending')->count();
         $pesananConfirmed = Pesanan::where('status', 'confirmed')->count();
+        $adminUser = User::find(1);
 
         $pesananUntukKalender = Pesanan::where('status', 'confirmed')->with('lapangan')->get();
         $events = [];
@@ -62,7 +63,8 @@ class DashboardAdminController extends Controller
             'pesananConfirmed',
             'events',
             'labels',
-            'dataPendapatan'
+            'dataPendapatan',
+            'adminUser'
         ));
     }
 }

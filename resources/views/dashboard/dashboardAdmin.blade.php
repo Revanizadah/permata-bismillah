@@ -6,6 +6,14 @@
 <div class="container mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
     <h2 class="text-center text-3xl font-bold text-gray-800 mb-6">Dashboard Admin</h2>
 
+    <div class="text-center mb-8">
+        @if($adminUser)
+            <p class="text-lg text-gray-600">Selamat datang, <span class="font-bold text-indigo-600">{{ $adminUser->nama }}</span>!</p>
+        @else
+            <p class="text-lg text-gray-600">Selamat datang, Admin!</p>
+        @endif
+    </div>
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div class="p-6 rounded-lg shadow-lg bg-blue-200">
             <h3 class="text-center text-3xl font-bold text-gray-800">{{ $totalUser }}</h3>
