@@ -5,8 +5,7 @@
 @section('content')
 <div class="container mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
     <h2 class="text-center text-3xl font-bold text-gray-800 mb-6">Dashboard Admin</h2>
-    
-    {{-- Card Statistics Section --}}
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div class="p-6 rounded-lg shadow-lg bg-blue-200">
             <h3 class="text-center text-3xl font-bold text-gray-800">{{ $totalUser }}</h3>
@@ -26,7 +25,6 @@
         </div>
     </div>
 
-    {{-- Chart Section --}}
     <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
         <h3 class="text-xl font-bold text-gray-800 mb-4">Pendapatan 7 Hari Terakhir</h3>
         <div>
@@ -34,7 +32,6 @@
         </div>
     </div>
 
-    {{-- Calendar Section --}}
     <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
         <h3 class="text-xl font-bold text-gray-800 mb-4">Kalender Jadwal Pesanan</h3>
         <div id='calendar'></div> 
@@ -43,7 +40,6 @@
 @endsection
 
 @push('scripts')
-{{-- Memuat library dari CDN --}}
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>

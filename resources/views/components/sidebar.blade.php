@@ -4,7 +4,6 @@
         <img src="/resources/views/image/logo.jpg" alt="Logo" class="w-12 h-12 rounded-full">
         <h2 class="text-2xl font-bold">Admin Permata</h2>
     </div>
-    <!-- Sidebar Navigation -->
     <ul class="space-y-4">
          <li>
             <a href="{{ route('admin.dashboard') }}" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-2 rounded-lg">
