@@ -23,10 +23,6 @@ class VerificationController extends Controller
         // Middleware ini akan kita definisikan di file route
     }
 
-    /**
-     * Menampilkan halaman notifikasi verifikasi email.
-     * Kita override method ini untuk mengirim data ke view.
-     */
     public function show(Request $request)
     {
         return $request->user()->hasVerifiedEmail()

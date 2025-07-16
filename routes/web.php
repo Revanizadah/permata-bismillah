@@ -8,6 +8,7 @@ use App\Http\Controllers\SlotWaktuController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\PesananOfflineController;
+use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -29,6 +30,10 @@ Route::get('/tes-email', function () {
     }
 });
 
+Route::get('/dashboard', [UserDashboardController::class, 'index'])
+    ->middleware(['auth', 'verified']) // Lindungi dengan auth & verifikasi
+    ->name('user.dashboard');
+
 Route::get('/', function () {
     return view('landing-page');
 });
@@ -44,7 +49,6 @@ Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'
 Route::post('/email/resend', [VerificationController::class, 'resend'])
     ->middleware(['auth', 'throttle:6,1'])
     ->name('verification.resend');
-
 
 Route::get('/api/check-availability', [PesananOfflineController::class, 'checkAvailability']);
 
