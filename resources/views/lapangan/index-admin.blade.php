@@ -50,7 +50,6 @@
     </div>
 </div>
 
-{{-- MODAL TAMBAH LAPANGAN --}}
 <div id="lapanganModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div id="modalContent" class="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 md:p-8 relative transform transition-all duration-300 opacity-0 scale-95">
         
