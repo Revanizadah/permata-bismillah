@@ -75,7 +75,7 @@
             </div>
         @endif
 
-        <form action="{{ route('user.store') }}" method="POST">
+        <form action="{{ route('admin.user.store') }}" method="POST">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="mb-4">

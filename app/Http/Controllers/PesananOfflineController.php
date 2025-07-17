@@ -15,18 +15,19 @@ class PesananOfflineController extends Controller
     {
         $lapangans = Lapangan::orderBy('nama')->get();
         $slotWaktus = SlotWaktu::orderBy('jam_mulai')->get();
+        $tanggalHariIni = Carbon::now()->toDateString();
 
-        return view('pesanan.offline-order', compact('lapangans', 'slotWaktus'));
+        return view('pesanan.offline-order', compact('lapangans', 'slotWaktus', 'tanggalHariIni'));
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'field_id' => 'required|exists:lapangans,id',
-            'booking_date' => 'required|date',
-            'slot_ids' => 'required|array|min:1',
-            'slot_ids.*' => 'exists:slot_waktus,id', 
-        ]);
+       $validated = $request->validate([
+        'field_id' => 'required|exists:lapangans,id',
+        'booking_date' => 'required|date|after_or_equal:today',
+        'slot_ids' => 'required|array|min:1',
+        'slot_ids.*' => 'exists:slot_waktus,id',
+    ]);
 
         try {
             DB::beginTransaction();

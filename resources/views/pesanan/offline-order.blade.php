@@ -89,14 +89,37 @@
 @endsection
 @push('scripts')
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const fieldSelector = document.getElementById('field_selector');
-        const dateSelector = document.getElementById('date_selector');
-        const slotsContainer = document.getElementById('time-slots-container');
-        const loadingSpinner = document.getElementById('loading_spinner');
-        const slotWaktuSection = document.getElementById('slot_waktu_section');
-        const totalHoursEl = document.getElementById('total-hours');
-        const totalPriceEl = document.getElementById('total-price');
+    console.log('Script pemesanan offline berhasil dimuat.');
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Tes #2: Pastikan event DOMContentLoaded berjalan
+    console.log('DOM siap, mulai mengambil elemen.');
+
+    const fieldSelector = document.getElementById('field_selector');
+    const dateSelector = document.getElementById('date_selector');
+    const slotsContainer = document.getElementById('time-slots-container');
+    const loadingSpinner = document.getElementById('loading_spinner');
+    const slotWaktuSection = document.getElementById('slot_waktu_section');
+    const totalHoursEl = document.getElementById('total-hours');
+    const totalPriceEl = document.getElementById('total-price');
+
+    console.log('Elemen #date_selector:', dateSelector);
+    console.log('Elemen #field_selector:', fieldSelector);
+    console.log('Elemen #time-slots-container:', slotsContainer);
+
+    // Pastikan elemen penting ada sebelum melanjutkan
+    if (!fieldSelector || !dateSelector || !slotsContainer) {
+        console.error('KESALAHAN: Satu atau lebih elemen penting tidak ditemukan. Periksa kembali ID di HTML Anda.');
+        return;
+    }
+
+    try {
+        const todayString = new Date().toISOString().split("T")[0];
+        dateSelector.min = todayString;
+        console.log(`SUKSES: Atribut 'min' pada dateSelector diatur ke: ${todayString}`);
+    } catch (e) {
+        console.error('ERROR saat mengatur tanggal minimal:', e);
+    }
 
         async function checkAvailability() {
             const fieldId = fieldSelector.value;
@@ -120,7 +143,7 @@
                     checkbox.disabled = isBooked;
                     slotButton.textContent = isBooked ? 'Booked' : slotButton.dataset.time;
                     
-                    slotButton.classList.remove('bg-blue-600', 'text-white', 'bg-gray-200', 'text-gray-400', 'cursor-not-allowed');
+                    slotButton.classList.remove('bg-blue-400', 'text-white', 'bg-gray-200', 'text-gray-400', 'cursor-not-allowed');
                     checkbox.checked = false;
 
                     if (isBooked) {
@@ -158,7 +181,7 @@
 
         fieldSelector.addEventListener('change', checkAvailability);
         dateSelector.addEventListener('change', checkAvailability);
-        dateSelector.min = new Date().toISOString().split("T")[0];
+        dateSelector.min = '{{ $tanggalHariIni }}';
     });
     </script>
 @endpush

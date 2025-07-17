@@ -108,8 +108,6 @@
             document.getElementById('slotModal').classList.add('hidden');
         }, 300);
     }
-
-    // Jika ada error validasi, buka kembali modalnya
     @if($errors->any())
         document.addEventListener('DOMContentLoaded', () => {
             openModal();
