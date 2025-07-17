@@ -3,9 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Notifications\VerifyEmailPermata;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Mockery\Matcher\Not;
 
 class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVerifyEmail
 {
@@ -40,5 +43,10 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
      *
      * @var list<string>
      */
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmailPermata);
+    }
 
 }
