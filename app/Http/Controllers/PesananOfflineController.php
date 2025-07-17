@@ -53,10 +53,9 @@ class PesananOfflineController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('pembayaran.index')->with('success', 'Pesanan berhasil dibuat!');
+            return redirect()->route('admin.pembayaran.index')->with('success', 'Pesanan berhasil dibuat!');
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }

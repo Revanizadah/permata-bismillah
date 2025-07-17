@@ -66,7 +66,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('lapangan.store') }}" method="POST">
+        <form action="{{ route('admin.lapangan.store') }}" method="POST">
             @csrf
             <div class="space-y-6">
                 <div>

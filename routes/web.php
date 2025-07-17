@@ -52,6 +52,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
     Route::get('/laporan/pendapatan', [LaporanAdminController::class, 'pendapatan'])->name('laporan.pendapatan');
     Route::resource('pesanan-offline', PesananOfflineController::class);
+    
     Route::resource('lapangan', LapanganController::class);
     Route::resource('user', UserController::class);
     Route::resource('slotwaktu', SlotWaktuController::class);

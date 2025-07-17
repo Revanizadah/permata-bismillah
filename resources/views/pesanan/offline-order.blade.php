@@ -17,7 +17,7 @@
             </p>
         </div>
 
-        <form method="POST" action="{{ route('pesanan-offline.store') }}">
+        <form method="POST" action="{{ route('admin.pesanan-offline.store') }}">
             @csrf
             <div class="space-y-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
