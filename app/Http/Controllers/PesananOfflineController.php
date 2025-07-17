@@ -11,7 +11,20 @@ use Carbon\Carbon;
 
 class PesananOfflineController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
+    {
+    $query = Pesanan::with(['user', 'lapangan', 'detailPemesanan.slotWaktu'])->latest();
+
+    if ($request->has('tanggal') && $request->tanggal != '') {
+        $query->whereDate('tanggal_pesan', $request->tanggal);
+    }
+
+    $pesanans = $query->paginate(10);
+    return view('pesanan.index-admin', compact('pesanans'));
+    }
+
+    public function create()
     {
         $lapangans = Lapangan::orderBy('nama')->get();
         $slotWaktus = SlotWaktu::orderBy('jam_mulai')->get();

@@ -52,13 +52,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
     Route::get('/laporan/pendapatan', [LaporanAdminController::class, 'pendapatan'])->name('laporan.pendapatan');
     Route::resource('pesanan-offline', PesananOfflineController::class);
+    Route::get('pesanan-offline/create', [PesananOfflineController::class, 'create'])->name('pesanan-offline.create');
     
     Route::resource('lapangan', LapanganController::class);
     Route::resource('user', UserController::class);
     Route::resource('slotwaktu', SlotWaktuController::class);
     Route::resource('pembayaran', PembayaranController::class);
     Route::resource('pesanan', PesananController::class);
-    Route::resource('manage-pesanan', PesananController::class);
     Route::patch('pembayaran/{pembayaran}/status', [PembayaranController::class, 'updateStatus'])->name('pembayaran.updateStatus');
     Route::patch('pesanan/{pesanan}/status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
 
