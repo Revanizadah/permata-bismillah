@@ -53,6 +53,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(
     Route::get('/laporan/pendapatan', [LaporanAdminController::class, 'pendapatan'])->name('laporan.pendapatan');
     Route::resource('pesanan-offline', PesananOfflineController::class);
     Route::get('pesanan-offline/create', [PesananOfflineController::class, 'create'])->name('pesanan-offline.create');
+    Route::patch('pesanan/{pesanan}/status', [PesananOfflineController::class, 'updateStatus'])->name('pesanan.updateStatus');
 
     
     Route::resource('lapangan', LapanganController::class);

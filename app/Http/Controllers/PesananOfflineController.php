@@ -90,4 +90,19 @@ class PesananOfflineController extends Controller
         return response()->json(['booked_slot_ids' => $bookedSlotIds]);
     }
 
+    public function updateStatus(Request $request, Pesanan $pesanan)
+    {
+        // Validasi input status
+        $request->validate([
+            'status' => 'required|in:confirmed,cancelled', // Hanya izinkan status ini
+        ]);
+
+        // Update status pada pesanan yang ditemukan
+        $pesanan->status = $request->status;
+        $pesanan->save();
+
+        // Redirect kembali ke halaman daftar pesanan dengan pesan sukses
+        return redirect()->route('admin.pesanan-offline.index')->with('success', 'Status pesanan berhasil diperbarui.');
+    }
+
 }
