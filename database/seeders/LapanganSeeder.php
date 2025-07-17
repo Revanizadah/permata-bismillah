@@ -14,26 +14,20 @@ class LapanganSeeder extends Seeder
     {
         DB::table('lapangans')->insert([
             [
-                'nama_lapangan' => 'Lapangan Futsal A',
-                'harga_per_jam' => 100000,
-
-
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nama_lapangan' => 'Lapangan Basket B',
-                'harga_per_jam' => 150000,
-
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nama_lapangan' => 'Lapangan Badminton C',
+                'nama' => 'Lapangan Futsal Rumput',
                 'harga_per_jam' => 80000,
+                'harga_weekend_per_jam' => 120000,
+            ],
+            [
+                'nama' => 'Lapangan Futsal Sintetis',
+                'harga_per_jam' => 100000,
+                'harga_weekend_per_jam' => 180000,
+            ],
+            [
+                'nama' => 'Lapangan Badminton ',
+                'harga_per_jam' => 80000,
+                'harga_weekend_per_jam' => 100000,
 
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
         ]);
     }

@@ -19,7 +19,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Mail\TestMail;
 
 Route::get('/dashboard', [UserDashboardController::class, 'index'])
-    ->middleware(['auth', 'verified']) // Lindungi dengan auth & verifikasi
+    ->middleware(['auth', 'verified'])
     ->name('user.dashboard');
 
 Route::get('/', function () {
