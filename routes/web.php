@@ -18,18 +18,6 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Mail\TestMail;
 
-
-Route::get('/tes-email', function () {
-    $emailTujuan = 'testing@example.com';
-
-    try {
-        Mail::to($emailTujuan)->send(new TestMail());
-        return 'Email tes berhasil dikirim dan ditangkap oleh Mailtrap!';
-    } catch (\Exception $e) {
-        return 'Gagal mengirim email: ' . $e->getMessage();
-    }
-});
-
 Route::get('/dashboard', [UserDashboardController::class, 'index'])
     ->middleware(['auth', 'verified']) // Lindungi dengan auth & verifikasi
     ->name('user.dashboard');
