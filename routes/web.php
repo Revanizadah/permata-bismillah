@@ -16,6 +16,7 @@ use App\Http\Controllers\LaporanAdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\DashboardUserController;
 use App\Mail\TestMail;
 
 Route::get('/dashboard', [UserDashboardController::class, 'index'])
@@ -40,7 +41,7 @@ Route::post('/email/resend', [VerificationController::class, 'resend'])
 
 Route::get('/api/check-availability', [PesananOfflineController::class, 'checkAvailability']);
 
-
+Route::resource('dashboard', DashboardUserController::class);
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisterController::class, 'create'])->name('register');
     Route::post('register', [RegisterController::class, 'store']);

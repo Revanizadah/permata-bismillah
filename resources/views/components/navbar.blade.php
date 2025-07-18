@@ -1,11 +1,9 @@
 <nav class="bg-gray-800 shadow-md py-4 px-8 fixed w-full top-0 z-10">
     <div class="max-w-screen-lg mx-auto px-4 flex items-center justify-between">
-
         <div class="flex items-center space-x-4">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-12 h-12 rounded-full" />
-            <h1 class="text-2xl font-semibold text-white">Permata Futsal</h1>
+            <h1 class="text-1xl font-semibold text-white">Permata Futsal</h1>
         </div>
-
         <div class="flex items-center space-x-6">
             <div class="hidden md:flex space-x-6">
                 <a href="{{ url('/about') }}" class="text-lg text-gray-300 hover:text-white transition duration-300">Tentang</a>

@@ -1,22 +1,47 @@
-@extends('layouts.user-layout')
+@extends('layouts.app-user')
 
-@section('title', 'Tentang Lapangan Kami')
+@section('title', 'Pilihan Venue Kami')
 
 @section('content')
-<div class="w-full max-w-screen-lg mx-auto px-4 pt-32 pb-10">
-    <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">Tentang Jenis-Jenis Lapangan</h2>
+<div class="container mx-auto py-16 px-4">
+    {{-- Anda perlu padding atas di sini untuk memberi ruang bagi navbar fixed Anda --}}
+    <div class="pt-20">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Pilihan Venue Kami</h2>
 
-    {{-- Di sini, Anda bisa mengambil data lapangan dari database menggunakan @foreach --}}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {{-- ========================================================== --}}
+        {{--         PERBAIKAN UTAMA ADA DI PEMBUNGKUS INI          --}}
+        {{-- ========================================================== --}}
+        {{-- Div ini bertugas mengatur layout dan jarak antar kartu --}}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            @forelse($lapangans as $lapangan)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                    <a href="#">
+                        <div class="h-48 overflow-hidden">
+                            <img src="{{ $lapangan->gambar_url ?? 'https://via.placeholder.com/400x300.png/E2E8F0/4A5568?text=Permata' }}" 
+                                 alt="Foto {{ $lapangan->nama }}" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-gray-800 truncate">{{ $lapangan->nama }}</h3>
+                            <p class="text-sm text-gray-500 mt-1">
+                                {{ $lapangan->lokasi ?? 'Malang' }} • {{ $lapangan->jumlah ?? 1 }} Lapangan
+                            </p>
+                            <div class="mt-4">
+                                <span class="text-sm text-gray-600">Harga mulai dari</span>
+                                <p class="text-xl font-bold text-indigo-600">
+                                    Rp {{ number_format($lapangan->harga_per_jam, 0, ',', '.') }}
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @empty
+                <p class="col-span-full text-center text-gray-500">
+                    Saat ini belum ada data lapangan yang tersedia.
+                </p>
+            @endforelse
+            {{-- Akhir dari perulangan --}}
 
-        <div class="bg-white shadow-lg rounded-lg p-6 text-center transition duration-300 transform hover:-translate-y-2">
-            <img src="https://via.placeholder.com/300" alt="Lapangan Futsal Sintetis" class="w-full h-48 object-cover rounded-lg mb-4" />
-            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Lapangan Futsal Sintetis</h3>
-            <p class="text-gray-600 mb-4">Lapangan futsal sintetis menggunakan rumput sintetis yang memberikan pengalaman bermain yang lebih nyaman.</p>
-            <div class="text-gray-800 space-y-1">
-                <p class="text-lg font-bold">Weekday Rp 70.000 / Jam</p>
-                <p class="text-lg font-bold">Weekend Rp 100.000 / Jam</p>
-            </div>
         </div>
     </div>
 </div>
