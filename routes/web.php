@@ -20,10 +20,6 @@ use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\PesananOnlineController;
 use App\Mail\TestMail;
 
-Route::get('/dashboard', [UserDashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('user.dashboard');
-
 Route::get('/', function () {
     return view('landing-page');
 });
@@ -66,11 +62,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(
     Route::patch('pembayaran/{pembayaran}/status', [PembayaranController::class, 'updateStatus'])->name('pembayaran.updateStatus');
 });
 
-Route::prefix('booking')->name('pesanan-user.')->middleware(['auth', 'verified'])->group(function () {
-    // Menampilkan form pemesanan untuk user
-    Route::get('/', [PesananOnlineController::class, 'create'])->name('create');
-    // Menyimpan data pemesanan dari user
-    Route::post('/', [PesananOnlineController::class, 'store'])->name('store');
+Route::prefix('user')->name('user.')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('dashboard');
+    Route::resource('pesanan', PesananOnlineController::class)->only(['create', 'store', 'show']);
+    Route::get('pesanan/history', [PesananOnlineController::class, 'history'])->name('pesanan.history');
+
 });
 
 
