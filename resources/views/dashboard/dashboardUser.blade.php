@@ -3,7 +3,7 @@
 @section('title', 'Pilihan Venue Kami')
 
 @section('content')
-<div class="w-full max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:px-8">    {{-- Anda perlu padding atas di sini untuk memberi ruang bagi navbar fixed Anda --}}
+<div class="w-full max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
     <div class="pt-20">
         <div class="relative bg-gray-800 rounded-2xl shadow-xl overflow-hidden mb-12">
     <div class="absolute inset-0">
@@ -25,7 +25,7 @@
                 <div class="bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
                     <a href="#">
                         <div class="h-48 overflow-hidden">
-                            <img src="{{ asset('images/futsal-rumput.jpg') }}"
+                             <img src="{{ $lapangan->gambar ? asset('images/' . $lapangan->gambar) : 'https://via.placeholder.com/400x300.png/E2E8F0/4A5568?text=Permata' }}"
                                  alt="Foto {{ $lapangan->nama }}" 
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                         </div>
