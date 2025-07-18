@@ -7,11 +7,6 @@
     {{-- Anda perlu padding atas di sini untuk memberi ruang bagi navbar fixed Anda --}}
     <div class="pt-20">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Pilihan Venue Kami</h2>
-
-        {{-- ========================================================== --}}
-        {{--         PERBAIKAN UTAMA ADA DI PEMBUNGKUS INI          --}}
-        {{-- ========================================================== --}}
-        {{-- Div ini bertugas mengatur layout dan jarak antar kartu --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             @forelse($lapangans as $lapangan)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
