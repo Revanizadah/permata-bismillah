@@ -7,7 +7,7 @@
     <div class="pt-20">
         <div class="relative bg-gray-800 rounded-2xl shadow-xl overflow-hidden mb-12">
     <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src="{{ asset('images/hero-background.jpg') }}" alt="Background Futsal">
+        <img class="w-full h-full object-cover" src="{{ asset('images/hero.jpg') }}" alt="Background Futsal">
         <div class="absolute inset-0 bg-gray-800 opacity-60"></div>
     </div>
     <div class="relative max-w-4xl mx-auto px-6 py-24 text-center">
@@ -25,7 +25,7 @@
                 <div class="bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
                     <a href="#">
                         <div class="h-48 overflow-hidden">
-                            <img src="{{ $lapangan->gambar_url ?? 'https://via.placeholder.com/400x300.png/E2E8F0/4A5568?text=Permata' }}" 
+                            <img src="{{ asset('images/futsal-rumput.jpg') }}"
                                  alt="Foto {{ $lapangan->nama }}" 
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                         </div>
