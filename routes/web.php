@@ -17,6 +17,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\DashboardUserController;
+use App\Http\Controllers\PesananOnlineController;
 use App\Mail\TestMail;
 
 Route::get('/dashboard', [UserDashboardController::class, 'index'])
@@ -64,6 +65,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(
     
     Route::patch('pembayaran/{pembayaran}/status', [PembayaranController::class, 'updateStatus'])->name('pembayaran.updateStatus');
 });
+
+Route::prefix('booking')->name('pesanan-user.')->middleware(['auth', 'verified'])->group(function () {
+    // Menampilkan form pemesanan untuk user
+    Route::get('/', [PesananOnlineController::class, 'create'])->name('create');
+    // Menyimpan data pemesanan dari user
+    Route::post('/', [PesananOnlineController::class, 'store'])->name('store');
+});
+
 
 Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
 
