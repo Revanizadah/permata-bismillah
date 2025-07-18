@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Lapangan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+
+<!-- Navbar -->
+ <nav class="bg-gray-800 shadow-md py-4 px-8 fixed w-full top-0 z-10">
+ <div class="max-w-screen-lg mx-auto px-4 flex items-center justify-between">
+
+    <!-- Logo and App Name -->
+    <div class="flex items-center space-x-4">
+      <img src="/resources/views/image/logo.jpg" alt="Logo" class="w-12 h-12 rounded-full" />
+      <h1 class="text-2xl font-semibold text-white">Permata Futsal Badminton</h1>
+    </div>
+
+    <!-- Navbar Links and Profile Dropdown aligned to the right -->
+    <div class="flex items-center space-x-6 ml-auto">
+      <!-- Navbar Links -->
+      <div class="hidden md:flex space-x-6">
+        <a href="about.html" class="text-lg text-gray-300 hover:text-gray-400 transition duration-300">Tentang</a>
+        <a href="pesan-lapangan.html" class="text-lg text-gray-300 hover:text-gray-400 transition duration-300">Pesan Lapangan</a>
+        <a href="riwayat-pesanan.html" class="text-lg text-gray-300 hover:text-gray-400 transition duration-300">Riwayat Pesanan</a>
+      </div>
+
+      <!-- Profile Dropdown -->
+      <div x-data="{ open: false }" class="relative">
+        <button @click="open = !open" class="flex items-center space-x-2 text-gray-300 hover:text-gray-400 transition duration-300">
+          <span class="font-semibold">Dikaas</span>
+          <i class="fas fa-caret-down"></i>
+        </button>
+
+        <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 transition duration-300">
+          <div class="px-4 py-2 text-gray-800 text-sm">Dikaas</div>
+          <div class="px-4 py-2 text-gray-600 text-xs">dikaas@example.com</div>
+          <div class="border-t border-gray-200">
+            <a href="../landing-page.html" class="block px-4 py-2 text-red-600 hover:bg-gray-100 transition duration-200">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+  <!-- Main Content for About Lapangan -->
+  <div class="w-full max-w-screen-lg max-auto px-4 pt-32 pb-10">
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">Tentang Jenis-Jenis Lapangan</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Card for Lapangan Futsal Sintetis -->
+      <div class="bg-blue-200 shadow-lg rounded-lg p-6 text-center transition duration-300 hover:shadow-2xl hover:bg-blue-100">
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Lapangan Futsal Sintetis</h3>
+        <img src="https://via.placeholder.com/300" alt="Lapangan Futsal Sintetis" class="w-full h-48 object-cover rounded-lg mb-4" />
+        <p class="text-gray-600 mb-4">Lapangan futsal sintetis menggunakan rumput sintetis yang memberikan pengalaman bermain yang lebih nyaman dan mirip dengan lapangan profesional.</p>
+        <!-- Tarif -->
+        <div class="text-gray-800 space-y-1">
+            <p class="text-lg font-bold">Weekday Rp.70.000 / Jam</p>
+            <p class="text-lg font-bold">Weekend Rp.100.000 / Jam</p>
+        </div>
+      </div>
+
+      <!-- Card for Lapangan Futsal Multicourt -->
+      <div class="bg-blue-200 shadow-lg rounded-lg p-6 text-center transition duration-300 hover:shadow-2xl hover:bg-blue-100">
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Lapangan Futsal Multicourt</h3>
+        <img src="https://via.placeholder.com/300" alt="Lapangan Futsal Multicourt" class="w-full h-48 object-cover rounded-lg mb-4" />
+        <p class="text-gray-600 mb-4">Lapangan multicourt adalah lapangan futsal dengan permukaan yang lebih fleksibel, cocok untuk berbagai jenis permainan, baik futsal maupun bola voli.</p>
+        <!-- Tarif -->
+        <div class="text-gray-800 space-y-1">
+            <p class="text-lg font-bold">Weekday Rp.70.000 / Jam</p>
+            <p class="text-lg font-bold">Weekend Rp.100.000 / Jam</p>
+        </div>
+      </div>
+
+      <!-- Card for Lapangan Badminton -->
+        <div class="bg-blue-200 shadow-lg rounded-lg p-6 text-center transition duration-300 hover:shadow-2xl hover:bg-blue-100">
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Lapangan Badminton</h3>
+        <img src="https://via.placeholder.com/300" alt="Lapangan Badminton" class="w-full h-48 object-cover rounded-lg mb-4" />
+        <p class="text-gray-600 mb-4">Lapangan badminton memiliki permukaan yang lebih keras dan datar, dirancang untuk memberikan kenyamanan dan keamanan saat bermain badminton.</p>
+
+        <!-- Tarif -->
+        <div class="text-gray-800 space-y-1">
+            <p class="text-lg font-bold">Weekday Rp.15.000 / Jam</p>
+            <p class="text-lg font-bold">Weekend Rp.20.000 / Jam</p>
+        </div>
+        </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
