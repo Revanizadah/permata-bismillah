@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('lapangan_id')->constrained('lapangans');
             $table->date('tanggal_pesan'); // Cukup tanggalnya saja
             $table->unsignedInteger('total_harga');
-            $table->string('status')->default('pending'); // 'pending', 'confirmed', 'cancelled'
+            $table->string('status')->default('pending');
             $table->text('catatan')->nullable();
             $table->timestamps();
         });

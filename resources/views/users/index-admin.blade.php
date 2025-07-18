@@ -39,10 +39,18 @@
                             {{ ucfirst($user->role) }}
                         </span>
                     </td>
-                    <td class="py-4 px-6 text-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
-                        <span class="text-gray-300 mx-1">|</span>
-                        <a href="#" class="text-red-600 hover:text-red-900 font-medium">Hapus</a>
+                    <td class="py-4 px-6 text-center whitespace-nowrap">
+                        <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" 
+                                    class="font-medium 
+                                           {{ $user->role == 'admin' ? 'text-gray-400 cursor-not-allowed' : 'text-red-600 hover:text-red-900' }}"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')"
+                                    {{ $user->role == 'admin' ? 'disabled' : '' }}>
+                                Hapus
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @empty
