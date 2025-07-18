@@ -1,4 +1,4 @@
-<nav class="bg-gray-800 shadow-md py-4 px-8 fixed w-full top-0 z-10">
+<nav class="bg-gray-800 shadow-md py-4 px-5 fixed w-full top-0 z-10">
     <div class="max-w-screen-lg mx-auto px-4 flex items-center justify-between">
         <div class="flex items-center space-x-4">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-12 h-12 rounded-full" />
@@ -16,7 +16,6 @@
                     <span class="font-semibold">{{ auth()->user()->nama }}</span>
                     <i class="fas fa-caret-down"></i>
                 </button>
-
                 <div x-show="open" @click.away="open = false" 
                      class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-1 transition duration-300"
                      style="display: none;">
