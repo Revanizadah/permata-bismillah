@@ -18,6 +18,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\PesananOnlineController;
+use App\Http\Controllers\PembayaranUserController;
+use App\Http\Controllers\RiwayatPesananuserController;
 use App\Mail\TestMail;
 
 Route::get('/', function () {
@@ -66,6 +68,10 @@ Route::prefix('user')->name('user.')->middleware(['auth', 'verified'])->group(fu
     Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('dashboard');
     Route::resource('pesanan', PesananOnlineController::class)->only(['create', 'store', 'show']);
     Route::get('pesanan/history', [PesananOnlineController::class, 'history'])->name('pesanan.history');
+    Route::resource('pembayaran', PembayaranUserController::class);
+    Route::get('pembayaran/{pembayaran}/upload', [PembayaranUserController::class, 'show'])->name('pembayaran.show');
+    Route::patch('pembayaran/{pembayaran}/upload', [PembayaranUserController::class, 'upload'])->name('pembayaran.upload');
+    Route::get('/riwayat-pesanan', [RiwayatPesananuserController::class, 'index'])->name('riwayat.index');
 
 });
 

@@ -57,6 +57,7 @@ class PesananOnlineController extends Controller
 
             $pembayaran = $pesanan->pembayaran()->create([
                 'kode_pembayaran' => 'INV-' . time() . $pesanan->id,
+                'metode_pembayaran' => 'transfer',
                 'status_pembayaran' => 'unpaid',
                 'expired_at' => Carbon::now()->addMinutes(60),
             ]);
@@ -64,7 +65,7 @@ class PesananOnlineController extends Controller
             DB::commit();
             
             // Arahkan pengguna ke halaman detail pembayaran mereka
-            return redirect()->route('pembayaran.show', $pembayaran->id)->with('success', 'Pesanan Anda berhasil dibuat!');
+            return redirect()->route('user.pembayaran.show', $pembayaran->id)->with('success', 'Pesanan Anda berhasil dibuat!');
 
         } catch (\Exception $e) {
             DB::rollBack();

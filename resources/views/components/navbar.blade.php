@@ -8,7 +8,7 @@
             <div class="hidden md:flex space-x-6">
                 <a href="{{ route('user.dashboard') }}" class="text-lg text-gray-500 hover:text-black transition duration-300">Home</a>
                 <a href="{{ route('user.pesanan.create') }}" class="text-lg text-gray-500 hover:text-black transition duration-300">Pesan Lapangan</a>
-                <a href="{{ route('user.pesanan.history') }}" class="text-lg text-gray-500 hover:text-black transition duration-300">Riwayat Pesanan</a>
+                <a href="{{ route('user.riwayat.index') }}" class="text-lg text-gray-500 hover:text-black transition duration-300">Riwayat Pesanan</a>
             </div>
             @auth
             <div x-data="{ open: false }" class="relative">

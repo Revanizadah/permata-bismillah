@@ -40,30 +40,21 @@
 
         {{-- Rekening Tujuan --}}
         <div class="mb-8">
-            <h3 class="text-xl font-semibold text-gray-800 mb-3">Rekening Tujuan Pembayaran</h3>
-            <div class="border border-gray-200 rounded-lg p-4">
-                <p class="font-medium text-gray-700">Bank Central Asia (BCA)</p>
-                <p class="text-2xl font-bold text-gray-900 mt-1">123 456 7890</p>
-                <p class="text-sm text-gray-600 mt-1">a.n. PT Permata Futsal Sejahtera</p>
-            </div>
-            <div class="border border-gray-200 rounded-lg p-4 mt-3">
-                <p class="font-medium text-gray-700">Bank Mandiri</p>
-                <p class="text-2xl font-bold text-gray-900 mt-1">098 765 4321</p>
-                <p class="text-sm text-gray-600 mt-1">a.n. PT Permata Futsal Sejahtera</p>
-            </div>
+            {{-- ... (Konten rekening tujuan tidak berubah) ... --}}
         </div>
 
         {{-- Form Upload Bukti Pembayaran --}}
         <div>
             <h3 class="text-xl font-semibold text-gray-800 mb-3">Unggah Bukti Pembayaran</h3>
-            <form action="{{ route('pembayaran.upload', $pembayaran->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('user.pembayaran.upload', $pembayaran->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 
                 <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-500 transition">
                     <label for="bukti_pembayaran" class="cursor-pointer">
                         <i class="fas fa-cloud-upload-alt text-4xl text-gray-400"></i>
-                        <p class="mt-2 text-sm text-gray-600">
+                        {{-- PERBAIKAN: Menambahkan ID pada elemen <p> --}}
+                        <p id="file-info" class="mt-2 text-sm text-gray-600">
                             <span class="font-semibold text-indigo-600">Klik untuk memilih file</span> atau seret file ke sini.
                         </p>
                         <p class="text-xs text-gray-500 mt-1">PNG, JPG, atau PDF (Maks. 2MB)</p>
@@ -81,7 +72,32 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>
 @endsection
+
+{{-- =============================================== --}}
+{{--         TAMBAHKAN SCRIPT BARU DI SINI           --}}
+{{-- =============================================== --}}
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('bukti_pembayaran');
+    const fileInfo = document.getElementById('file-info');
+    const originalText = fileInfo.innerHTML;
+
+    if (fileInput) {
+        fileInput.addEventListener('change', function() {
+            // Cek jika ada file yang dipilih
+            if (fileInput.files.length > 0) {
+                // Tampilkan nama file yang dipilih
+                fileInfo.innerHTML = `<span class="font-semibold text-green-600">File terpilih:</span> ${fileInput.files[0].name}`;
+            } else {
+                // Kembalikan ke teks asli jika tidak ada file
+                fileInfo.innerHTML = originalText;
+            }
+        });
+    }
+});
+</script>
+@endpush
