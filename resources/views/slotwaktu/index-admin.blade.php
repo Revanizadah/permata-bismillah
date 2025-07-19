@@ -31,12 +31,10 @@
                     <td class="py-4 px-6 whitespace-nowrap font-mono">{{ \Carbon\Carbon::parse($slot->jam_mulai)->format('H:i') }}</td>
                     <td class="py-4 px-6 whitespace-nowrap font-mono">{{ \Carbon\Carbon::parse($slot->jam_selesai)->format('H:i') }}</td>
                     <td class="py-4 px-6 text-center whitespace-nowrap">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
-                        <span class="text-gray-300 mx-1">|</span>
-                        <form action="" method="POST" class="inline-block">
+                        <form action="{{ route('admin.slotwaktu.destroy', $slot->id) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:text-red-900 font-medium" onclick="return confirm('Apakah Anda yakin ingin menghapus slot ini?')">Hapus</button>
+                            <button type="submit" class="bg-red-500 text-white text-xs font-bold py-1 px-3 rounded-full hover:bg-red-600 transition duration-300"onclick="return confirm('Apakah Anda yakin ingin menghapus slot ini?')">Hapus</button>
                         </form>
                     </td>
                 </tr>
@@ -108,8 +106,6 @@
             document.getElementById('slotModal').classList.add('hidden');
         }, 300);
     }
-
-    // Jika ada error validasi, buka kembali modalnya
     @if($errors->any())
         document.addEventListener('DOMContentLoaded', () => {
             openModal();

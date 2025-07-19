@@ -30,10 +30,10 @@ public function lapangan()
     return $this->belongsTo(Lapangan::class);
 }
 
-public function pembayaran()
-{
-    return $this->hasOne(Pembayaran::class);
-}
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class);
+    }
 
 public function detailPemesanan()
 {

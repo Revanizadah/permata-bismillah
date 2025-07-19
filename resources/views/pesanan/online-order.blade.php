@@ -1,11 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.app-user')
 
 @section('title', 'Pemesanan Lapangan')
 
 @section('content')
 {{-- PERBAIKAN: Menghapus `items-center` agar form tidak selalu di tengah secara vertikal --}}
-<div class="bg-white shadow-lg rounded-lg flex justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl w-full space-y-8">
+{{-- <div class="w-full max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+    <div class="pt-20"> --}}
+
+<div class="bg-white shadow-lg rounded-lg flex justify-center py-12 px-4 sm:px-6 lg:px-8 pt-28">
+    <div class="pt-20">
         
         {{-- Judul halaman, sekarang berada langsung di atas latar abu-abu --}}
         <div class="text-center">
@@ -17,7 +20,7 @@
             </p>
         </div>
 
-        <form method="POST" action="{{ route('admin.pesanan-offline.store') }}">
+        <form method="POST" action="{{ route('user.pesanan.store') }}">
             @csrf
             <div class="space-y-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">

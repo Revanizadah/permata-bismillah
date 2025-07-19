@@ -11,22 +11,36 @@ use Carbon\Carbon;
 
 class PesananOfflineController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
+    {
+    $query = Pesanan::with(['user', 'lapangan', 'detailPemesanan.slotWaktu'])->latest();
+
+    if ($request->has('tanggal') && $request->tanggal != '') {
+        $query->whereDate('tanggal_pesan', $request->tanggal);
+    }
+
+    $pesanans = $query->paginate(10);
+    return view('pesanan.index-admin', compact('pesanans'));
+    }
+
+    public function create()
     {
         $lapangans = Lapangan::orderBy('nama')->get();
         $slotWaktus = SlotWaktu::orderBy('jam_mulai')->get();
+        $tanggalHariIni = Carbon::now()->toDateString();
 
-        return view('pesanan.offline-order', compact('lapangans', 'slotWaktus'));
+        return view('pesanan.offline-order', compact('lapangans', 'slotWaktus', 'tanggalHariIni'));
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'field_id' => 'required|exists:lapangans,id',
-            'booking_date' => 'required|date',
-            'slot_ids' => 'required|array|min:1',
-            'slot_ids.*' => 'exists:slot_waktus,id', 
-        ]);
+       $validated = $request->validate([
+        'field_id' => 'required|exists:lapangans,id',
+        'booking_date' => 'required|date|after_or_equal:today',
+        'slot_ids' => 'required|array|min:1',
+        'slot_ids.*' => 'exists:slot_waktus,id',
+    ]);
 
         try {
             DB::beginTransaction();
@@ -53,10 +67,9 @@ class PesananOfflineController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('pembayaran.index')->with('success', 'Pesanan berhasil dibuat!');
+            return redirect()->route('admin.pembayaran.index')->with('success', 'Pesanan berhasil dibuat!');
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }
@@ -75,6 +88,21 @@ class PesananOfflineController extends Controller
             ->pluck('detail_pesanans.slot_waktu_id');
 
         return response()->json(['booked_slot_ids' => $bookedSlotIds]);
+    }
+
+    public function updateStatus(Request $request, Pesanan $pesanan)
+    {
+        // Validasi input status
+        $request->validate([
+            'status' => 'required|in:confirmed,cancelled', // Hanya izinkan status ini
+        ]);
+
+        // Update status pada pesanan yang ditemukan
+        $pesanan->status = $request->status;
+        $pesanan->save();
+
+        // Redirect kembali ke halaman daftar pesanan dengan pesan sukses
+        return redirect()->route('admin.pesanan-offline.index')->with('success', 'Status pesanan berhasil diperbarui.');
     }
 
 }

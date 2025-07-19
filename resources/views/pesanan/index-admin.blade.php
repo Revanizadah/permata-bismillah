@@ -58,9 +58,22 @@
                         </span>
                     </td>
 
-                    <td class="py-4 px-6 text-center">
-                        <a href="" class="text-indigo-600 hover:text-indigo-900 font-medium">Detail</a>
-                    </td>
+                    <td class="py-4 px-6 text-center whitespace-nowrap">
+                    @if ($pesanan->status == 'pending')
+                    <form action="{{ route('admin.pesanan.updateStatus', $pesanan->id) }}" method="POST" class="inline-block">
+                    @csrf
+                    @method('PATCH')
+                    <input type="hidden" name="status" value="confirmed">
+                    <button type="submit" class="bg-green-500 text-white text-xs font-bold py-1 px-3 rounded-full hover:bg-green-600 transition duration-300">
+                    Konfirmasi
+                    </button>
+                    </form>
+                    @else
+        <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-green-100 text-green-600">
+            <i class="fas fa-check"></i>
+        </span>
+    @endif
+</td>
                 </tr>
                 @empty
                 <tr>

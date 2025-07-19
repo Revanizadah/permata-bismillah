@@ -9,8 +9,7 @@ class PembayaranController extends Controller
 {
     public function index()
     {
-        // GANTI User::all() MENJADI User::paginate()
-        $pembayarans = Pembayaran::latest()->paginate(10); // Ambil 10 data per halaman, urutkan dari yang terbaru
+        $pembayarans = Pembayaran::latest()->paginate(10); 
 
         return view('payment.index-admin', compact('pembayarans'));
     }

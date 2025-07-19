@@ -32,7 +32,7 @@ class UserController extends Controller
         ]);
         $validated['password'] = bcrypt($validated['password']);
         User::create($validated);
-        return redirect()->route('user.index')->with('success', 'Pengguna berhasil ditambahkan');
+        return redirect()->route('admin.user.index')->with('success', 'Pengguna berhasil ditambahkan');
     }
 
     // Tampilkan detail user
@@ -71,6 +71,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'Pengguna berhasil dihapus');
+        return redirect()->route('admin.user.index')->with('success', 'Pengguna berhasil dihapus');
     }
 }

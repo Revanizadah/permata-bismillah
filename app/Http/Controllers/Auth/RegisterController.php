@@ -40,6 +40,6 @@ class RegisterController extends Controller
         Auth::login($user);
 
         // 4. Arahkan pengguna ke halaman dashboard
-    return redirect()->intended(route('user.dashboard'));
+    return redirect()->intended(route('dashboard'));
     }
 }

@@ -19,16 +19,13 @@ class SlotWaktuController extends Controller
    public function store(Request $request)
 {
     $validated = $request->validate([
-        'lapangan_id' => 'required|exists:lapangans,id',
-        'tanggal' => 'required|date',
         'jam_mulai' => 'required|date_format:H:i',
         'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
-        'status' => 'required|string|max:255'
-    ]);
+        ]);
 
     SlotWaktu::create($validated);
 
-    return redirect()->route('slotwaktu.index')->with('success', 'Slot waktu berhasil ditambahkan');
+    return redirect()->route('admin.slotwaktu.index')->with('success', 'Slot waktu berhasil ditambahkan');
 }
 
     public function edit(SlotWaktu $slotwaktu)
@@ -39,8 +36,6 @@ class SlotWaktuController extends Controller
     public function update(Request $request, SlotWaktu $slotwaktu)
     {
         $validated = $request->validate([
-            'nama_lapangan' => 'required|string|max:255',
-            'tanggal' => 'required|date',
             'jam_mulai' => 'required|date_format:H:i',
             'jam_selesai' => 'required|date_format:H:i',
         ]);
@@ -48,10 +43,15 @@ class SlotWaktuController extends Controller
         return redirect()->route('slotwaktu.index')->with('success', 'Slot waktu berhasil diupdate');
     }
 
-    public function destroy(SlotWaktu $slotwaktu)
+   public function destroy(SlotWaktu $slotwaktu)
     {
+        // Karena Route-Model Binding, $slotwaktu sudah berisi satu
+        // instance SlotWaktu yang siap dihapus. Tidak perlu mencarinya lagi.
+        
         $slotwaktu->delete();
-        return redirect()->route('slotwaktu.index')->with('success', 'Slot waktu berhasil dihapus');
+
+        // Redirect kembali dengan pesan sukses
+        return redirect()->route('admin.slotwaktu.index')->with('success', 'Slot waktu berhasil dihapus.');
     }
 
     public function show(SlotWaktu $slotwaktu)
