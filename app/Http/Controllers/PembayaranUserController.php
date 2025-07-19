@@ -10,12 +10,12 @@ class PembayaranUserController extends Controller
 {
     public function show(Pembayaran $pembayaran)
     {
-        if (!$pembayaran->pesanan || $pembayaran->pesanan->user_id !== auth()->id()) {
+        if (!$pembayaran->pesanan || !$pembayaran->pesanan->user || $pembayaran->pesanan->user->id !== auth()->id()) {
 
             abort(403, 'Akses Ditolak');
         }
 
-        return view('pembayaran.show', compact('pembayaran'));
+        return view('payment.pembayaran-user', compact('pembayaran'));
     }
 
     /**
@@ -43,9 +43,9 @@ class PembayaranUserController extends Controller
             'status_pembayaran' => 'paid',
         ]);
         
-        $pembayaran->pesanan()->update(['status' => 'confirmed']);
+        // $pembayaran->pesanan()->update(['status' => 'pending']);
 
-        return redirect()->route('pembayaran.show', $pembayaran->id)
+        return redirect()->route('user.riwayat.index', $pembayaran->id)
                          ->with('success', 'Bukti pembayaran berhasil diunggah! Pesanan Anda telah dikonfirmasi.');
     }
 }
