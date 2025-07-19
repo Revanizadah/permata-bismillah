@@ -44,7 +44,6 @@ class PesananOnlineController extends Controller
             $totalHarga = count($validated['slot_ids']) * $lapangan->harga_per_jam;
 
             $pesanan = Pesanan::create([
-                // PERUBAHAN PALING PENTING: Menggunakan ID pengguna yang login
                 'user_id' => Auth::id(), 
                 'lapangan_id' => $lapangan->id,
                 'tanggal_pesan' => $validated['booking_date'],

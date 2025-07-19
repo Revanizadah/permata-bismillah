@@ -8,11 +8,11 @@ use App\Models\Pembayaran;
 
 class PembayaranUserController extends Controller
 {
-        public function show(Pembayaran $pembayaran)
+    public function show(Pembayaran $pembayaran)
     {
-        // Pastikan pengguna hanya bisa melihat pembayaran miliknya
-        if ($pembayaran->pesanan->user_id !== auth()->id()) {
-            abort(403);
+        if (!$pembayaran->pesanan || $pembayaran->pesanan->user_id !== auth()->id()) {
+
+            abort(403, 'Akses Ditolak');
         }
 
         return view('pembayaran.show', compact('pembayaran'));
@@ -23,30 +23,26 @@ class PembayaranUserController extends Controller
      */
     public function upload(Request $request, Pembayaran $pembayaran)
     {
-
-        if ($pembayaran->pesanan->user_id !== auth()->id()) {
-            abort(403);
+        // ✅ PERBAIKAN: Terapkan pengecekan yang sama di sini
+        if (!$pembayaran->pesanan || $pembayaran->pesanan->user_id !== auth()->id()) {
+            abort(403, 'Akses Ditolak');
         }
 
         $request->validate([
             'bukti_pembayaran' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Hapus bukti lama jika ada
         if ($pembayaran->bukti_pembayaran) {
             Storage::disk('public')->delete($pembayaran->bukti_pembayaran);
         }
 
-        // Simpan file baru
         $path = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
 
-        // Update database
         $pembayaran->update([
             'bukti_pembayaran' => $path,
-            'status_pembayaran' => 'paid', // Langsung ubah status menjadi paid
+            'status_pembayaran' => 'paid',
         ]);
         
-        // Update status pesanan juga
         $pembayaran->pesanan()->update(['status' => 'confirmed']);
 
         return redirect()->route('pembayaran.show', $pembayaran->id)
