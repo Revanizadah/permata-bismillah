@@ -26,12 +26,13 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <label for="field_selector" class="block text-sm font-medium text-gray-700 mb-2">1. Pilih Lapangan</label>
-                        <select id="field_selector" name="field_id" class="w-full border-gray-300 rounded-lg shadow-sm p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" required>
-                            <option value="" disabled selected>-- Pilih Jenis Lapangan --</option>
+                        <select id="field_selector" name="field_id" ...>
                             @foreach ($lapangans as $lapangan)
-                                <option value="{{ $lapangan->id }}" data-price="{{ $lapangan->harga_per_jam }}">
-                                    {{ $lapangan->nama }} (Rp {{ number_format($lapangan->harga_per_jam, 0, ',', '.') }}/jam)
-                                </option>
+                                <option value="{{ $lapangan->id }}" 
+                            data-price="{{ $lapangan->harga_per_jam }}"
+                            data-price-weekend="{{ $lapangan->harga_weekend_per_jam }}">
+                            {{ $lapangan->nama }}
+                            </option>
                             @endforeach
                         </select>
                         @error('field_id') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror

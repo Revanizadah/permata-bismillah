@@ -27,7 +27,6 @@ class BatalkanPesananKedaluwarsa extends Command
     {
         $this->info('Mulai memeriksa pembayaran yang kedaluwarsa...');
 
-        // 1. Cari semua pembayaran yang statusnya 'unpaid' DAN sudah melewati batas waktu
         $pembayaranKedaluwarsa = Pembayaran::where('status_pembayaran', 'unpaid')
                                            ->where('expired_at', '<', Carbon::now())
                                            ->get();
