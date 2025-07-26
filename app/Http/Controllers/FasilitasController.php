@@ -42,8 +42,8 @@ class FasilitasController extends Controller
     public function update(Request $request, Fasilitas $fasilitas)
     {
         $request->validate([
-        'nama' => 'required|string|max:255|unique:fasilitas,nama,' . $fasilitas->id,
-            'ikon' => 'nullable|string|max:255',
+        'nama' => 'required|string|max:255,' . $fasilitas->id,
+        'ikon' => 'nullable|string|max:255',
         ]);
 
         $fasilitas->update($request->all());
