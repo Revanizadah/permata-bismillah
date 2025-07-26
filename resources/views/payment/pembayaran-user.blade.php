@@ -54,24 +54,20 @@
                         </p>
                     </div>
                 </div>
-                {{-- PERUBAHAN: Menambahkan Countdown Timer --}}
                 <div id="countdown-wrapper" class="text-xs text-center text-red-600 mt-4 bg-red-50 py-2 rounded-md">
                     Batas waktu pembayaran: <span class="font-bold" id="countdown-timer"></span>
                 </div>
             </div>
 
             @if ($pembayaran->status_pembayaran == 'unpaid' && now()->lessThan($pembayaran->expired_at))
-                {{-- 3. REKENING TUJUAN --}}
                 <div>
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Rekening Tujuan</h3>
                     <div class="space-y-3">
-                        {{-- Rekening BCA --}}
                         <div class="border border-gray-200 rounded-lg p-4 flex justify-between items-center">
                             <div>
                                 <p class="font-medium text-gray-700">Bank Central Asia (BCA)</p>
                                 <div class="flex items-center space-x-3">
                                     <p id="bca-number" class="text-2xl font-bold text-gray-900 mt-1">123 456 7890</p>
-                                    {{-- PERUBAHAN: Menambahkan Tombol Salin --}}
                                     <button onclick="copyToClipboard('bca-number')" class="text-gray-500 hover:text-indigo-600">
                                         <i class="far fa-copy"></i>
                                     </button>

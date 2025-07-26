@@ -17,9 +17,9 @@ class Pembayaran extends Model
     ];
 
     protected $casts = [
-        // TAMBAHKAN BARIS INI
         'expired_at' => 'datetime',
     ];
+    
     public function pesanan()
 {
     return $this->belongsTo(Pesanan::class);
