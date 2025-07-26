@@ -43,7 +43,6 @@ class FasilitasController extends Controller
     public function update(Request $request, Fasilitas $fasilitas)
     {
         $request->validate([
-            // Rule 'unique' diubah agar mengabaikan data saat ini
         'nama' => 'required|string|max:255|unique:fasilitas,nama,' . $fasilitas->id,
             'ikon' => 'nullable|string|max:255',
         ]);
