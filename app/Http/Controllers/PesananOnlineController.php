@@ -15,11 +15,10 @@ class PesananOnlineController extends Controller
 
     public function create()
     {
-        $lapangans = Lapangan::orderBy('nama')->get();
+        $lapangans = Lapangan::with('fasilitas')->orderBy('nama')->get();
         $slotWaktus = SlotWaktu::orderBy('jam_mulai')->get();
         $tanggalHariIni = Carbon::now()->toDateString();
-        
-        // Mengarahkan ke view khusus pengguna
+       
         return view('pesanan.online-order', compact('lapangans', 'slotWaktus', 'tanggalHariIni'));
     }
 

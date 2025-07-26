@@ -23,4 +23,8 @@ class Lapangan extends Model
         return $this->hasMany(SlotWaktu::class, 'lapangan_id');
     }
 
+    public function fasilitas()
+    {
+        return $this->belongsToMany(Fasilitas::class, 'fasilitas_lapangan');
+    }
 }
