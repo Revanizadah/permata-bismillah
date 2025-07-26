@@ -111,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('Elemen #field_selector:', fieldSelector);
     console.log('Elemen #time-slots-container:', slotsContainer);
 
-    // Pastikan elemen penting ada sebelum melanjutkan
     if (!fieldSelector || !dateSelector || !slotsContainer) {
         console.error('KESALAHAN: Satu atau lebih elemen penting tidak ditemukan. Periksa kembali ID di HTML Anda.');
         return;
@@ -163,11 +162,9 @@ function updatePrice() {
     const selectedSlots = slotsContainer.querySelectorAll('.slot-checkbox:checked');
     const selectedFieldOption = fieldSelector.options[fieldSelector.selectedIndex];
     
-    // Ambil nilai tanggal dari date picker
     const selectedDateValue = dateSelector.value;
     
     let pricePerHour = 0;
-    // Pastikan tanggal dan lapangan sudah dipilih
     if (selectedDateValue && selectedFieldOption.value) {
         const selectedDate = new Date(selectedDateValue + 'T00:00:00'); 
         const day = selectedDate.getDay(); 
