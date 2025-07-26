@@ -20,6 +20,7 @@ use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\PesananOnlineController;
 use App\Http\Controllers\PembayaranUserController;
 use App\Http\Controllers\RiwayatPesananuserController;
+use App\Http\Controllers\FasilitasController;
 use App\Mail\TestMail;
 
 Route::get('/', function () {
@@ -60,6 +61,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(
     Route::resource('user', UserController::class);
     Route::resource('slotwaktu', SlotWaktuController::class);
     Route::resource('pembayaran', PembayaranController::class);
+     Route::resource('fasilitas', FasilitasController::class);
     
     Route::patch('pembayaran/{pembayaran}/status', [PembayaranController::class, 'updateStatus'])->name('pembayaran.updateStatus');
 });

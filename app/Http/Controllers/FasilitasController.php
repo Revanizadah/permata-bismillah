@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Fasilitas;
 
 class FasilitasController extends Controller
 {
@@ -11,54 +12,54 @@ class FasilitasController extends Controller
      */
     public function index()
     {
-        //
+        $fasilitas = Fasilitas::latest()->paginate(10);
+        return view('admin.fasilitas.index', compact('fasilitas'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Menyimpan fasilitas baru ke database.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255|unique:fasilitas',
+            'ikon' => 'nullable|string|max:255',
+        ]);
+
+        Fasilitas::create($request->all());
+
+        return redirect()->route('admin.fasilitas.index')
+                         ->with('success', 'Fasilitas baru berhasil ditambahkan.');
+    }
+   public function show(Fasilitas $fasilitas)
+    {
+        // Mengembalikan data sebagai JSON untuk diisi oleh JavaScript
+        return response()->json($fasilitas);
     }
 
     /**
-     * Display the specified resource.
+     * Mengupdate data fasilitas yang ada.
      */
-    public function show(string $id)
+    public function update(Request $request, Fasilitas $fasilitas)
     {
-        //
+        $request->validate([
+            // Rule 'unique' diubah agar mengabaikan data saat ini
+        'nama' => 'required|string|max:255|unique:fasilitas,nama,' . $fasilitas->id,
+            'ikon' => 'nullable|string|max:255',
+        ]);
+
+        $fasilitas->update($request->all());
+
+        return redirect()->route('admin.fasilitas.index')
+                         ->with('success', 'Fasilitas berhasil diperbarui.');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Menghapus data fasilitas.
      */
-    public function edit(string $id)
+    public function destroy(Fasilitas $fasilitas)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $fasilitas->delete();
+        return redirect()->route('admin.fasilitas.index')->with('success', 'Fasilitas berhasil dihapus.');
     }
 }
