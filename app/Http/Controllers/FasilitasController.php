@@ -33,7 +33,6 @@ class FasilitasController extends Controller
     }
    public function show(Fasilitas $fasilitas)
     {
-        // Mengembalikan data sebagai JSON untuk diisi oleh JavaScript
         return response()->json($fasilitas);
     }
 
