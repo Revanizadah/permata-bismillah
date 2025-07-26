@@ -96,7 +96,6 @@
     console.log('Script pemesanan offline berhasil dimuat.');
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Tes #2: Pastikan event DOMContentLoaded berjalan
     console.log('DOM siap, mulai mengambil elemen.');
 
     const fieldSelector = document.getElementById('field_selector');
