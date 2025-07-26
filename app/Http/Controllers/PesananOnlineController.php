@@ -12,9 +12,7 @@ use Carbon\Carbon;
 
 class PesananOnlineController extends Controller
 {
-    /**
-     * Menampilkan form untuk membuat pesanan baru oleh pengguna.
-     */
+
     public function create()
     {
         $lapangans = Lapangan::orderBy('nama')->get();
@@ -25,9 +23,6 @@ class PesananOnlineController extends Controller
         return view('pesanan.online-order', compact('lapangans', 'slotWaktus', 'tanggalHariIni'));
     }
 
-    /**
-     * Menyimpan pesanan baru yang dibuat oleh pengguna.
-     */
 public function store(Request $request)
 {
     $validated = $request->validate([
@@ -42,26 +37,20 @@ public function store(Request $request)
 
         $lapangan = Lapangan::find($validated['field_id']);
         
-        // --- MODIFIKASI DIMULAI DI SINI ---
 
-        // 1. Ubah string tanggal menjadi objek Carbon yang "pintar"
         $tanggalPesan = Carbon::parse($validated['booking_date']);
 
-        // 2. Tentukan harga per jam berdasarkan hari (weekend atau weekday)
         $hargaPerJam = $tanggalPesan->isWeekend() 
                        ? $lapangan->harga_weekend_per_jam 
                        : $lapangan->harga_per_jam;
 
-        // 3. Hitung total harga menggunakan harga yang sudah benar
         $totalHarga = count($validated['slot_ids']) * $hargaPerJam;
-
-        // --- AKHIR DARI MODIFIKASI ---
 
         $pesanan = Pesanan::create([
             'user_id' => Auth::id(), 
             'lapangan_id' => $lapangan->id,
             'tanggal_pesan' => $validated['booking_date'],
-            'total_harga' => $totalHarga, // Menggunakan total harga yang sudah dinamis
+            'total_harga' => $totalHarga,
             'status' => 'pending',
         ]);
 
@@ -71,14 +60,13 @@ public function store(Request $request)
 
         $pembayaran = $pesanan->pembayaran()->create([
             'kode_pembayaran' => 'INV-' . time() . $pesanan->id,
-            'metode_pembayaran' => 'transfer', // Anda bisa sesuaikan ini
+            'metode_pembayaran' => 'transfer',
             'status_pembayaran' => 'unpaid',
-            'expired_at' => Carbon::now()->addMinutes(60), // Anda mengubah ini menjadi 1 menit
+            'expired_at' => Carbon::now()->addMinutes(60), 
         ]);
 
         DB::commit();
         
-        // Arahkan pengguna ke halaman detail pembayaran mereka
         return redirect()->route('pembayaran.show', $pembayaran->id)->with('success', 'Pesanan Anda berhasil dibuat!');
 
     } catch (\Exception $e) {

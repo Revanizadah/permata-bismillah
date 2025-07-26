@@ -159,13 +159,29 @@ document.addEventListener('DOMContentLoaded', function () {
             finally { loadingSpinner.classList.add('hidden'); updatePrice(); }
         }
 
-        function updatePrice() {
-            const selectedSlots = slotsContainer.querySelectorAll('.slot-checkbox:checked');
-            const selectedFieldOption = fieldSelector.options[fieldSelector.selectedIndex];
-            const pricePerHour = (selectedFieldOption && selectedFieldOption.dataset.price) ? parseInt(selectedFieldOption.dataset.price) : 0;
-            totalHoursEl.textContent = `${selectedSlots.length} Jam`;
-            totalPriceEl.textContent = `Rp ${ (selectedSlots.length * pricePerHour).toLocaleString('id-ID') }`;
+function updatePrice() {
+    const selectedSlots = slotsContainer.querySelectorAll('.slot-checkbox:checked');
+    const selectedFieldOption = fieldSelector.options[fieldSelector.selectedIndex];
+    
+    // Ambil nilai tanggal dari date picker
+    const selectedDateValue = dateSelector.value;
+    
+    let pricePerHour = 0;
+    // Pastikan tanggal dan lapangan sudah dipilih
+    if (selectedDateValue && selectedFieldOption.value) {
+        const selectedDate = new Date(selectedDateValue + 'T00:00:00'); 
+        const day = selectedDate.getDay(); 
+
+        if (day === 0 || day === 6) {
+            pricePerHour = parseInt(selectedFieldOption.dataset.priceWeekend) || 0;
+        } else {
+            pricePerHour = parseInt(selectedFieldOption.dataset.price) || 0;
         }
+    }
+    
+    totalHoursEl.textContent = `${selectedSlots.length} Jam`;
+    totalPriceEl.textContent = `Rp ${ (selectedSlots.length * pricePerHour).toLocaleString('id-ID') }`;
+}
         
         slotsContainer.addEventListener('click', function(e) {
             if (e.target.classList.contains('slot-button') && !e.target.previousElementSibling.disabled) {
