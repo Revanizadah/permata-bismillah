@@ -59,7 +59,7 @@ class PesananOnlineController extends Controller
                 'kode_pembayaran' => 'INV-' . time() . $pesanan->id,
                 'metode_pembayaran' => 'transfer',
                 'status_pembayaran' => 'unpaid',
-                'expired_at' => Carbon::now()->addMinutes(60),
+                'expired_at' => Carbon::now()->addMinutes(1),
             ]);
 
             DB::commit();
