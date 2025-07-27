@@ -126,7 +126,7 @@
                     <i class="fas fa-times-circle text-5xl text-red-500 mb-4"></i>
                     <h3 class="text-2xl font-bold text-gray-800">Pembayaran Kedaluwarsa</h3>
                     <p class="text-gray-600 mt-2">Batas waktu pembayaran untuk pesanan ini telah lewat. Silakan buat pesanan baru.</p>
-                    <a href="#" class="mt-6 inline-block bg-indigo-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-indigo-600">
+                    <a href="{{ route('user.pesanan.create') }}" class="mt-6 inline-block bg-indigo-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-indigo-600">
                         Buat Pesanan Baru
                     </a>
                 </div>

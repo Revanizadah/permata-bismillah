@@ -24,6 +24,6 @@ class LapanganController extends Controller
 
         Lapangan::create($validated);
 
-        return redirect()->route('lapangan.index')->with('success', 'Lapangan berhasil ditambahkan');
+        return redirect()->route('admin.lapangan.index')->with('success', 'Lapangan berhasil ditambahkan');
     }
 }
