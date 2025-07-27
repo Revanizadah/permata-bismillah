@@ -16,7 +16,7 @@
                 <h1 class="text-4xl md:text-5xl font-extrabold text-white">Temukan & Pesan Lapangan Terbaik</h1>
                 <p class="mt-4 text-lg text-gray-200">Booking lapangan Futsal & Badminton favorit Anda hanya dengan beberapa klik.</p>
                 {{-- PERUBAHAN WARNA: Tombol utama menjadi oranye --}}
-                <a href="#" class="mt-8 inline-block bg-red-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-red-600 transition duration-300">
+                <a href="{{ route('user.pesanan.create') }}" class="mt-8 inline-block bg-red-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-red-600 transition duration-300">
                     Pesan Sekarang
                 </a>
             </div>
