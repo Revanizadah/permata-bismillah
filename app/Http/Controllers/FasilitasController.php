@@ -7,9 +7,7 @@ use App\Models\Fasilitas;
 
 class FasilitasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $fasilitas = Fasilitas::latest()->paginate(10);
@@ -31,7 +29,7 @@ class FasilitasController extends Controller
         return redirect()->route('admin.fasilitas.index')
                          ->with('success', 'Fasilitas baru berhasil ditambahkan.');
     }
-   public function show(Fasilitas $fasilitas)
+    public function show(Fasilitas $fasilitas)
     {
         return response()->json($fasilitas);
     }
