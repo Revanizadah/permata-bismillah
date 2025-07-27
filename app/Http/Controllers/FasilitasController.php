@@ -42,7 +42,7 @@ class FasilitasController extends Controller
     public function update(Request $request, Fasilitas $fasilitas)
     {
         $request->validate([
-        'nama' => 'required|string|max:255,' . $fasilitas->id,
+        'nama' => 'required|string|max:255,',
         'ikon' => 'nullable|string|max:255',
         ]);
 
