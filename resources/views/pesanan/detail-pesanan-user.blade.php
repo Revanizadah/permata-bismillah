@@ -80,12 +80,10 @@
 
 <div class="pt-6 border-t border-gray-200 text-center">
     @if($pesanan->status == 'pending' && $pesanan->pembayaran->status_pembayaran == 'unpaid' && now()->lessThan($pesanan->pembayaran->expired_at))
-        {{-- Jika pesanan masih PENDING dan BELUM dibayar --}}
         <a href="{{ route('user.pembayaran.show', $pesanan->pembayaran->id) }}" class="w-full md:w-auto inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 font-bold text-lg transition">
             Lanjutkan Pembayaran
         </a>
         
-        {{-- Tombol untuk membatalkan pesanan --}}
         <form action="{{ route('user.riwayat.cancel', $pesanan->id) }}" method="POST" class="mt-4">
             @csrf
             @method('PATCH')
