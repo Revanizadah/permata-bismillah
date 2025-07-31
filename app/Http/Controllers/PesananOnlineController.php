@@ -61,12 +61,12 @@ public function store(Request $request)
             'kode_pembayaran' => 'INV-' . time() . $pesanan->id,
             'metode_pembayaran' => 'transfer',
             'status_pembayaran' => 'unpaid',
-            'expired_at' => Carbon::now()->addMinutes(1), 
+            'expired_at' => Carbon::now()->addMinutes(10), 
         ]);
 
         DB::commit();
         
-        return redirect()->route('pembayaran.show', $pembayaran->id)->with('success', 'Pesanan Anda berhasil dibuat!');
+        return redirect()->route('user.pembayaran.show', $pembayaran->id)->with('success', 'Pesanan Anda berhasil dibuat!');
 
     } catch (\Exception $e) {
         DB::rollBack();

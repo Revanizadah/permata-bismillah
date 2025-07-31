@@ -24,4 +24,29 @@ class RiwayatPesananuserController extends Controller
 
         return view('pesanan.riwayat-user', compact('pesanans'));
     }
+
+    public function show(Pesanan $pesanan)
+    {
+        if ($pesanan->user_id !== Auth::id()) {
+            abort(403, 'AKSES DITOLAK');
+        }
+
+        $pesanan->load(['user', 'lapangan', 'pembayaran', 'detailPemesanan.slotWaktu']);
+
+        return view('pesanan.detail-pesanan-user', compact('pesanan'));
+    }
+    
+    public function cancel(Pesanan $pesanan)
+    {
+        if ($pesanan->user_id !== Auth::id()) {
+            abort(403, 'AKSES DITOLAK');
+        }
+        if ($pesanan->status !== 'pending') {
+            return redirect()->route('riwayat.show', $pesanan->id)
+                             ->with('error', 'Pesanan yang sudah dikonfirmasi atau dibatalkan tidak bisa diubah.');
+        }
+        $pesanan->status = 'cancelled';
+        $pesanan->save();
+        return redirect()->route('user.riwayat.index')->with('success', 'Pesanan Anda berhasil dibatalkan.');
+    }
 }

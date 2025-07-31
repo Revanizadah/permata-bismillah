@@ -53,8 +53,8 @@
                                     </span>
                                 </div>
                             </div>
-                            
-                            <a href="{{ route('user.pembayaran.show', $pesanan->pembayaran->id) }}" class="ml-6 text-indigo-600 hover:text-indigo-900 font-bold whitespace-nowrap">
+
+                            <a href="{{ route('user.riwayat.show', $pesanan->id) }}" class="ml-6 text-indigo-600 hover:text-indigo-900 font-bold whitespace-nowrap">
                                 Detail &rarr;
                             </a>
                         </div>

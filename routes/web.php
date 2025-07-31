@@ -73,6 +73,8 @@ Route::prefix('user')->name('user.')->middleware(['auth', 'verified'])->group(fu
     Route::get('pembayaran/{pembayaran}/upload', [PembayaranUserController::class, 'show'])->name('pembayaran.show');
     Route::patch('pembayaran/{pembayaran}/upload', [PembayaranUserController::class, 'upload'])->name('pembayaran.upload');
     Route::get('/riwayat-pesanan', [RiwayatPesananuserController::class, 'index'])->name('riwayat.index');
+    Route::get('/riwayat-pesanan/{pesanan}', [RiwayatPesananuserController::class, 'show'])->name('riwayat.show');
+    Route::patch('/riwayat-pesanan/{pesanan}/cancel', [RiwayatPesananuserController::class, 'cancel'])->name('riwayat.cancel');
 
 });
 
