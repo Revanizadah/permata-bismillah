@@ -17,7 +17,6 @@
 <div class="flex items-center justify-center min-h-screen py-12">
     <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-2xl shadow-xl">
         
-        {{-- Header Form --}}
         <div class="text-center">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto mb-4 w-20 h-20">
             <h2 class="text-3xl font-extrabold text-gray-900">
@@ -27,12 +26,9 @@
                 Silakan isi data diri Anda untuk memulai.
             </p>
         </div>
-
-        {{-- Form Registrasi --}}
         <form action="{{ route('register') }}" method="POST" class="space-y-6">
             @csrf
             
-            {{-- Input Nama --}}
             <div>
                 <label for="nama" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                 <div class="mt-1">
@@ -43,7 +39,7 @@
                 </div>
             </div>
 
-            {{-- Input Email --}}
+
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <div class="mt-1">
@@ -53,8 +49,16 @@
                     @error('email')<span class="text-xs text-red-500 mt-1">{{ $message }}</span>@enderror
                 </div>
             </div>
+            <div>
+                <label for="no_hp" class="block text-sm font-medium text-gray-700">Nomor HP</label>
+                <div class="mt-1">
+                    <input type="text" id="no_hp" name="no_hp" required value="{{ old('no_hp') }}"
+                           class="w-full border border-gray-400 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                           placeholder="0812xxxxxx">
+                    @error('no_hp')<span class="text-xs text-red-500 mt-1">{{ $message }}</span>@enderror
+                </div>
+            </div>
 
-            {{-- Input Password --}}
             <div>
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                 <div class="mt-1">
@@ -65,7 +69,6 @@
                 </div>
             </div>
 
-            {{-- Input Konfirmasi Password --}}
             <div>
                 <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
                 <div class="mt-1">
@@ -75,16 +78,13 @@
                 </div>
             </div>
 
-            {{-- Tombol Register --}}
             <div>
                 <button type="submit" 
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105">
                     Daftar
                 </button>
             </div>
-            
-            {{-- Link ke Halaman Login --}}
-            <div class="text-sm text-center">
+                    <div class="text-sm text-center">
                 <p class="text-gray-600">
                     Sudah punya akun?
                     <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500">

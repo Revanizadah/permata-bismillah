@@ -13,7 +13,7 @@ class VerificationController extends Controller
     /**
      * Ke mana pengguna akan diarahkan setelah verifikasi berhasil.
      */
-    protected $redirectTo = '/'; // Sesuaikan dengan route dashboard Anda
+    protected $redirectTo = '/user/dashboard'; // Sesuaikan dengan route dashboard Anda
 
     /**
      * Buat instance controller baru.

@@ -41,7 +41,6 @@ Route::post('/email/resend', [VerificationController::class, 'resend'])
 
 Route::get('/api/check-availability', [PesananOfflineController::class, 'checkAvailability']);
 
-Route::resource('dashboard', DashboardUserController::class);
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisterController::class, 'create'])->name('register');
     Route::post('register', [RegisterController::class, 'store']);
