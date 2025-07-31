@@ -72,6 +72,7 @@
                 <div class="p-4 rounded-lg 
                     {{ $pesanan->pembayaran->status_pembayaran == 'paid' ? 'bg-green-50 text-green-800' : '' }}
                     {{ $pesanan->pembayaran->status_pembayaran == 'unpaid' ? 'bg-yellow-50 text-yellow-800' : '' }}
+                    {{ $pesanan->pembayaran->status_pembayaran == 'pending' ? 'bg-red-50 text-yellow-800' : '' }}
                     {{ $pesanan->pembayaran->status_pembayaran == 'expired' ? 'bg-red-50 text-red-800' : '' }}">
                     
                     <span class="font-bold">Status Pembayaran:</span> {{ ucfirst($pesanan->pembayaran->status_pembayaran) }}
