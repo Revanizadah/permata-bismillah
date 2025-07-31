@@ -65,7 +65,7 @@
                     <i class="fas fa-file-alt text-5xl text-gray-400 mb-4"></i>
                     <p class="text-lg font-medium text-gray-700">Anda belum memiliki riwayat pesanan.</p>
                     <p class="text-sm text-gray-500 mt-1">Mari mulai pesan lapangan pertama Anda!</p>
-                    <a href="#" class="mt-6 inline-block bg-indigo-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-indigo-600 transition">
+                    <a href="{{ route('user.pesanan.create') }}" class="mt-6 inline-block bg-indigo-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-indigo-600 transition">
                         Pesan Sekarang
                     </a>
                 </div>
