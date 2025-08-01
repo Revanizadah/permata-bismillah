@@ -20,7 +20,13 @@ class LapanganController extends Controller
             'nama' => 'required|string|max:255',
             'harga_per_jam' => 'required|numeric|min:0',
             'harga_weekend_per_jam' => 'nullable|numeric|min:0',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
         ]);
+
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('images/lapangan', 'public');
+            $validated['gambar'] = basename($path);
+        }
 
         Lapangan::create($validated);
 
