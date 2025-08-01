@@ -87,3 +87,9 @@ Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth')->
 
 
  
+Route::middleware(['verified'])->group(function () {
+    Route::get('/forget-password', [LoginController::class, 'showForgetPasswordForm'])->name('password.request');
+    Route::post('/forget-password', [LoginController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [LoginController::class, 'showResetPasswordForm'])->name('password.reset');
+    Route::post('/reset-password', [LoginController::class, 'resetPassword'])->name('password.update');
+});
