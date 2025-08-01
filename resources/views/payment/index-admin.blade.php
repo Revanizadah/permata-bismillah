@@ -53,7 +53,7 @@
                         </span>
                     </td>
                     <td class="py-4 px-6 text-center whitespace-nowrap">
-    @if($pembayaran->status_pembayaran == 'pending_verification')
+    @if($pembayaran->status_pembayaran == 'pending')
         <form action="{{ route('admin.pembayaran.confirm', $pembayaran->id) }}" method="POST" class="inline-block">
             @csrf @method('PATCH')
             <button type="submit" class="text-green-600 hover:text-green-900">Konfirmasi</button>
