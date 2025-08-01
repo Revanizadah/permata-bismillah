@@ -61,7 +61,7 @@ public function store(Request $request)
             'kode_pembayaran' => 'INV-' . time() . $pesanan->id,
             'metode_pembayaran' => 'transfer',
             'status_pembayaran' => 'unpaid',
-            'expired_at' => Carbon::now()->addMinutes(100), 
+            'expired_at' => Carbon::now()->addMinutes(15), 
         ]);
 
         DB::commit();

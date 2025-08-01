@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class PembayaranController extends Controller
 {
@@ -35,10 +36,8 @@ class PembayaranController extends Controller
 
    public function confirm(Pembayaran $pembayaran)
     {
-        // Ubah status pembayaran & pesanan
         $pembayaran->update(['status_pembayaran' => 'paid']);
         $pembayaran->pesanan()->update(['status' => 'confirmed']);
-        // Anda bisa menambahkan notifikasi email ke user di sini
         return back()->with('success', 'Pembayaran berhasil dikonfirmasi.');
     }
 
@@ -51,8 +50,8 @@ class PembayaranController extends Controller
         $pembayaran->update([
             'status_pembayaran' => 'rejected',
             'bukti_pembayaran' => null,
+            'expired_at' => Carbon::now()->addHours(24),
         ]);
-        // Anda bisa menambahkan notifikasi email ke user di sini
         return back()->with('success', 'Bukti pembayaran telah ditolak.');
     }
 }
