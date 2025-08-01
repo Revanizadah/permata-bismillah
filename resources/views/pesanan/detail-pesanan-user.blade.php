@@ -46,17 +46,13 @@
                 </div>
             </div>
             
-            {{-- 2. RINCIAN BIAYA & STATUS --}}
+            {{-- 2. RINCIAN BIAYA --}}
             <div>
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Rincian Biaya</h3>
                 <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-4">
                     <div class="flex justify-between items-center text-gray-700">
                         <span>Harga Sewa ({{ $pesanan->detailPemesanan->count() }} jam)</span>
                         <span>Rp {{ number_format($pesanan->total_harga, 0, ',', '.') }}</span>
-                    </div>
-                    <div class="flex justify-between items-center text-gray-700">
-                        <span>Biaya Layanan</span>
-                        <span>Rp 0</span>
                     </div>
                     <div class="border-t border-gray-200 my-2"></div>
                     <div class="flex justify-between items-center font-bold text-gray-900">
@@ -72,33 +68,46 @@
                 <div class="p-4 rounded-lg 
                     {{ $pesanan->pembayaran->status_pembayaran == 'paid' ? 'bg-green-50 text-green-800' : '' }}
                     {{ $pesanan->pembayaran->status_pembayaran == 'unpaid' ? 'bg-yellow-50 text-yellow-800' : '' }}
-                    {{ $pesanan->pembayaran->status_pembayaran == 'pending' ? 'bg-yellow-50 text-yellow-800' : '' }}
+                    {{ $pesanan->pembayaran->status_pembayaran == 'rejected' ? 'bg-orange-50 text-orange-800' : '' }}
+                    {{ $pesanan->pembayaran->status_pembayaran == 'pending' ? 'bg-blue-50 text-blue-800' : '' }}
                     {{ $pesanan->pembayaran->status_pembayaran == 'expired' ? 'bg-red-50 text-red-800' : '' }}">
                     
-                    <span class="font-bold">Status Pembayaran:</span> {{ ucfirst($pesanan->pembayaran->status_pembayaran) }}
+                    <p class="font-bold">Status Pembayaran: {{ ucfirst(str_replace('_', ' ', $pesanan->pembayaran->status_pembayaran)) }}</p>
+
+                    @if($pesanan->pembayaran->status_pembayaran == 'pending')
+                        <p class="text-sm mt-1">Bukti pembayaran Anda sedang kami verifikasi. Mohon tunggu.</p>
+                    @endif
                 </div>
             </div>
 
-    <div class="pt-6 border-t border-gray-200 text-center">
-        @if ($pesanan->pembayaran->status_pembayaran == 'unpaid' && now()->lessThan($pesanan->pembayaran->expired_at))
-        <a href="{{ route('user.pembayaran.show', $pesanan->pembayaran->id) }}" class="w-full md:w-auto inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 font-bold text-lg transition">
-            Lanjutkan Pembayaran
-        </a>
-    @elseif ($pesanan->status == 'confirmed')
-        <p class="text-green-600 font-medium py-3">Pesanan Dikonfirmasi. Sampai jumpa di lapangan!</p>
-    @else
-        <p class="text-red-600 font-medium py-3">Pesanan ini telah dibatalkan/kedaluwarsa.</p>
-    @endif
-    @if ($pesanan->status == 'pending')
-        <form action="{{ route('user.riwayat.cancel', $pesanan->id) }}" method="POST" class="mt-4">
-            @csrf
-            @method('PATCH')
-            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')" class="text-sm text-gray-500 hover:text-red-600 hover:underline">
-                Batalkan Pesanan
-            </button>
-        </form>
-    @endif
-</div>
+            {{-- TOMBOL AKSI KONDISIONAL --}}
+            <div class="pt-6 border-t border-gray-200 text-center">
+                @if (in_array($pesanan->pembayaran->status_pembayaran, ['unpaid', 'rejected']) && now()->lessThan($pesanan->pembayaran->expired_at))
+                    @if ($pesanan->pembayaran->status_pembayaran == 'rejected')
+                        <p class="text-sm text-red-600 mb-4">Pembayaran Anda sebelumnya ditolak. Silakan unggah bukti baru.</p>
+                    @endif
+                    <a href="{{ route('user.pembayaran.show', $pesanan->pembayaran->id) }}" class="w-full md:w-auto inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 font-bold text-lg transition">
+                        Lanjutkan Pembayaran
+                    </a>
+                @elseif($pesanan->pembayaran->status_pembayaran == 'pending')
+                    <p class="text-blue-600 font-medium py-3">Menunggu konfirmasi dari Admin.</p>
+                @elseif($pesanan->status == 'confirmed')
+                    <p class="text-green-600 font-medium py-3">Pesanan Dikonfirmasi. Sampai jumpa di lapangan!</p>
+                @else
+                    <p class="text-red-600 font-medium py-3">Pesanan ini telah dibatalkan atau kedaluwarsa.</p>
+                @endif
+                
+                @if ($pesanan->status == 'pending')
+                    <form action="{{ route('user.riwayat.cancel', $pesanan->id) }}" method="POST" class="mt-4">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" onclick="return confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')" class="text-sm text-gray-500 hover:text-red-600 hover:underline">
+                            Batalkan Pesanan
+                        </button>
+                    </form>
+                @endif
+            </div>
+
         </div>
     </div>
 </div>
