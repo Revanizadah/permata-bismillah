@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container mx-auto my-10 p-6 md:p-8 bg-white shadow-xl rounded-2xl">
-    {{-- HEADER --}}
     <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-4 border-b border-gray-200">
         <div>
             <h2 class="text-3xl font-bold text-gray-800">Kelola Lapangan</h2>
@@ -14,13 +13,12 @@
             + Tambah Lapangan
         </button>
     </div>
-
-    {{-- TABEL LAPANGAN --}}
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Lapangan</th>
+                    <th class="py-3 px-6 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Gambar</th>
                     <th class="py-3 px-6 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Per Jam</th>
                     <th class="py-3 px-6 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Weekend Per Jam</th>
                     <th class="py-3 px-6 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
@@ -30,17 +28,30 @@
                 @forelse($lapangans as $lapangan)
                 <tr class="hover:bg-gray-50 transition duration-150">
                     <td class="py-4 px-6 whitespace-nowrap font-semibold">{{ $lapangan->nama }}</td>
+                    <td class="py-4 px-6 text-center">
+                        @if($lapangan->gambar)
+                            <a href="{{ asset('storage/images/lapangan/' . $lapangan->gambar) }}" target="_blank" class="text-blue-500 hover:underline text-sm font-medium">
+                                Lihat Gambar
+                            </a>
+                        @else
+                            <span class="text-xs text-gray-400">-</span>
+                        @endif
+                    </td>
                     <td class="py-4 px-6 text-right whitespace-nowrap">Rp {{ number_format($lapangan->harga_per_jam, 0, ',', '.') }}</td>
                     <td class="py-4 px-6 text-right whitespace-nowrap">Rp {{ number_format($lapangan->harga_weekend_per_jam, 0, ',', '.') }}</td>
                     <td class="py-4 px-6 text-center whitespace-nowrap">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
-                        <span class="text-gray-300 mx-1">|</span>
-                        <a href="#" class="text-red-600 hover:text-red-900 font-medium">Hapus</a>
+                        <form action="{{ route('admin.lapangan.destroy', $lapangan->id) }}" method="POST" class="inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-600 hover:text-red-900 font-medium" onclick="return confirm('Apakah Anda yakin ingin menghapus lapangan ini?')">
+                        Hapus
+                        </button>
+                        </form>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" class="text-center py-10 text-gray-500">
+                    <td colspan="5" class="text-center py-10 text-gray-500">
                         <p class="text-lg">Belum ada data lapangan yang ditambahkan.</p>
                     </td>
                 </tr>
@@ -49,7 +60,6 @@
         </table>
     </div>
 </div>
-
 <div id="lapanganModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div id="modalContent" class="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 md:p-8 relative transform transition-all duration-300 opacity-0 scale-95">
         
@@ -66,7 +76,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('admin.lapangan.store') }}" method="POST">
+        <form action="{{ route('admin.lapangan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
             <div class="space-y-6">
                 <div>
@@ -119,8 +129,6 @@
             document.getElementById('lapanganModal').classList.add('hidden');
         }, 300);
     }
-
-    // Jika ada error validasi, buka kembali modalnya
     @if($errors->any())
         document.addEventListener('DOMContentLoaded', () => {
             openModal();

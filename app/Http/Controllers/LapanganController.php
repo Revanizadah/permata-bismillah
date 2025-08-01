@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lapangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LapanganController extends Controller
 {
@@ -31,5 +32,21 @@ class LapanganController extends Controller
         Lapangan::create($validated);
 
         return redirect()->route('admin.lapangan.index')->with('success', 'Lapangan berhasil ditambahkan');
+    }
+
+
+
+
+    public function destroy(Lapangan $lapangan)
+    {
+        // Hapus gambar terkait dari storage jika ada
+        if ($lapangan->gambar) {
+            Storage::disk('public')->delete('images/lapangan/' . $lapangan->gambar);
+        }
+
+        // Hapus data dari database
+        $lapangan->delete();
+
+        return redirect()->route('admin.lapangan.index')->with('success', 'Lapangan berhasil dihapus.');
     }
 }
