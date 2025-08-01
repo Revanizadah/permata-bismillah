@@ -81,6 +81,17 @@
                     <label for="harga_weekend_per_jam" class="block text-gray-700 font-medium mb-2">Harga Per Jam (Weekend)</label>
                     <input type="number" id="harga_weekend_per_jam" name="harga_weekend_per_jam" class="w-full border border-gray-400 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition" required value="{{ old('harga_weekend_per_jam') }}">
                 </div>
+                <div>
+                    <label for="gambar" class="block text-gray-700 font-medium mb-2">Foto Lapangan</label>
+                    <input type="file" id="gambar" name="gambar" class="w-full text-sm text-gray-500
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-full file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-indigo-50 file:text-indigo-700
+                        hover:file:bg-indigo-100"
+                    >
+                    <p class="text-xs text-gray-500 mt-1">Opsional. Tipe: JPG, PNG. Maks: 2MB.</p>
+                </div>
             </div>
             <div class="flex justify-end space-x-4 mt-8">
                 <button type="button" onclick="closeModal()" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 font-medium">Batal</button>

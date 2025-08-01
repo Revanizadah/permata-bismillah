@@ -14,8 +14,8 @@ class Lapangan extends Model
     protected $fillable = [
         'nama',
         'harga_per_jam',
-        'harga_weekend_per_jam'
-        
+        'harga_weekend_per_jam',
+        'gambar'
     ];
 
     public function slotWaktus()
