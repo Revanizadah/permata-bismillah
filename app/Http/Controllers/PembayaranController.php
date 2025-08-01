@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
+use Illuminate\Support\Facades\Storage;
 
 class PembayaranController extends Controller
 {
@@ -32,17 +33,26 @@ class PembayaranController extends Controller
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil ditambahkan');
     }
 
-    public function updateStatus(Request $request, $id)
-{
-    $request->validate([
-        'status' => 'required|in:Sukses,Ditolak',
-    ]);
+   public function confirm(Pembayaran $pembayaran)
+    {
+        // Ubah status pembayaran & pesanan
+        $pembayaran->update(['status_pembayaran' => 'paid']);
+        $pembayaran->pesanan()->update(['status' => 'confirmed']);
+        // Anda bisa menambahkan notifikasi email ke user di sini
+        return back()->with('success', 'Pembayaran berhasil dikonfirmasi.');
+    }
 
-    $pembayaran = Pembayaran::findOrFail($id);
+    public function reject(Pembayaran $pembayaran)
+    {
+        if ($pembayaran->bukti_pembayaran) {
+            Storage::disk('public')->delete($pembayaran->bukti_pembayaran);
+        }
 
-    $pembayaran->status_pembayaran = $request->status;
-    $pembayaran->save();
-
-    return redirect()->back()->with('success', 'Status pembayaran berhasil diupdate!');
-}
+        $pembayaran->update([
+            'status_pembayaran' => 'rejected',
+            'bukti_pembayaran' => null,
+        ]);
+        // Anda bisa menambahkan notifikasi email ke user di sini
+        return back()->with('success', 'Bukti pembayaran telah ditolak.');
+    }
 }

@@ -53,8 +53,20 @@
                         </span>
                     </td>
                     <td class="py-4 px-6 text-center whitespace-nowrap">
-                        <a href="" class="text-indigo-600 hover:text-indigo-900 font-medium">Lihat Detail</a>
-                    </td>
+    @if($pembayaran->status_pembayaran == 'pending_verification')
+        <form action="{{ route('admin.pembayaran.confirm', $pembayaran->id) }}" method="POST" class="inline-block">
+            @csrf @method('PATCH')
+            <button type="submit" class="text-green-600 hover:text-green-900">Konfirmasi</button>
+        </form>
+        <span class="text-gray-300 mx-1">|</span>
+        <form action="{{ route('admin.pembayaran.reject', $pembayaran->id) }}" method="POST" class="inline-block">
+            @csrf @method('PATCH')
+            <button type="submit" class="text-red-600 hover:text-red-900">Tolak</button>
+        </form>
+    @else
+        <span class="text-gray-400">-</span>
+    @endif
+</td>
                 </tr>
                 @empty
                 <tr>

@@ -72,32 +72,31 @@
                 <div class="p-4 rounded-lg 
                     {{ $pesanan->pembayaran->status_pembayaran == 'paid' ? 'bg-green-50 text-green-800' : '' }}
                     {{ $pesanan->pembayaran->status_pembayaran == 'unpaid' ? 'bg-yellow-50 text-yellow-800' : '' }}
-                    {{ $pesanan->pembayaran->status_pembayaran == 'pending' ? 'bg-red-50 text-yellow-800' : '' }}
+                    {{ $pesanan->pembayaran->status_pembayaran == 'pending' ? 'bg-yellow-50 text-yellow-800' : '' }}
                     {{ $pesanan->pembayaran->status_pembayaran == 'expired' ? 'bg-red-50 text-red-800' : '' }}">
                     
                     <span class="font-bold">Status Pembayaran:</span> {{ ucfirst($pesanan->pembayaran->status_pembayaran) }}
                 </div>
             </div>
 
-<div class="pt-6 border-t border-gray-200 text-center">
-    @if($pesanan->status == 'pending' && $pesanan->pembayaran->status_pembayaran == 'unpaid' && now()->lessThan($pesanan->pembayaran->expired_at))
+    <div class="pt-6 border-t border-gray-200 text-center">
+        @if ($pesanan->pembayaran->status_pembayaran == 'unpaid' && now()->lessThan($pesanan->pembayaran->expired_at))
         <a href="{{ route('user.pembayaran.show', $pesanan->pembayaran->id) }}" class="w-full md:w-auto inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 font-bold text-lg transition">
             Lanjutkan Pembayaran
         </a>
-        
+    @elseif ($pesanan->status == 'confirmed')
+        <p class="text-green-600 font-medium py-3">Pesanan Dikonfirmasi. Sampai jumpa di lapangan!</p>
+    @else
+        <p class="text-red-600 font-medium py-3">Pesanan ini telah dibatalkan/kedaluwarsa.</p>
+    @endif
+    @if ($pesanan->status == 'pending')
         <form action="{{ route('user.riwayat.cancel', $pesanan->id) }}" method="POST" class="mt-4">
             @csrf
             @method('PATCH')
-            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')" class="text-sm text-gray-500 hover:text-red-600">
+            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')" class="text-sm text-gray-500 hover:text-red-600 hover:underline">
                 Batalkan Pesanan
             </button>
         </form>
-
-    @elseif($pesanan->status == 'confirmed')
-        <p class="text-green-600 font-medium">Pesanan Dikonfirmasi. Sampai jumpa di lapangan!</p>
-
-    @else
-        <p class="text-red-600 font-medium">Pesanan ini telah dibatalkan.</p>
     @endif
 </div>
         </div>

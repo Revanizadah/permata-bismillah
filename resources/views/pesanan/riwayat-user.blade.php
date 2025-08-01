@@ -48,6 +48,7 @@
                                     <span class="px-3 py-1 font-semibold text-xs leading-tight rounded-full
                                         {{ $pesanan->pembayaran->status_pembayaran == 'paid' ? 'bg-blue-100 text-blue-800' : '' }}
                                         {{ $pesanan->pembayaran->status_pembayaran == 'unpaid' ? 'bg-orange-100 text-orange-800' : '' }}
+                                        {{ $pesanan->pembayaran->status_pembayaran == 'pending' ? 'bg-red-50 text-yellow-800' : '' }}
                                         {{ $pesanan->pembayaran->status_pembayaran == 'expired' ? 'bg-gray-100 text-gray-800' : '' }}">
                                         {{ ucfirst($pesanan->pembayaran->status_pembayaran ?? 'N/A') }}
                                     </span>
