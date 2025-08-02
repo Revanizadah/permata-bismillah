@@ -39,7 +39,6 @@
                     <td class="py-4 px-6 text-right">Rp {{ number_format($lapangan->harga_per_jam, 0, ',', '.') }}</td>
                     <td class="py-4 px-6 text-right">Rp {{ number_format($lapangan->harga_weekend_per_jam, 0, ',', '.') }}</td>
                     <td class="py-4 px-6 text-center whitespace-nowrap">
-                        {{-- PERBAIKAN: Tombol Edit sekarang memanggil fungsi JS dengan data --}}
                         <button onclick='openEditModal({{ $lapangan->toJson() }})' class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</button>
                         <span class="text-gray-300 mx-1">|</span>
                         <form action="{{ route('admin.lapangan.destroy', $lapangan->id) }}" method="POST" class="inline-block">

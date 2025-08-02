@@ -63,7 +63,7 @@
                     <div class="bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
                         <a href="#">
                             <div class="h-48 overflow-hidden">
-                                <img src="{{ $lapangan->gambar ? asset('images/' . $lapangan->gambar) : 'https://via.placeholder.com/400x300.png/E2E8F0/4A5568?text=Permata' }}"
+                                <img src="{{ $lapangan->gambar ? asset('storage/images/lapangan/' . $lapangan->gambar) : 'https://via.placeholder.com/400x300.png/E2E8F0/4A5568?text=Permata' }}"
                                      alt="Foto {{ $lapangan->nama }}" 
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                             </div>
