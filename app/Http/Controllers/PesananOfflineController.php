@@ -80,7 +80,7 @@ class PesananOfflineController extends Controller
             'date' => 'required|date_format:Y-m-d',
         ]);
         
-        // PERBAIKI: Join ke tabel 'detail_pesanans' sesuai migrasi Anda
+
         $bookedSlotIds = Pesanan::join('detail_pesanans', 'pesanans.id', '=', 'detail_pesanans.pesanan_id')
             ->where('pesanans.lapangan_id', $validated['field_id'])
             ->whereDate('pesanans.tanggal_pesan', $validated['date'])

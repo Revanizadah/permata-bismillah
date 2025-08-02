@@ -42,8 +42,6 @@ class PembayaranUserController extends Controller
             'bukti_pembayaran' => $path,
             'status_pembayaran' => 'pending',
         ]);
-        
-        // $pembayaran->pesanan()->update(['status' => 'pending']);
 
         return redirect()->route('user.riwayat.index', $pembayaran->id)
                          ->with('success', 'Bukti pembayaran berhasil diunggah! Pesanan Anda telah dikonfirmasi.');
