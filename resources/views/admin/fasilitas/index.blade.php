@@ -33,7 +33,6 @@
                     </td>
                     <td class="py-4 px-6 font-medium">{{ $item->nama }}</td>
                     <td class="py-4 px-6 text-center whitespace-nowrap">
-                        {{-- Mengirim seluruh objek $item ke fungsi JavaScript --}}
                         <button onclick='openEditModal({{ $item->toJson() }})' class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</button>
                         <span class="text-gray-300 mx-1">|</span>
                         <form action="{{ route('admin.fasilitas.destroy', $item->id) }}" method="POST" class="inline-block">

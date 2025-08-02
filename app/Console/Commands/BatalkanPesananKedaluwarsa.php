@@ -37,11 +37,9 @@ class BatalkanPesananKedaluwarsa extends Command
         }
 
         foreach ($pembayaranKedaluwarsa as $pembayaran) {
-            // Update status pembayaran menjadi 'expired'
             $pembayaran->status_pembayaran = 'expired';
             $pembayaran->save();
 
-            // Update status pesanan terkait menjadi 'cancelled'
             $pembayaran->pesanan->status = 'cancelled';
             $pembayaran->pesanan->save();
 

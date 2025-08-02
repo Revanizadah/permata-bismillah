@@ -12,6 +12,8 @@ class Pembayaran extends Model
         'pesanan_id',
         'metode_pembayaran',
         'tanggal_pembayaran',
+        'bukti_pembayaran',
+        'status_pembayaran', // 'pending', 'paid', 'failed'
         'kode_pembayaran',
         'expired_at',
     ];

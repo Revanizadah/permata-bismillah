@@ -48,13 +48,14 @@
                                     <span class="px-3 py-1 font-semibold text-xs leading-tight rounded-full
                                         {{ $pesanan->pembayaran->status_pembayaran == 'paid' ? 'bg-blue-100 text-blue-800' : '' }}
                                         {{ $pesanan->pembayaran->status_pembayaran == 'unpaid' ? 'bg-orange-100 text-orange-800' : '' }}
+                                        {{ $pesanan->pembayaran->status_pembayaran == 'pending' ? 'bg-red-50 text-yellow-800' : '' }}
                                         {{ $pesanan->pembayaran->status_pembayaran == 'expired' ? 'bg-gray-100 text-gray-800' : '' }}">
                                         {{ ucfirst($pesanan->pembayaran->status_pembayaran ?? 'N/A') }}
                                     </span>
                                 </div>
                             </div>
-                            
-                            <a href="{{ route('user.pembayaran.show', $pesanan->pembayaran->id) }}" class="ml-6 text-indigo-600 hover:text-indigo-900 font-bold whitespace-nowrap">
+
+                            <a href="{{ route('user.riwayat.show', $pesanan->id) }}" class="ml-6 text-indigo-600 hover:text-indigo-900 font-bold whitespace-nowrap">
                                 Detail &rarr;
                             </a>
                         </div>
@@ -65,7 +66,7 @@
                     <i class="fas fa-file-alt text-5xl text-gray-400 mb-4"></i>
                     <p class="text-lg font-medium text-gray-700">Anda belum memiliki riwayat pesanan.</p>
                     <p class="text-sm text-gray-500 mt-1">Mari mulai pesan lapangan pertama Anda!</p>
-                    <a href="#" class="mt-6 inline-block bg-indigo-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-indigo-600 transition">
+                    <a href="{{ route('user.pesanan.create') }}" class="mt-6 inline-block bg-indigo-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-indigo-600 transition">
                         Pesan Sekarang
                     </a>
                 </div>

@@ -41,7 +41,6 @@ Route::post('/email/resend', [VerificationController::class, 'resend'])
 
 Route::get('/api/check-availability', [PesananOfflineController::class, 'checkAvailability']);
 
-Route::resource('dashboard', DashboardUserController::class);
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisterController::class, 'create'])->name('register');
     Route::post('register', [RegisterController::class, 'store']);
@@ -61,7 +60,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(
     Route::resource('user', UserController::class);
     Route::resource('slotwaktu', SlotWaktuController::class);
     Route::resource('pembayaran', PembayaranController::class);
-     Route::resource('fasilitas', FasilitasController::class);
+
+    Route::patch('pembayaran/{pembayaran}/confirm', [PembayaranController::class, 'confirm'])->name('pembayaran.confirm');
+    Route::patch('pembayaran/{pembayaran}/reject', [PembayaranController::class, 'reject'])->name('pembayaran.reject');
+
+    Route::resource('fasilitas', FasilitasController::class);
+
     
     Route::patch('pembayaran/{pembayaran}/status', [PembayaranController::class, 'updateStatus'])->name('pembayaran.updateStatus');
 });
@@ -74,6 +78,8 @@ Route::prefix('user')->name('user.')->middleware(['auth', 'verified'])->group(fu
     Route::get('pembayaran/{pembayaran}/upload', [PembayaranUserController::class, 'show'])->name('pembayaran.show');
     Route::patch('pembayaran/{pembayaran}/upload', [PembayaranUserController::class, 'upload'])->name('pembayaran.upload');
     Route::get('/riwayat-pesanan', [RiwayatPesananuserController::class, 'index'])->name('riwayat.index');
+    Route::get('/riwayat-pesanan/{pesanan}', [RiwayatPesananuserController::class, 'show'])->name('riwayat.show');
+    Route::patch('/riwayat-pesanan/{pesanan}/cancel', [RiwayatPesananuserController::class, 'cancel'])->name('riwayat.cancel');
 
 });
 
@@ -82,3 +88,9 @@ Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth')->
 
 
  
+Route::middleware(['verified'])->group(function () {
+    Route::get('/forget-password', [LoginController::class, 'showForgetPasswordForm'])->name('password.request');
+    Route::post('/forget-password', [LoginController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [LoginController::class, 'showResetPasswordForm'])->name('password.reset');
+    Route::post('/reset-password', [LoginController::class, 'resetPassword'])->name('password.update');
+});

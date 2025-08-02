@@ -56,7 +56,6 @@ class DashboardAdminController extends Controller
         $dataPendapatan = array_values($semuaTanggal);
 
         return view('dashboard.dashboardAdmin', compact(
-            // Data untuk kartu
             'totalUser',
             'totalLapangan',
             'pesananPending',

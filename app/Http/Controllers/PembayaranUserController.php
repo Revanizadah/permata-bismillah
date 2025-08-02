@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Pembayaran;
+use Illuminate\Support\Facades\Auth;
 
 class PembayaranUserController extends Controller
 {
     public function show(Pembayaran $pembayaran)
     {
-        if (!$pembayaran->pesanan || !$pembayaran->pesanan->user || $pembayaran->pesanan->user->id !== auth()->id()) {
+        if (!$pembayaran->pesanan || !$pembayaran->pesanan->user || $pembayaran->pesanan->user->id !== Auth::id()) {
 
             abort(403, 'Akses Ditolak');
         }
@@ -23,8 +24,7 @@ class PembayaranUserController extends Controller
      */
     public function upload(Request $request, Pembayaran $pembayaran)
     {
-        // ✅ PERBAIKAN: Terapkan pengecekan yang sama di sini
-        if (!$pembayaran->pesanan || $pembayaran->pesanan->user_id !== auth()->id()) {
+        if (!$pembayaran->pesanan || $pembayaran->pesanan->user_id !== Auth::id()) {
             abort(403, 'Akses Ditolak');
         }
 
@@ -40,10 +40,8 @@ class PembayaranUserController extends Controller
 
         $pembayaran->update([
             'bukti_pembayaran' => $path,
-            'status_pembayaran' => 'paid',
+            'status_pembayaran' => 'pending',
         ]);
-        
-        // $pembayaran->pesanan()->update(['status' => 'pending']);
 
         return redirect()->route('user.riwayat.index', $pembayaran->id)
                          ->with('success', 'Bukti pembayaran berhasil diunggah! Pesanan Anda telah dikonfirmasi.');

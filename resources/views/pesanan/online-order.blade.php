@@ -9,13 +9,8 @@
             @csrf
             <div class="bg-white p-8 md:p-10 rounded-2xl shadow-xl">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">
-
-                    {{-- =============================================== --}}
-                    {{-- KOLOM KIRI: PILIHAN LAPANGAN & RINCIAN --}}
-                    {{-- =============================================== --}}
                     <div class="flex flex-col justify-between">
                         <div>
-                            {{-- Header Form --}}
                             <div class="mb-8">
                                 <h2 class="text-3xl font-extrabold text-gray-900">
                                     Buat Pesanan
@@ -24,8 +19,6 @@
                                     Pilih lapangan dan tanggal untuk melihat jadwal yang tersedia.
                                 </p>
                             </div>
-
-                            {{-- Pilihan Lapangan dengan Kartu --}}
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">1. Pilih Lapangan</label>
                                 <div id="field_selector" class="space-y-4">
@@ -35,7 +28,7 @@
                                                    data-price="{{ $lapangan->harga_per_jam }}"
                                                    data-price-weekend="{{ $lapangan->harga_weekend_per_jam }}">
                                             <div class="p-4 border border-gray-300 rounded-lg flex items-center space-x-4 transition duration-300 peer-checked:ring-2 peer-checked:ring-indigo-500 peer-checked:border-indigo-500 hover:bg-gray-50">
-                                                <img src="{{ $lapangan->gambar ? asset('images/' . $lapangan->gambar) : 'https://via.placeholder.com/150' }}" alt="Foto {{ $lapangan->nama }}" class="w-24 h-24 rounded-md object-cover">
+                                                <img src="{{ $lapangan->gambar ? asset('storage/images/lapangan/' . $lapangan->gambar) : 'https://via.placeholder.com/150' }}" alt="Foto {{ $lapangan->nama }}" class="w-24 h-24 rounded-md object-cover">
                                                 <div class="flex-1">
                                                     <p class="font-bold text-lg text-gray-800">{{ $lapangan->nama }}</p>
                                                     {{-- Menampilkan Fasilitas --}}

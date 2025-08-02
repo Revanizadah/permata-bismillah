@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class PembayaranController extends Controller
 {
@@ -32,17 +34,24 @@ class PembayaranController extends Controller
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil ditambahkan');
     }
 
-    public function updateStatus(Request $request, $id)
-{
-    $request->validate([
-        'status' => 'required|in:Sukses,Ditolak',
-    ]);
+   public function confirm(Pembayaran $pembayaran)
+    {
+        $pembayaran->update(['status_pembayaran' => 'paid']);
+        $pembayaran->pesanan()->update(['status' => 'confirmed']);
+        return back()->with('success', 'Pembayaran berhasil dikonfirmasi.');
+    }
 
-    $pembayaran = Pembayaran::findOrFail($id);
+    public function reject(Pembayaran $pembayaran)
+    {
+        if ($pembayaran->bukti_pembayaran) {
+            Storage::disk('public')->delete($pembayaran->bukti_pembayaran);
+        }
 
-    $pembayaran->status_pembayaran = $request->status;
-    $pembayaran->save();
-
-    return redirect()->back()->with('success', 'Status pembayaran berhasil diupdate!');
-}
+        $pembayaran->update([
+            'status_pembayaran' => 'rejected',
+            'bukti_pembayaran' => null,
+            'expired_at' => Carbon::now()->addHours(24),
+        ]);
+        return back()->with('success', 'Bukti pembayaran telah ditolak.');
+    }
 }

@@ -5,9 +5,7 @@
 @section('content')
 <div class="container mx-auto py-16 px-4 pt-28">
     <div class="max-w-3xl mx-auto">
-
         <div class="bg-white rounded-2xl shadow-xl p-8 space-y-8">
-            {{-- Notifikasi Sukses/Error --}}
             @if (session('success'))
                 <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-r-lg" role="alert">
                     <p class="font-bold">Sukses!</p>
@@ -21,7 +19,6 @@
                 </div>
             @endif
 
-            {{-- 1. KARTU DETAIL PESANAN --}}
             <div>
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Ringkasan Pesanan</h3>
                 <div class="bg-gray-50 rounded-lg border border-gray-200 p-4 flex items-center space-x-4">
@@ -40,7 +37,6 @@
                 </div>
             </div>
             
-            {{-- 2. RINCIAN BIAYA & BATAS WAKTU --}}
             <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
                 <div class="flex justify-between items-center">
                     <div>
@@ -55,11 +51,29 @@
                     </div>
                 </div>
                 <div id="countdown-wrapper" class="text-xs text-center text-red-600 mt-4 bg-red-50 py-2 rounded-md">
-                    Batas waktu pembayaran: <span class="font-bold" id="countdown-timer"></span>
+                    Batas waktu pembayaran: <span class="font-bold" id="countdown-timer">Memuat...</span>
                 </div>
             </div>
 
-            @if ($pembayaran->status_pembayaran == 'unpaid' && now()->lessThan($pembayaran->expired_at))
+            @if ($pembayaran->status_pembayaran == 'paid')
+                <div class="text-center p-8 bg-green-50 border-2 border-dashed border-green-200 rounded-lg">
+                    <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800">Pembayaran Lunas</h3>
+                    <p class="text-gray-600 mt-2">Terima kasih! Pesanan Anda telah dikonfirmasi. Sampai jumpa di lapangan!</p>
+                    @if ($pembayaran->bukti_pembayaran)
+                        <a href="{{ asset('storage/' . $pembayaran->bukti_pembayaran) }}" target="_blank" class="mt-4 inline-block text-sm text-indigo-600 hover:underline">
+                            Lihat Bukti Pembayaran
+                        </a>
+                    @endif
+                </div>
+
+            @elseif ($pembayaran->status_pembayaran == 'rejected' || ($pembayaran->status_pembayaran == 'unpaid' && now()->lessThan($pembayaran->expired_at)))
+                @if ($pembayaran->status_pembayaran == 'rejected')
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg" role="alert">
+                        <p class="font-bold">Pembayaran Ditolak</p>
+                        <p>Bukti pembayaran Anda sebelumnya tidak valid. Silakan unggah kembali bukti yang benar.</p>
+                    </div>
+                @endif
                 <div>
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Rekening Tujuan</h3>
                     <div class="space-y-3">
@@ -68,25 +82,19 @@
                                 <p class="font-medium text-gray-700">Bank Central Asia (BCA)</p>
                                 <div class="flex items-center space-x-3">
                                     <p id="bca-number" class="text-2xl font-bold text-gray-900 mt-1">123 456 7890</p>
-                                    <button onclick="copyToClipboard('bca-number')" class="text-gray-500 hover:text-indigo-600">
-                                        <i class="far fa-copy"></i>
-                                    </button>
+                                    <button onclick="copyToClipboard('bca-number')" class="text-gray-500 hover:text-indigo-600"><i class="far fa-copy"></i></button>
                                 </div>
                                 <p class="text-sm text-gray-600 mt-1">a.n. PT Permata Futsal Sejahtera</p>
                             </div>
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia_logo.svg/1280px-Bank_Central_Asia_logo.svg.png" alt="BCA" class="h-6">
                         </div>
-                        {{-- ... rekening lainnya bisa ditambahkan dengan pola yang sama ... --}}
                     </div>
                 </div>
-
-                {{-- 4. FORM UPLOAD BUKTI --}}
                 <div>
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Unggah Bukti Pembayaran</h3>
                     <form action="{{ route('user.pembayaran.upload', $pembayaran->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
-                        
                         <div id="upload-area" class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-500 transition">
                             <label for="bukti_pembayaran" class="cursor-pointer">
                                 <i id="upload-icon" class="fas fa-cloud-upload-alt text-4xl text-gray-400"></i>
@@ -98,10 +106,7 @@
                             </label>
                             <input id="bukti_pembayaran" name="bukti_pembayaran" type="file" class="sr-only" required accept="image/png, image/jpeg">
                         </div>
-                        @error('bukti_pembayaran')
-                            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                        @enderror
-
+                        @error('bukti_pembayaran')<p class="text-red-500 text-xs mt-2">{{ $message }}</p>@enderror
                         <div class="mt-6">
                             <button type="submit" class="w-full bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 font-bold text-lg transition">
                                 Konfirmasi Pembayaran
@@ -109,29 +114,16 @@
                         </div>
                     </form>
                 </div>
-
-            @elseif ($pembayaran->status_pembayaran == 'paid')
-                <div class="text-center p-8 bg-green-50 border-2 border-dashed border-green-200 rounded-lg">
-                    <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
-                    <h3 class="text-2xl font-bold text-gray-800">Pembayaran Lunas</h3>
-                    <p class="text-gray-600 mt-2">Terima kasih! Pesanan Anda telah dikonfirmasi. Sampai jumpa di lapangan!</p>
-                    @if ($pembayaran->bukti_pembayaran)
-                        <a href="{{ asset('storage/' . $pembayaran->bukti_pembayaran) }}" target="_blank" class="mt-4 inline-block text-sm text-indigo-600 hover:underline">
-                            Lihat Bukti Pembayaran
-                        </a>
-                    @endif
-                </div>
             @else
                 <div class="text-center p-8 bg-red-50 border-2 border-dashed border-red-200 rounded-lg">
                     <i class="fas fa-times-circle text-5xl text-red-500 mb-4"></i>
                     <h3 class="text-2xl font-bold text-gray-800">Pembayaran Kedaluwarsa</h3>
                     <p class="text-gray-600 mt-2">Batas waktu pembayaran untuk pesanan ini telah lewat. Silakan buat pesanan baru.</p>
-                    <a href="{{ route('user.pesanan.create') }}" class="mt-6 inline-block bg-indigo-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-indigo-600">
+                    <a href="{{ route('pesanan-user.create') }}" class="mt-6 inline-block bg-indigo-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-indigo-600">
                         Buat Pesanan Baru
                     </a>
                 </div>
             @endif
-
         </div>
     </div>
 </div>
@@ -144,14 +136,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const fileInfo = document.getElementById('file-info');
     const uploadIcon = document.getElementById('upload-icon');
     const imagePreview = document.getElementById('image-preview');
-    const originalText = fileInfo.innerHTML;
 
     if (fileInput) {
+        const originalText = fileInfo.innerHTML;
         fileInput.addEventListener('change', function() {
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
                 fileInfo.innerHTML = `<span class="font-semibold text-green-600">File terpilih:</span> ${file.name}`;
-                
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     imagePreview.src = e.target.result;
@@ -159,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     uploadIcon.classList.add('hidden');
                 }
                 reader.readAsDataURL(file);
-
             } else {
                 fileInfo.innerHTML = originalText;
                 imagePreview.classList.add('hidden');
@@ -168,11 +158,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===============================================
-    //         ✅ SCRIPT BARU DITAMBAHKAN DI SINI
-    // ===============================================
-
-    // 1. Fungsi untuk Tombol "Salin" Nomor Rekening
     window.copyToClipboard = function(elementId) {
         const textToCopy = document.getElementById(elementId).innerText;
         navigator.clipboard.writeText(textToCopy).then(() => {
@@ -182,25 +167,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 2. Fungsi untuk Countdown Timer
     const countdownEl = document.getElementById('countdown-timer');
     if (countdownEl) {
         const expiredTime = new Date('{{ $pembayaran->expired_at->toIso8601String() }}').getTime();
-
         const timer = setInterval(function() {
             const now = new Date().getTime();
             const distance = expiredTime - now;
-
             if (distance < 0) {
                 clearInterval(timer);
                 document.getElementById('countdown-wrapper').innerHTML = '<span class="font-bold">Waktu pembayaran telah habis.</span>';
                 return;
             }
-
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
             countdownEl.textContent = `${hours} jam ${minutes} menit ${seconds} detik`;
         }, 1000);
     }
