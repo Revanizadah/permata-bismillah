@@ -89,8 +89,6 @@
                 @endforelse
             </div>
         </div>
-
-        {{-- Mengapa Memilih Kami? --}}
         <div class="mt-20 py-16 bg-red-700 rounded-2xl shadow-lg">
             <h3 class="text-3xl font-bold text-center text-white mb-10">Mengapa Memilih Permata Futsal?</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center px-10">
