@@ -26,9 +26,10 @@ class FasilitasController extends Controller
         return redirect()->route('admin.fasilitas.index')
                          ->with('success', 'Fasilitas baru berhasil ditambahkan.');
     }
-    
+
     public function destroy(Fasilitas $fasilitas)
     {
+        $fasilitas = Fasilitas::findOrFail($fasilitas->id);
         $fasilitas->delete();
         return redirect()->route('admin.fasilitas.index')->with('success', 'Fasilitas berhasil dihapus.');
     }
