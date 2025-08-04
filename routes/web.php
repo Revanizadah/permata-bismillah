@@ -51,6 +51,7 @@ Route::middleware('guest')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
     Route::get('/laporan/pendapatan', [LaporanAdminController::class, 'pendapatan'])->name('laporan.pendapatan');
+    Route::get('/laporan/pendapatan/export-excel', [LaporanAdminController::class, 'exportExcel'])->name('laporan.export.excel');
     Route::resource('pesanan-offline', PesananOfflineController::class);
     Route::get('pesanan-offline/create', [PesananOfflineController::class, 'create'])->name('pesanan-offline.create');
     Route::patch('pesanan/{pesanan}/status', [PesananOfflineController::class, 'updateStatus'])->name('pesanan.updateStatus');
