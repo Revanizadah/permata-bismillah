@@ -67,11 +67,7 @@
                     Masuk
                 </button>
             </div>
-            
-            {{-- =============================================== --}}
-            {{--         ✅ PERBAIKAN UTAMA ADA DI SINI           --}}
-            {{-- =============================================== --}}
-            {{-- Link ke Halaman Register --}}
+    
             <div class="text-sm text-center">
                 <p class="text-gray-600">
                     Belum punya akun?
