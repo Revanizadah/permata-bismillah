@@ -19,9 +19,6 @@ class PembayaranUserController extends Controller
         return view('payment.pembayaran-user', compact('pembayaran'));
     }
 
-    /**
-     * Mengunggah dan memproses bukti pembayaran.
-     */
     public function upload(Request $request, Pembayaran $pembayaran)
     {
         if (!$pembayaran->pesanan || $pembayaran->pesanan->user_id !== Auth::id()) {

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Spatie\SimpleExcel\SimpleExcelWriter;
+use Illuminate\Support\Facades\Storage;
 
 class LaporanAdminController extends Controller
 {
@@ -36,7 +38,7 @@ class LaporanAdminController extends Controller
         $labelsKontribusi = $kontribusiLapangan->pluck('lapangan.nama');
         $dataKontribusi = $kontribusiLapangan->pluck('total');
         
-        return view('admin.laporan.pendapatan', compact(
+        return view('admin.Laporan.pendapatan', compact(
             'laporanPesanans',
             'totalPendapatan',
             'jumlahTransaksi',
@@ -46,5 +48,45 @@ class LaporanAdminController extends Controller
             'tanggalMulai',
             'tanggalSelesai'
         ));
+    }
+
+        public function exportExcel(Request $request)
+    {
+        $tanggalMulai = $request->input('tanggal_mulai', Carbon::now()->startOfMonth());
+        $tanggalSelesai = $request->input('tanggal_selesai', Carbon::now()->endOfMonth());
+
+        $pesanans = Pesanan::with(['user', 'lapangan'])
+            ->where('status', 'confirmed')
+            ->whereBetween('tanggal_pesan', [$tanggalMulai, $tanggalSelesai])
+            ->latest()
+            ->get();
+        
+        $dataUntukExport = $pesanans->map(function ($pesanan) {
+            return [
+                'ID Pesanan' => $pesanan->id,
+                'Invoice' => $pesanan->pembayaran->kode_pembayaran ?? 'N/A',
+                'Nama Pelanggan' => $pesanan->user->nama ?? 'N/A',
+                'Email' => $pesanan->user->email ?? 'N/A',
+                'Nama Lapangan' => $pesanan->lapangan->nama ?? 'N/A',
+                'Tanggal Pesan' => Carbon::parse($pesanan->tanggal_pesan)->format('d-m-Y'),
+                'Total Harga' => $pesanan->total_harga,
+                'Status' => ucfirst($pesanan->status),
+                'Dibuat Pada' => $pesanan->created_at->format('d-m-Y H:i'),
+            ];
+        });
+
+        $tanggal = now()->format('d-m-Y');
+        $fileName = "laporan-pendapatan-{$tanggal}.xlsx";
+        $filePath = 'temp/' . $fileName;
+
+        SimpleExcelWriter::create(Storage::path($filePath))
+            ->addHeader([
+                'ID Pesanan', 'Invoice', 'Nama Pelanggan', 'Email', 'Nama Lapangan',
+                'Tanggal Pesan', 'Total Harga', 'Status', 'Dibuat Pada'
+            ])
+            ->addRows($dataUntukExport);
+
+        return response()->download(Storage::path($filePath), $fileName)
+                         ->deleteFileAfterSend(false);
     }
 }

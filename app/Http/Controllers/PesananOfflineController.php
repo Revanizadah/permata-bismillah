@@ -92,16 +92,13 @@ class PesananOfflineController extends Controller
 
     public function updateStatus(Request $request, Pesanan $pesanan)
     {
-        // Validasi input status
         $request->validate([
-            'status' => 'required|in:confirmed,cancelled', // Hanya izinkan status ini
+            'status' => 'required|in:confirmed,cancelled', 
         ]);
-
-        // Update status pada pesanan yang ditemukan
+        
         $pesanan->status = $request->status;
         $pesanan->save();
 
-        // Redirect kembali ke halaman daftar pesanan dengan pesan sukses
         return redirect()->route('admin.pesanan-offline.index')->with('success', 'Status pesanan berhasil diperbarui.');
     }
 

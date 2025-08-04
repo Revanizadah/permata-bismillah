@@ -23,9 +23,9 @@ use App\Http\Controllers\RiwayatPesananuserController;
 use App\Http\Controllers\FasilitasController;
 use App\Mail\TestMail;
 
-Route::get('/', function () {
-    return view('landing-page');
-});
+
+Route::get('/', [DashboardUserController::class, 'index'])->name('dashboard');
+
 
 Route::get('/email/verify', [VerificationController::class, 'show'])
     ->middleware('auth')
@@ -51,6 +51,7 @@ Route::middleware('guest')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
     Route::get('/laporan/pendapatan', [LaporanAdminController::class, 'pendapatan'])->name('laporan.pendapatan');
+    Route::get('/laporan/pendapatan/export-excel', [LaporanAdminController::class, 'exportExcel'])->name('laporan.export.excel');
     Route::resource('pesanan-offline', PesananOfflineController::class);
     Route::get('pesanan-offline/create', [PesananOfflineController::class, 'create'])->name('pesanan-offline.create');
     Route::patch('pesanan/{pesanan}/status', [PesananOfflineController::class, 'updateStatus'])->name('pesanan.updateStatus');
@@ -71,7 +72,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(
 });
 
 Route::prefix('user')->name('user.')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('dashboard');
     Route::resource('pesanan', PesananOnlineController::class)->only(['create', 'store', 'show']);
     Route::get('pesanan/history', [PesananOnlineController::class, 'history'])->name('pesanan.history');
     Route::resource('pembayaran', PembayaranUserController::class);

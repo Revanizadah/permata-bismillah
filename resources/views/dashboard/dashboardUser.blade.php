@@ -75,7 +75,6 @@
                                 <div class="mt-4">
                                     <span class="text-sm text-gray-600">Harga mulai dari</span>
                                     <p class="text-xl font-bold text-green-600">
-                                        {{-- PERUBAHAN WARNA: Harga menjadi oranye --}}
                                         Rp {{ number_format($lapangan->harga_per_jam, 0, ',', '.') }}
                                     </p>
                                 </div>

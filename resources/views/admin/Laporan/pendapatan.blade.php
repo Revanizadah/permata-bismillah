@@ -4,22 +4,22 @@
 
 @section('content')
 <div class="container mx-auto my-10 p-6 md:p-8 bg-white shadow-xl rounded-2xl">
-    {{-- HEADER & FILTER --}}
     <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-4 border-b border-gray-200">
         <div>
             <h2 class="text-3xl font-bold text-gray-800">Laporan Admin</h2>
             <p class="text-sm text-gray-500 mt-1">Analisis pendapatan berdasarkan rentang waktu.</p>
         </div>
-        {{-- FORM FILTER TANGGAL --}}
         <form action="{{ route('admin.laporan.pendapatan') }}" method="GET" class="flex items-center space-x-2 mt-4 md:mt-0">
             <input type="date" name="tanggal_mulai" value="{{ $tanggalMulai }}" class="border-gray-300 rounded-lg shadow-sm p-2">
             <span class="text-gray-500">s/d</span>
             <input type="date" name="tanggal_selesai" value="{{ $tanggalSelesai }}" class="border-gray-300 rounded-lg shadow-sm p-2">
             <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600">Filter</button>
         </form>
+        <a href="{{ route('admin.laporan.export.excel', request()->query()) }}" class="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-600">
+            Ekspor Excel
+        </a>
     </div>
 
-    {{-- KARTU STATISTIK --}}
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
         <div class="p-6 rounded-lg shadow-lg bg-green-100 text-green-800">
             <h3 class="text-4xl font-bold">Rp {{ number_format($totalPendapatan, 0, ',', '.') }}</h3>

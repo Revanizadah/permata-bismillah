@@ -20,9 +20,6 @@ class BatalkanPesananKedaluwarsa extends Command
      */
     protected $description = 'Mencari dan membatalkan pesanan yang pembayarannya sudah kedaluwarsa';
 
-    /**
-     * Jalankan logika command.
-     */
     public function handle()
     {
         $this->info('Mulai memeriksa pembayaran yang kedaluwarsa...');

@@ -21,10 +21,10 @@
         <div class="text-center">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto mb-4 w-20 h-20">
             <h2 class="text-3xl font-extrabold text-gray-900">
-                Login Admin
+                Login
             </h2>
             <p class="mt-2 text-sm text-gray-600">
-                Silakan masuk untuk mengelola sistem.
+                Silakan masuk untuk memesan lapangan
             </p>
         </div>
 
@@ -67,12 +67,14 @@
                     Masuk
                 </button>
             </div>
-            
-            {{-- Link Lupa Password atau Register --}}
+    
             <div class="text-sm text-center">
-                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                    Lupa password?
-                </a>
+                <p class="text-gray-600">
+                    Belum punya akun?
+                    <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
+                        Daftar di sini
+                    </a>
+                </p>
             </div>
         </form>
     </div>

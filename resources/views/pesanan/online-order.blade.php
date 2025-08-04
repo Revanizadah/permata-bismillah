@@ -32,7 +32,7 @@
                                                 <div class="flex-1">
                                                     <p class="font-bold text-lg text-gray-800">{{ $lapangan->nama }}</p>
                                                     {{-- Menampilkan Fasilitas --}}
-                                                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-600 mt-2">
+                                                    {{-- <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-600 mt-2">
                                                         @if($lapangan->fasilitas)
                                                             @foreach(explode(',', $lapangan->fasilitas) as $fasilitas)
                                                                 <span class="flex items-center">
@@ -41,7 +41,7 @@
                                                                 </span>
                                                             @endforeach
                                                         @endif
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </label>
