@@ -46,6 +46,7 @@ class RiwayatPesananuserController extends Controller
                              ->with('error', 'Pesanan yang sudah dikonfirmasi atau dibatalkan tidak bisa diubah.');
         }
         $pesanan->status = 'cancelled';
+        // $pesanan->status_pembayaran = "canceled";
         $pesanan->save();
         return redirect()->route('user.riwayat.index')->with('success', 'Pesanan Anda berhasil dibatalkan.');
     }
