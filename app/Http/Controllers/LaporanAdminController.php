@@ -7,6 +7,7 @@ use App\Models\Pesanan;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Spatie\SimpleExcel\SimpleExcelWriter;
+use Illuminate\Support\Facades\Storage;
 
 class LaporanAdminController extends Controller
 {
@@ -49,9 +50,8 @@ class LaporanAdminController extends Controller
         ));
     }
 
-    public function exportExcel(Request $request)
+        public function exportExcel(Request $request)
     {
-        // 2. Ambil data yang ingin diekspor, sama seperti di method laporan Anda
         $tanggalMulai = $request->input('tanggal_mulai', Carbon::now()->startOfMonth());
         $tanggalSelesai = $request->input('tanggal_selesai', Carbon::now()->endOfMonth());
 
@@ -60,29 +60,32 @@ class LaporanAdminController extends Controller
             ->whereBetween('tanggal_pesan', [$tanggalMulai, $tanggalSelesai])
             ->latest()
             ->get();
+        
+        $dataUntukExport = $pesanans->map(function ($pesanan) {
+            return [
+                'ID Pesanan' => $pesanan->id,
+                'Nama Pelanggan' => $pesanan->user->nama ?? 'N/A',
+                'Email' => $pesanan->user->email ?? 'N/A',
+                'Nama Lapangan' => $pesanan->lapangan->nama ?? 'N/A',
+                'Tanggal Pesan' => Carbon::parse($pesanan->tanggal_pesan)->format('d-m-Y'),
+                'Total Harga' => $pesanan->total_harga,
+                'Status' => ucfirst($pesanan->status),
+                'Dibuat Pada' => $pesanan->created_at->format('d-m-Y H:i'),
+            ];
+        });
 
-        // 3. Siapkan nama file
         $tanggal = now()->format('d-m-Y');
         $fileName = "laporan-pendapatan-{$tanggal}.xlsx";
+        $filePath = 'temp/' . $fileName;
 
-        // 4. Buat dan unduh file Excel
-        return SimpleExcelWriter::streamDownload($fileName)
+        SimpleExcelWriter::create(Storage::path($filePath))
             ->addHeader([
                 'ID Pesanan', 'Nama Pelanggan', 'Email', 'Nama Lapangan',
                 'Tanggal Pesan', 'Total Harga', 'Status', 'Dibuat Pada'
             ])
-            ->addRows($pesanans->map(function ($pesanan) {
-                // 5. Format setiap baris data
-                return [
-                    'ID Pesanan' => $pesanan->id,
-                    'Nama Pelanggan' => $pesanan->user->nama ?? 'N/A',
-                    'Email' => $pesanan->user->email ?? 'N/A',
-                    'Nama Lapangan' => $pesanan->lapangan->nama ?? 'N/A',
-                    'Tanggal Pesan' => Carbon::parse($pesanan->tanggal_pesan)->format('d-m-Y'),
-                    'Total Harga' => $pesanan->total_harga,
-                    'Status' => ucfirst($pesanan->status),
-                    'Dibuat Pada' => $pesanan->created_at->format('d-m-Y H:i'),
-                ];
-            })->toArray());
+            ->addRows($dataUntukExport);
+
+        return response()->download(Storage::path($filePath), $fileName)
+                         ->deleteFileAfterSend(false);
     }
 }

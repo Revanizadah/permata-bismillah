@@ -42,7 +42,7 @@ class RiwayatPesananuserController extends Controller
             abort(403, 'AKSES DITOLAK');
         }
         if ($pesanan->status !== 'pending') {
-            return redirect()->route('riwayat.show', $pesanan->id)
+            return redirect()->route('user.riwayat.show', $pesanan->id)
                              ->with('error', 'Pesanan yang sudah dikonfirmasi atau dibatalkan tidak bisa diubah.');
         }
         $pesanan->status = 'cancelled';
