@@ -27,7 +27,6 @@
                 </div>
             @endif
 
-            {{-- 1. KARTU DETAIL PESANAN --}}
             <div>
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Ringkasan Jadwal</h3>
                 <div class="bg-gray-50 rounded-lg border border-gray-200 p-4 flex items-center space-x-4">
@@ -46,7 +45,6 @@
                 </div>
             </div>
             
-            {{-- 2. RINCIAN BIAYA --}}
             <div>
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Rincian Biaya</h3>
                 <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-4">
@@ -62,7 +60,6 @@
                 </div>
             </div>
 
-            {{-- 3. STATUS PEMBAYARAN --}}
             <div>
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Status</h3>
                 <div class="p-4 rounded-lg 
