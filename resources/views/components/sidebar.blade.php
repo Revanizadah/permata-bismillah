@@ -39,12 +39,12 @@
 
         {{-- Master Data Group --}}
         <p class="px-4 pt-4 pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Master Data</p>
-                <a href="{{ route('admin.fasilitas.index') }}" 
+        {{-- <a href="{{ route('admin.fasilitas.index') }}" 
                     class="flex items-center px-4 py-2.5 rounded-lg transition duration-200 
                     {{ request()->routeIs('admin.fasilitas.*') ? 'bg-indigo-600 text-white' : 'hover:bg-gray-800 hover:text-white' }}">
                 <i class="fas fa-concierge-bell fa-fw w-5 h-5 mr-3"></i>
             <span class="font-medium">Fasilitas</span>
-        </a>
+        </a> --}}
         <a href="{{ route('admin.lapangan.index') }}" 
            class="flex items-center px-4 py-2.5 rounded-lg transition duration-200 
                   {{ request()->routeIs('admin.lapangan.*') ? 'bg-indigo-600 text-white shadow-lg' : 'hover:bg-gray-800 hover:text-white' }}">

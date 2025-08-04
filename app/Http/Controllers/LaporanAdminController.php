@@ -64,6 +64,7 @@ class LaporanAdminController extends Controller
         $dataUntukExport = $pesanans->map(function ($pesanan) {
             return [
                 'ID Pesanan' => $pesanan->id,
+                'Invoice' => $pesanan->pembayaran->kode_pembayaran ?? 'N/A',
                 'Nama Pelanggan' => $pesanan->user->nama ?? 'N/A',
                 'Email' => $pesanan->user->email ?? 'N/A',
                 'Nama Lapangan' => $pesanan->lapangan->nama ?? 'N/A',
@@ -80,7 +81,7 @@ class LaporanAdminController extends Controller
 
         SimpleExcelWriter::create(Storage::path($filePath))
             ->addHeader([
-                'ID Pesanan', 'Nama Pelanggan', 'Email', 'Nama Lapangan',
+                'ID Pesanan', 'Invoice', 'Nama Pelanggan', 'Email', 'Nama Lapangan',
                 'Tanggal Pesan', 'Total Harga', 'Status', 'Dibuat Pada'
             ])
             ->addRows($dataUntukExport);

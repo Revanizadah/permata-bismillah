@@ -31,7 +31,7 @@ class PembayaranController extends Controller
             $validated['bukti_pembayaran'] = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
         }
         Pembayaran::create($validated);
-        return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil ditambahkan');
+        return redirect()->route('admin.pembayaran.index')->with('success', 'Pembayaran berhasil ditambahkan');
     }
 
    public function confirm(Pembayaran $pembayaran)

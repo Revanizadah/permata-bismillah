@@ -17,7 +17,6 @@ class LapanganController extends Controller
     }
     public function store(Request $request)
     {
-        // Validate the request data
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'harga_per_jam' => 'required|numeric|min:0',
