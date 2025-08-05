@@ -19,12 +19,9 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    /**
-     * Menyimpan data pengguna baru dari form registrasi.
-     */
     public function store(Request $request)
     {
-        // 1. Validasi data yang masuk
+        
         $request->validate([
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
@@ -41,6 +38,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-    return redirect()->intended(route('dashboard'));
+    return redirect()->intended(route('verification.notice'))
+            ->with('success', 'Registrasi berhasil! Silakan verifikasi email Anda.');
     }
 }

@@ -30,7 +30,7 @@
             <div>
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Ringkasan Jadwal</h3>
                 <div class="bg-gray-50 rounded-lg border border-gray-200 p-4 flex items-center space-x-4">
-                    <img class="h-24 w-24 rounded-lg object-cover" src="{{ $pesanan->lapangan->gambar ? asset('images/' . $pesanan->lapangan->gambar) : 'https://via.placeholder.com/150' }}" alt="Foto Lapangan">
+                    <img class="h-24 w-24 rounded-lg object-cover" src="{{ $pesanan->lapangan->gambar ? asset('storage/images/lapangan/' . $pesanan->lapangan->gambar) : 'https://via.placeholder.com/150' }}" alt="Foto Lapangan">
                     <div>
                         <p class="font-bold text-lg text-gray-900">{{ $pesanan->lapangan->nama }}</p>
                         <p class="text-sm text-gray-600">{{ \Carbon\Carbon::parse($pesanan->tanggal_pesan)->isoFormat('dddd, D MMMM YYYY') }}</p>

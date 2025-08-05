@@ -52,7 +52,7 @@
             <div>
                 <label for="no_hp" class="block text-sm font-medium text-gray-700">Nomor HP</label>
                 <div class="mt-1">
-                    <input type="text" id="no_hp" name="no_hp" required value="{{ old('no_hp') }}"
+                    <input type="number" id="no_hp" name="no_hp" required value="{{ old('no_hp') }}"
                            class="w-full border border-gray-400 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                            placeholder="0812xxxxxx">
                     @error('no_hp')<span class="text-xs text-red-500 mt-1">{{ $message }}</span>@enderror

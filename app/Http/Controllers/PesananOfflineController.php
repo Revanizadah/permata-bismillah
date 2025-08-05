@@ -7,6 +7,7 @@ use App\Models\Pesanan;
 use App\Models\Lapangan;
 use App\Models\SlotWaktu;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class PesananOfflineController extends Controller
@@ -33,46 +34,55 @@ class PesananOfflineController extends Controller
         return view('pesanan.offline-order', compact('lapangans', 'slotWaktus', 'tanggalHariIni'));
     }
 
-    public function store(Request $request)
-    {
-       $validated = $request->validate([
+public function store(Request $request)
+{
+    $validated = $request->validate([
         'field_id' => 'required|exists:lapangans,id',
         'booking_date' => 'required|date|after_or_equal:today',
         'slot_ids' => 'required|array|min:1',
         'slot_ids.*' => 'exists:slot_waktus,id',
     ]);
 
-        try {
-            DB::beginTransaction();
-            $lapangan = Lapangan::findOrFail($validated['field_id']);
-            $totalHarga = count($validated['slot_ids']) * $lapangan->harga_per_jam;
+    try {
+        DB::beginTransaction();
 
-            $pesanan = Pesanan::create([
-                'user_id' => 1,
-                'lapangan_id' => $lapangan->id,
-                'tanggal_pesan' => $validated['booking_date'],
-                'total_harga' => $totalHarga,
-                'status' => 'pending',
-            ]);
+        $lapangan = Lapangan::findOrFail($validated['field_id']);
+        
+        $tanggalPesan = Carbon::parse($validated['booking_date']);
 
-            foreach ($validated['slot_ids'] as $slotId) {
-                $pesanan->detailPemesanan()->create(['slot_waktu_id' => $slotId]);
-            }
+        $hargaPerJam = $tanggalPesan->isWeekend() 
+                       ? $lapangan->harga_weekend_per_jam 
+                       : $lapangan->harga_per_jam;
 
-            $pembayaran = $pesanan->pembayaran()->create([
-                'kode_pembayaran' => 'INV-' . time() . $pesanan->id,
-                'status_pembayaran' => 'unpaid',
-                'metode_pembayaran' => 'cash/ditempat',
-                'expired_at' => Carbon::now()->addMinutes(60),
-            ]);
+        $totalHarga = count($validated['slot_ids']) * $hargaPerJam;
 
-            DB::commit();
-            return redirect()->route('admin.pembayaran.index')->with('success', 'Pesanan berhasil dibuat!');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
+        $pesanan = Pesanan::create([
+            'user_id' => Auth::id(),
+            'lapangan_id' => $lapangan->id,
+            'tanggal_pesan' => $validated['booking_date'],
+            'total_harga' => $totalHarga, 
+            'status' => 'pending',
+        ]);
+
+        foreach ($validated['slot_ids'] as $slotId) {
+            $pesanan->detailPemesanan()->create(['slot_waktu_id' => $slotId]);
         }
+
+        $pembayaran = $pesanan->pembayaran()->create([
+            'kode_pembayaran' => 'INV-' . time() . $pesanan->id,
+            'status_pembayaran' => 'paid',
+            'metode_pembayaran' => 'cash/ditempat',
+            'expired_at' => Carbon::now()->addMinutes(60),
+        ]);
+
+        DB::commit();
+        return redirect()->route('admin.pembayaran.index')->with('success', 'Pesanan berhasil dibuat!');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
     }
+}
+
     public function checkAvailability(Request $request)
     {
         $validated = $request->validate([
