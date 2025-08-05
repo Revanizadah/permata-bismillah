@@ -31,17 +31,8 @@
                                                 <img src="{{ $lapangan->gambar ? asset('storage/images/lapangan/' . $lapangan->gambar) : 'https://via.placeholder.com/150' }}" alt="Foto {{ $lapangan->nama }}" class="w-24 h-24 rounded-md object-cover">
                                                 <div class="flex-1">
                                                     <p class="font-bold text-lg text-gray-800">{{ $lapangan->nama }}</p>
-                                                    {{-- Menampilkan Fasilitas --}}
-                                                    {{-- <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-600 mt-2">
-                                                        @if($lapangan->fasilitas)
-                                                            @foreach(explode(',', $lapangan->fasilitas) as $fasilitas)
-                                                                <span class="flex items-center">
-                                                                    <i class="fas fa-check-circle text-green-500 mr-1"></i>
-                                                                    {{ trim($fasilitas) }}
-                                                                </span>
-                                                            @endforeach
-                                                        @endif
-                                                    </div> --}}
+                                                    <p class="text-sm text-gray-600">Harga Per Jam Weekday: Rp {{ number_format($lapangan->harga_per_jam, 0, ',', '.') }}</p>
+                                                    <p class="text-sm text-gray-600">Harga Per Jam Weekend: Rp {{ number_format($lapangan->harga_weekend_per_jam, 0, ',', '.') }}</p>
                                                 </div>
                                             </div>
                                         </label>
