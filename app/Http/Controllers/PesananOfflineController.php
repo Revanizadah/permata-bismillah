@@ -73,6 +73,7 @@ class PesananOfflineController extends Controller
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }
+    
     public function checkAvailability(Request $request)
     {
         $validated = $request->validate([
