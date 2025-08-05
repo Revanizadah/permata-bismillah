@@ -20,7 +20,7 @@
                         {{-- Detail Lapangan dan Tanggal --}}
                         <div class="md:flex md:items-center">
                             <div class="md:flex-shrink-0">
-                                <img class="h-20 w-20 rounded-lg object-cover" src="{{ $pesanan->lapangan->gambar ? asset('images/' . $pesanan->lapangan->gambar) : 'https://via.placeholder.com/150' }}" alt="Foto {{ $pesanan->lapangan->nama }}">
+                                <img class="h-20 w-20 rounded-lg object-cover" src="{{ $pesanan->lapangan->gambar ? asset('storage/images/lapangan/' . $pesanan->lapangan->gambar) : 'https://via.placeholder.com/150' }}" alt="Foto {{ $pesanan->lapangan->nama }}">
                             </div>
                             <div class="mt-4 md:mt-0 md:ml-6">
                                 <p class="text-xl font-bold text-gray-900">{{ $pesanan->lapangan->nama ?? 'Lapangan Dihapus' }}</p>
