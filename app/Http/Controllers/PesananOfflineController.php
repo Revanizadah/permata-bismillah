@@ -70,7 +70,7 @@ public function store(Request $request)
 
         $pembayaran = $pesanan->pembayaran()->create([
             'kode_pembayaran' => 'INV-' . time() . $pesanan->id,
-            'status_pembayaran' => 'unpaid',
+            'status_pembayaran' => 'paid',
             'metode_pembayaran' => 'cash/ditempat',
             'expired_at' => Carbon::now()->addMinutes(60),
         ]);

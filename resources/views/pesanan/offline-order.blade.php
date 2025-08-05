@@ -23,14 +23,18 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <label for="field_selector" class="block text-sm font-medium text-gray-700 mb-2">1. Pilih Lapangan</label>
-                        <select id="field_selector" name="field_id" class="w-full border-gray-300 rounded-lg shadow-sm p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" required>
-                            <option value="" disabled selected>-- Pilih Jenis Lapangan --</option>
-                            @foreach ($lapangans as $lapangan)
-                                <option value="{{ $lapangan->id }}" data-price="{{ $lapangan->harga_per_jam }}">
-                                    {{ $lapangan->nama }} (Rp {{ number_format($lapangan->harga_per_jam, 0, ',', '.') }}/jam)
-                                </option>
-                            @endforeach
-                        </select>
+                        <select id="field_selector" name="field_id" class="w-full border-gray-300 rounded-lg shadow-sm p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" required>
+    <option value="" disabled selected>-- Pilih Jenis Lapangan --</option>
+    @foreach ($lapangans as $lapangan)
+        <option value="{{ $lapangan->id }}" 
+                data-price="{{ $lapangan->harga_per_jam }}" 
+                data-price-weekend="{{ $lapangan->harga_weekend_per_jam }}">
+            
+            {{-- PERBAIKAN: Menampilkan nama, harga weekday, dan harga weekend --}}
+            {{ $lapangan->nama }} (Wd: Rp {{ number_format($lapangan->harga_per_jam, 0, ',', '.') }} | We: Rp {{ number_format($lapangan->harga_weekend_per_jam, 0, ',', '.') }})
+        </option>
+    @endforeach
+</select>
                         @error('field_id') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     </div>
                     <div>
@@ -88,13 +92,9 @@
 </div>
 @endsection
 @push('scripts')
-    <script>
-    console.log('Script pemesanan offline berhasil dimuat.');
-
+<script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Tes #2: Pastikan event DOMContentLoaded berjalan
-    console.log('DOM siap, mulai mengambil elemen.');
-
+    // Mengambil semua elemen yang dibutuhkan dari halaman
     const fieldSelector = document.getElementById('field_selector');
     const dateSelector = document.getElementById('date_selector');
     const slotsContainer = document.getElementById('time-slots-container');
@@ -103,85 +103,97 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalHoursEl = document.getElementById('total-hours');
     const totalPriceEl = document.getElementById('total-price');
 
-    console.log('Elemen #date_selector:', dateSelector);
-    console.log('Elemen #field_selector:', fieldSelector);
-    console.log('Elemen #time-slots-container:', slotsContainer);
+    // Mengatur tanggal minimal di date picker menggunakan data dari controller
+    dateSelector.min = '{{ $tanggalHariIni ?? now()->toDateString() }}';
 
-    // Pastikan elemen penting ada sebelum melanjutkan
-    if (!fieldSelector || !dateSelector || !slotsContainer) {
-        console.error('KESALAHAN: Satu atau lebih elemen penting tidak ditemukan. Periksa kembali ID di HTML Anda.');
-        return;
-    }
-
-    try {
-        const todayString = new Date().toISOString().split("T")[0];
-        dateSelector.min = todayString;
-        console.log(`SUKSES: Atribut 'min' pada dateSelector diatur ke: ${todayString}`);
-    } catch (e) {
-        console.error('ERROR saat mengatur tanggal minimal:', e);
-    }
-
-        async function checkAvailability() {
-            const fieldId = fieldSelector.value;
-            const date = dateSelector.value;
-            if (!fieldId || !date) {
-                slotWaktuSection.classList.add('hidden');
-                return;
-            }
-            slotWaktuSection.classList.remove('hidden');
-            loadingSpinner.classList.remove('hidden');
-            
-            try {
-                const response = await fetch(`{{ url('/api/check-availability') }}?field_id=${fieldId}&date=${date}`);
-                const data = await response.json();
-                const bookedSlotIds = data.booked_slot_ids;
-
-                slotsContainer.querySelectorAll('.slot-checkbox').forEach(checkbox => {
-                    const slotButton = checkbox.nextElementSibling;
-                    const isBooked = bookedSlotIds.includes(parseInt(checkbox.dataset.slotId));
-                    
-                    checkbox.disabled = isBooked;
-                    slotButton.textContent = isBooked ? 'Booked' : slotButton.dataset.time;
-                    
-                    slotButton.classList.remove('bg-blue-400', 'text-white', 'bg-gray-200', 'text-gray-400', 'cursor-not-allowed');
-                    checkbox.checked = false;
-
-                    if (isBooked) {
-                        slotButton.classList.add('bg-gray-200', 'text-gray-400', 'cursor-not-allowed');
-                    }
-                });
-
-            } catch (error) { console.error('Gagal mengambil data ketersediaan:', error); }
-            finally { loadingSpinner.classList.add('hidden'); updatePrice(); }
+    // Fungsi untuk memeriksa ketersediaan slot dari server
+    async function checkAvailability() {
+        const fieldId = fieldSelector.value;
+        const date = dateSelector.value;
+        if (!fieldId || !date) {
+            slotWaktuSection.classList.add('hidden');
+            return;
         }
-
-        function updatePrice() {
-            const selectedSlots = slotsContainer.querySelectorAll('.slot-checkbox:checked');
-            const selectedFieldOption = fieldSelector.options[fieldSelector.selectedIndex];
-            const pricePerHour = (selectedFieldOption && selectedFieldOption.dataset.price) ? parseInt(selectedFieldOption.dataset.price) : 0;
-            totalHoursEl.textContent = `${selectedSlots.length} Jam`;
-            totalPriceEl.textContent = `Rp ${ (selectedSlots.length * pricePerHour).toLocaleString('id-ID') }`;
-        }
+        slotWaktuSection.classList.remove('hidden');
+        loadingSpinner.classList.remove('hidden');
         
-        slotsContainer.addEventListener('click', function(e) {
-            if (e.target.classList.contains('slot-button') && !e.target.previousElementSibling.disabled) {
-                const checkbox = e.target.previousElementSibling;
-                e.preventDefault();
-                checkbox.checked = !checkbox.checked;
-                
-                if (checkbox.checked) {
-                    e.target.classList.add('bg-blue-400', 'text-white');
-                } else {
-                    e.target.classList.remove('bg-blue-400', 'text-white');
-                }
-
-                updatePrice();
-            }
+        // Reset semua pilihan slot saat tanggal atau lapangan berubah
+        slotsContainer.querySelectorAll('.slot-checkbox').forEach(checkbox => {
+            checkbox.checked = false;
+            checkbox.nextElementSibling.classList.remove('bg-blue-600', 'text-white');
         });
 
-        fieldSelector.addEventListener('change', checkAvailability);
-        dateSelector.addEventListener('change', checkAvailability);
-        dateSelector.min = '{{ $tanggalHariIni }}';
+        try {
+            const response = await fetch(`{{ url('/api/check-availability') }}?field_id=${fieldId}&date=${date}`);
+            const data = await response.json();
+            const bookedSlotIds = data.booked_slot_ids;
+
+            slotsContainer.querySelectorAll('.slot-checkbox').forEach(checkbox => {
+                const slotButton = checkbox.nextElementSibling;
+                const isBooked = bookedSlotIds.includes(parseInt(checkbox.dataset.slotId));
+                
+                checkbox.disabled = isBooked;
+                slotButton.textContent = isBooked ? 'Booked' : slotButton.dataset.time;
+                
+                // Reset style 'disabled' sebelum menerapkannya lagi
+                slotButton.classList.remove('bg-gray-200', 'text-gray-400', 'cursor-not-allowed');
+                if (isBooked) {
+                    slotButton.classList.add('bg-gray-200', 'text-gray-400', 'cursor-not-allowed');
+                }
+            });
+
+        } catch (error) { 
+            console.error('Gagal mengambil data ketersediaan:', error); 
+        } finally { 
+            loadingSpinner.classList.add('hidden'); 
+            updatePrice(); 
+        }
+    }
+
+    // Fungsi untuk mengupdate rincian harga secara real-time
+    function updatePrice() {
+        const selectedSlots = slotsContainer.querySelectorAll('.slot-checkbox:checked');
+        const selectedFieldOption = fieldSelector.options[fieldSelector.selectedIndex];
+        const selectedDateValue = dateSelector.value;
+        
+        let pricePerHour = 0;
+        // Pastikan lapangan dan tanggal sudah dipilih
+        if (selectedDateValue && selectedFieldOption.value) {
+            const selectedDate = new Date(selectedDateValue + 'T00:00:00'); 
+            const day = selectedDate.getDay(); // 0 = Minggu, 6 = Sabtu
+
+            // Cek apakah weekend atau weekday
+            if (day === 0 || day === 6) {
+                pricePerHour = parseInt(selectedFieldOption.dataset.priceWeekend) || 0;
+            } else {
+                pricePerHour = parseInt(selectedFieldOption.dataset.price) || 0;
+            }
+        }
+        
+        totalHoursEl.textContent = `${selectedSlots.length} Jam`;
+        totalPriceEl.textContent = `Rp ${ (selectedSlots.length * pricePerHour).toLocaleString('id-ID') }`;
+    }
+    
+    // Event listener untuk menangani klik pada tombol slot waktu
+    slotsContainer.addEventListener('click', function(e) {
+        if (e.target.classList.contains('slot-button') && !e.target.previousElementSibling.disabled) {
+            const checkbox = e.target.previousElementSibling;
+            e.preventDefault();
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                e.target.classList.add('bg-blue-600', 'text-white');
+            } else {
+                e.target.classList.remove('bg-blue-600', 'text-white');
+            }
+
+            updatePrice();
+        }
     });
-    </script>
+
+    // Memasang event listener ke input lapangan dan tanggal
+    fieldSelector.addEventListener('change', checkAvailability);
+    dateSelector.addEventListener('change', checkAvailability);
+});
+</script>
 @endpush

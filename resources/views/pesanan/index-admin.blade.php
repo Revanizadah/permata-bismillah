@@ -21,6 +21,7 @@
         <table class="min-w-full bg-white">
             <thead class="bg-gray-50">
                 <tr>
+                    <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kode Pembayaran</th>
                     <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pelanggan</th>
                     <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lapangan</th>
                     <th class="py-3 px-6 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tgl. Pesan</th>
@@ -33,6 +34,9 @@
             <tbody class="text-gray-700 divide-y divide-gray-200">
                 @forelse($pesanans as $pesanan)
                 <tr class="hover:bg-gray-50 transition duration-150">
+                    <td class="py-4 px-6 whitespace-nowrap">
+                        <span class="font-mono text-sm">{{ $pesanan->pembayaran->kode_pembayaran }}</span>
+                    </td>
                     <td class="py-4 px-6 whitespace-nowrap">{{ $pesanan->user->nama ?? 'User tidak diketahui' }}</td>
                     <td class="py-4 px-6 whitespace-nowrap">{{ $pesanan->lapangan->nama ?? 'Lapangan tidak diketahui' }}</td>
                     <td class="py-4 px-6 text-center whitespace-nowrap">{{ \Carbon\Carbon::parse($pesanan->tanggal_pesan)->format('d M Y') }}</td>
