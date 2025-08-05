@@ -7,6 +7,7 @@ use App\Models\Pesanan;
 use App\Models\Lapangan;
 use App\Models\SlotWaktu;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class PesananOfflineController extends Controller
@@ -47,26 +48,19 @@ public function store(Request $request)
 
         $lapangan = Lapangan::findOrFail($validated['field_id']);
         
-        // --- MODIFIKASI DIMULAI DI SINI ---
-
-        // 1. Ubah string tanggal menjadi objek Carbon
         $tanggalPesan = Carbon::parse($validated['booking_date']);
 
-        // 2. Tentukan harga yang benar berdasarkan hari (weekend/weekday)
         $hargaPerJam = $tanggalPesan->isWeekend() 
                        ? $lapangan->harga_weekend_per_jam 
                        : $lapangan->harga_per_jam;
 
-        // 3. Hitung total harga menggunakan harga yang sudah dinamis
         $totalHarga = count($validated['slot_ids']) * $hargaPerJam;
 
-        // --- AKHIR DARI MODIFIKASI ---
-
         $pesanan = Pesanan::create([
-            'user_id' => 1, // Tetap menggunakan ID statis untuk admin
+            'user_id' => Auth::id(),
             'lapangan_id' => $lapangan->id,
             'tanggal_pesan' => $validated['booking_date'],
-            'total_harga' => $totalHarga, // Menggunakan total harga yang sudah benar
+            'total_harga' => $totalHarga, 
             'status' => 'pending',
         ]);
 
