@@ -61,7 +61,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse($lapangans as $lapangan)
                     <div class="bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
-                        <a href="#">
+                        <a href="{{ route('user.lapangan.show', $lapangan->id) }}">
                             <div class="h-48 overflow-hidden">
                                 <img src="{{ $lapangan->gambar ? asset('storage/images/lapangan/' . $lapangan->gambar) : 'https://via.placeholder.com/400x300.png/E2E8F0/4A5568?text=Permata' }}"
                                      alt="Foto {{ $lapangan->nama }}" 
