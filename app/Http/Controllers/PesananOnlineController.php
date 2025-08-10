@@ -6,7 +6,7 @@ use App\Models\Lapangan;
 use App\Models\Pesanan;
 use App\Models\SlotWaktu;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // <-- WAJIB
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
