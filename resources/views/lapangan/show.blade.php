@@ -33,7 +33,6 @@
                     </div>
                 </div>
 
-                {{-- FASILITAS (Menggunakan Data Statis) --}}
                 <div class="mt-8 border-t pt-6">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Fasilitas Tersedia</h3>
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
